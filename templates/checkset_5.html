@@ -1,0 +1,52 @@
+		       <!--  头部 -->
+	<div class="bar bar-header bar-light">
+	  <h1 class="title">血压测量设置</h1>
+	  <button class="button button-positive btn_checkset" ng-click="back()">返回</button>
+    <button class="button button-positive btn_checkset" ng-click="saveSet(4)">保存</button>
+	</div>
+
+
+<ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
+ <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+   
+        <!-- 内容 -->
+
+   <div class="list card card_checkset animated bounceInRight ">
+  	<a><button class="button  button-positive btn_checkset_1" ng-click="toggle(show_BP1)">报警设置</button></a>
+  	   <!-- 隐藏 -->
+  	 <div class="checkset_text" ng-show="show_BP1.val">
+  	  <table>
+  	  	<tr>
+  	  		<td>收缩压 报警阈值：低于<input type="number" ng-model="setting[4]['报警设置']['收缩压报警阈值低于']">高于<input type="number" ng-model="setting[4]['报警设置']['收缩压报警阈值高于']"></td>
+  	  		
+  	  	</tr>
+  	  	<tr>
+  	  		<td>
+  	  		收缩压 报警阈值：低于<input type="number" ng-model="setting[4]['报警设置']['舒张压报警阈值低于']">高于<input type="number" ng-model="setting[4]['报警设置']['舒张压报警阈值高于']">
+  	  		</td>
+  	  	</tr>
+  	  </table>
+     </div>
+  	<a><button class="button  button-positive btn_checkset_1" ng-click="toggle(show_BP2)">正常参数设置</button></a>
+        <!-- 隐藏 -->
+      <div class="checkset_text" ng-show="show_BP2.val">
+      	<table>
+      		<tr>
+      			<td>
+      				收缩压参考正常值：<input type="number" ng-model="setting[4]['正常参数设置']['收缩压参考正常值最低']">————<input type="number" ng-model="setting[4]['正常参数设置']['收缩压参考正常值最高']">
+      			</td>
+      		</tr>
+      		<tr>
+      			<td>
+      				舒张压参考正常值：<input type="number" ng-model="setting[4]['正常参数设置']['舒张压参考正常值最低']">————<input type="number"  ng-model="setting[4]['正常参数设置']['舒张压参考正常值最高']">
+      			</td>
+      		</tr>
+      	</table>
+      </div>
+
+  	<a><button class="button  button-positive btn_checkset_1" ng-click="toReset(4)">恢复默认设置</button></a>
+  </div>
+
+ 
+ </div> 
+</ion-scroll>

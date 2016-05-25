@@ -1,0 +1,45 @@
+	<div class="bar bar-header bar-light">
+	  
+	  <button class="button button-positive btn_checkset" ng-click="back()">返回</button>
+    <h1 class="title">语言设置</h1>
+    <button class="button button-positive btn_checkset" ng-click="save()">保存</button>
+	</div>
+	<div class="list card card_setting">
+<!-- 		<ion-list>
+		  <ion-radio ng-model="choice" checked="checked" ng-value="'A'">简体中文</ion-radio>
+		  <ion-radio ng-model="choice" ng-value="'B'">繁体中文</ion-radio>
+		  <ion-radio ng-model="choice" ng-value="'C'">English</ion-radio>
+		</ion-list>
+ -->
+   <form >
+        <label class="item item-radio">
+          <input type="radio" name="language" ng-model="systemSetting.language" value="简体中文">
+          <div class="radio-content">
+            <div class="item-content">
+             简体中文
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </div>
+        </label>
+
+        <label class="item item-radio">
+          <input type="radio" name="language" ng-model="systemSetting.language" value="繁体中文">
+          <div class="radio-content">
+            <div class="item-content">
+              繁体中文
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </div>
+        </label>
+
+        <label class="item item-radio">
+          <input type="radio" name="language" ng-model="systemSetting.language" value="英语">
+          <div class="radio-content">
+            <div class="item-content">
+              English
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </div>
+        </label>
+     </form>
+    </div>

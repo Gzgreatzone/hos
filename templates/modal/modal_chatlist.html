@@ -1,0 +1,109 @@
+<!-- 模板 全屏浏览内容 -->
+<div id="modal_chatlist" class="modal modal_chatlist">
+	<style ng-if="current_modal=='modal_expand'">
+		/* .modal-open .modal, .modal-open .modal-backdrop {
+			width: initial;
+			right: 240px;
+		} */
+		#modal_chatlist {
+			background: #fff;
+			width: initial;
+			right: 240px;
+			left: 0;
+			position: absolute;
+		}
+	</style>
+	<style>
+		.modal {
+			height: 100%;
+			width: 100%;
+			top: 0;
+			left: 0;
+			background: transparent;
+		}
+		.active .modal-backdrop-bg {
+			opacity: .2;
+		}
+		#modal_img {
+			background: #000;
+		}
+		#modal_expand {
+			position: absolute;
+		}
+	</style>
+	
+	<ion-content id="modal_img" ng-show="current_modal=='modal_img'">
+		<!-- 模板 图片幻灯浏览 -->
+		<div class="modal_btn">
+			<i class="icon stable ion-archive" ng-click="download()"></i>
+			<i class="icon assertive ion-log-out" ng-click="closeModal_Chatlist()"></i>
+		</div>
+		<ion-slide-box class="modal_img" active-slide="modal_img_index" on-slide-changed="modal_img_slide($index)" pager-click="modal_img_pager($index)">
+			<ion-slide ng-repeat="row in modal_img_array track by $index" on-hold="modal_img_event()">
+				<div class="box">
+					<img ng-src="{{row}}" ng-click="closeModalImg()"/>
+				</div>
+			</ion-slide>
+		</ion-slide-box>
+	</ion-content>
+
+	<ion-content id="modal_expand" overflow-scroll="false" ng-show="current_modal=='modal_expand'">
+		<!-- 模板 全屏浏览内容 -->
+		<ion-list can-swipe="no">
+			<ion-item class="item item-thumbnail-left item-thumbnail-left_reset item-remove-animate">
+				<img ng-src="{{chatlist.avatar}}" avatar_empty="{{chatlist.avatar.length + 0}}"/>
+				<div class="main_list_content_container" ng-click="get_reply(chatlist.id)" on-tap="show_reply = false">
+					<div class="list_top_container">
+						<span class="list_name">{{chatlist.formLogin}}</span><span class="list_time">{{chatlist.formTime}}</span>
+					</div>
+					<div class="list_text">
+						{{chatlist.msg}}
+					</div>
+					<!-- 数据项数目：{{chatlist.image.length}} -->
+					<div class="list_pic">
+						<div class="list_pic_container" ng-repeat="row in chatlist.image track by $index">
+							<div class="list_pic_content" ng-click="image_expand(chatlist,chatlist.id,$index)">
+								<img ng-src="{{row}}"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 功能按钮 -->
+				<div class="main_list_icon_container stable">
+					<!-- <div class="calm-bg main_list_icon" ng-click="chatlist_play(chatlist)">
+						<i class="ion-speakerphone"></i>
+					</div>
+					<div class="balanced-bg main_list_icon" ng-click="chatlist_expand(chatlist)">
+						<i class="ion-arrow-expand"></i>
+					</div>
+					<div class="energized-bg main_list_icon" ng-click="show_reply = !show_reply">
+						<i class="ion-chatbubbles"></i>
+					</div>
+					<div class="assertive-bg main_list_icon" ng-click="chatlist_delete(chatlist)">
+						<i class="ion-android-close"></i>
+					</div>
+					<div class="bar bar-header item-input-inset energized-bg" ng-show="show_reply"> -->
+					<div class="bar bar-header item-input-inset energized-bg">
+						<label class="item-input-wrapper stable-bg">
+							<i class="icon ion-compose placeholder-icon"></i>
+							<input type="text" placeholder="回复" ng-model="input_msg.input_content">
+						</label>
+						<button class="button ion-checkmark-round" ng-click="chatlist_reply(chatlist)">
+							发送
+						</button>
+					</div>
+				</div>
+				<div class="main_list_reply_container stable">
+					<div class="list card list-borderless">
+						<!-- 判断头像左右 -->
+						<div class="item item-text-wrap main_list_content" sameperson="{{item.SamePerson}}" ng-repeat="item in reply_array track by $index">
+							<!-- {{item.SamePerson}} -->
+							<img ng-src="{{item.user_data.uAvatar}}"/>
+							<span ng-bind="item.gsondata"></span>
+						</div>
+					</div>
+				</div>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</div>

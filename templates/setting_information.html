@@ -1,0 +1,30 @@
+	<div class="bar bar-header bar-light">
+	  <h1 class="title">医院信息设置</h1>
+	  <button class="button button-positive button_checkset" ng-click="back()">返回</button>
+	</div>
+	<div class="list card_setting">
+	  <label class="item item-input item-input_setting">
+		<span class="input-label col-10">医院名称</span>
+	    <input type="text" placeholder="医院名称" ng-disabled="isDisabled" ng-model="systemSetting.h_name">
+	  </label>
+	  <label class="item item-input item-input_setting">
+	    <span class="input-label col-10">科室名</span>
+	    <input type="text" placeholder="科室名" ng-disabled="isDisabled" ng-model="systemSetting.ad_name">
+	  </label>
+	  <label class="item item-input item-input_setting">
+	    <span class="input-label col-10">地区</span>
+	    <input type="text" placeholder="地区" ng-disabled="isDisabled" ng-model="systemSetting.area">
+	  </label>
+	  <label class="item item-input item-input_setting">
+	    <span class="input-label col-10">地址</span>
+	    <input type="text" placeholder="地址" ng-disabled="isDisabled" ng-model="systemSetting.address">
+	  </label>
+	  <label class="item item-input item-input_setting">
+	    <span class="input-label col-10">电话</span>
+	    <input type="text" placeholder="电话" ng-disabled="isDisabled" ng-model="systemSetting.telephone">
+	  </label>
+		<div class="row">
+		  <div class="col"><button class="button button-positive" ng-click="editor()">编辑</button></div>
+		  <div class="col"><button class="button button-positive" ng-click="save()">保存</button></div>
+		</div>
+	</div>

@@ -1,0 +1,26 @@
+ 
+          <!--   表单 -->
+    <div class="loginmain">
+      <h1>{{systemSetting.h_name}}医院</h1>
+      <h2>{{systemSetting.ad_name}}</h2>
+      <h2>{{systemSetting.address}}</h2>
+      <h3 class="title_chafan">KF580查房工具包</h3>
+    </div>
+    <form class="login_from" name = "login_form" novalidate>
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="text" name = "user" placeholder="用户账号" ng-model="username" required>
+          </label>
+          <label class="item item-input">
+            <input type="password" name="pw" placeholder="输入密码" ng-model="password" required>
+          </label>
+        </div>
+    </form>
+    <form class="login_from login_submit">
+      <button class="button button-positive login_button "ng-click="toIndex()" ng-disabled = "login_form.user.$dirty && login_form.user.$invalid || login_form.pw.$dirty && login_form.pw.$invalid">
+         登陆
+      </button>
+      <button class="button button-positive login_button" ng-click="toSetting()">
+         系统设置
+      </button>
+    </form>

@@ -1,0 +1,74 @@
+	<div class="bar bar-header bar-light">
+	  <h1 class="title">{{people.name}}</h1>
+	  <button class="button button-positive btn_checkset " ng-click="back()">返回</button>
+	  <button class="button button-positive btn_checkset " ng-click="next()">下一步</button>
+	</div>
+
+<ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
+ <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+
+  <div class="list card card_checkreport">
+    <h3><b>打印设置<b></h3>
+   <form class="form_checkreport">	
+	  <label for=""><input type="radio" name="group" ng-model="report" ng-value="single" >单次检查报告<br></label>
+	  <label for=""><input type="radio" name="group" ng-model="report" ng-value="time" >趋势分析报告报告<br></label>
+	              <p>&nbsp &nbsp	起始时间xxxxxx</p>  
+	              <p>&nbsp &nbsp	起始时间xxxxxx</p>
+	  <label for=""><input type="radio" name="group" ng-model="report" ng-value="allReport">全部<br></label>
+
+   </form>
+    <h3>输入血气分析结果</h3>
+    
+	<table>
+		<tr>
+			<td class="td-1 tdcolor-1">
+				时间
+			</td>
+			<td class="td-2 tdcolor-1">
+				PH
+			</td>
+			<td class="td-3 tdcolor-1">
+				Paco2（mmHg）
+			</td>
+			<td class="td-4 tdcolor-1">
+				Pao2 <br>（mmHg）
+			</td>
+		</tr>
+
+		<tr>
+			<td class="td-1 tdcolor-2">
+				v{{one.time}}
+			</td>
+			<td class="td-2 tdcolor-2">
+				v{{one.PH}}
+			</td>
+			<td class="td-3 tdcolor-2">
+				v{{one.Paco2}}
+			</td>
+			<td class="td-4 tdcolor-2">
+				v{{one.Pao2}}
+			</td>
+		</tr>
+
+		<tr>
+			<td class="td-1 tdcolor-3">
+				v{{two.time}}
+			</td>
+			<td class="td-2 tdcolor-3">
+				v{{two.PH}}
+			</td>
+			<td class="td-3 tdcolor-3">
+				v{{two.Paco2}}
+			</td>
+			<td class="td-4 tdcolor-3">
+				v{{two.Pao2}}
+			</td>
+		</tr>
+	</table>
+	<div class="row row_checkreport">
+	  <div class="col"><button class="button button-positive btn_checkreport" ng-click="next()">确定</button></div>
+	  <div class="col"><button class="button button-positive btn_checkreport" ng-click="back()">取消</button></div>
+	</div>
+   </div>
+ </div> 
+</ion-scroll>

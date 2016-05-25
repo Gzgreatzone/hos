@@ -1,0 +1,24 @@
+[
+    	{
+            "title":"攻城狮",
+						"description":"这是刷新的栏目",
+						"url":0,
+						"img":"img/adam.jpg",
+						"date":"2015-10-10"
+        },
+        {
+            "title":"攻城狮",
+						"description":"这是刷新的栏目",
+						"url":1,
+						"img":"img/ben.png",
+						"date":"2015-10-10"
+        },
+        {   "type":"threepic",
+            "title":"攻城狮6",
+						"description":"高薪招聘攻城狮",
+						"url":1,
+						"img":"img/ben.png",
+						"date":"2015-10-10",
+						"content":"攻城狮6的内容"
+        }
+]

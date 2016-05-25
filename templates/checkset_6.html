@@ -1,0 +1,38 @@
+		       <!--  头部 -->
+	<div class="bar bar-header bar-light">
+	  <h1 class="title">血糖测量设置  </h1>
+	  <button class="button button-positive btn_checkset" ng-click="back()">返回</button>
+    <button class="button button-positive btn_checkset" ng-click="saveSet(5)">保存</button>
+	</div>
+
+<ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
+ <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+
+          <!--  内容 -->
+   <div class="list card card_checkset animated bounceInRight">
+  	<a><button class="button  button-positive btn_checkset_1" ng-click="toggle(show_BS1)">报警设置</button></a>
+  	     <!-- 隐藏的 -->
+  	 <div class="checkset_text" ng-show="show_BS1.val">
+  	  <table>
+  	  	<tr>
+  	  		<td>空腹血糖报警阈值：低于<input type="number" ng-model="setting[5]['报警设置']['空腹血糖报警阈值低于']">高于<input type="number" ng-model="setting[5]['报警设置']['空腹血糖报警阈值高于']"></td>
+  	  		
+  	  	</tr>
+  	  </table>
+     </div>
+  	<a><button class="button  button-positive btn_checkset_1" ng-click="toggle(show_BS2)">正常参数设置</button></a>
+          <!-- 隐藏的 -->
+      <div class="checkset_text" ng-show="show_BS2.val">
+      	<table>
+      		<tr>
+      			<td>空腹血糖参考正常值：低于<input type="number" ng-model="setting[5]['正常参数设置']['空腹血糖参考正常值最低']">高于<input type="number" ng-model="setting[5]['正常参数设置']['空腹血糖参考正常值最高']"></td>
+      		</tr>
+      	</table>
+      </div>
+
+  	<a><button class="button  button-positive btn_checkset_1" ng-click="toReset(5)">恢复默认设置</button></a>
+  </div>
+
+ 
+ </div> 
+</ion-scroll>

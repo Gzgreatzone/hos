@@ -1,0 +1,72 @@
+<div class="header box-vm">
+  <div class="w" ng-click="back()">
+    <img src="img/back1.png" class="vm">
+    <span class="vm ml10">返回</span>
+  </div>
+  <div class="flex td fb fs20">
+    {{people.name}}
+  </div>
+
+  <div class="ww tr" ng-click="">
+    扫描二维码
+  </div>
+</div>
+      <!-- 头部标题 -->
+<!--    <div class="bar bar-header bar-light">
+    <button class="button button-positive button_check" ng-click="back()">返回</button>
+    <h2 class="title">{{people.name}}</h2>
+    <button class="button button-positive button_check">扫二维码</button>
+</div> -->
+       <!-- 内容 -->
+<ion-scroll id="manage_index" zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
+ <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+      <div class="page_container">
+      <div class="page_container_top">
+        <div class="page_content">
+          <!-- 仪表盘 -->
+          <div class="index_dashboard col-50" ng-repeat="dashboard in activeDevice['dashboard']">
+            <span></span>
+            <!-- 刻度 -->
+            <!-- <p><a href="#"><span></a></p>
+            <p><a href="#"><span></a></p>
+            <p><a href="#"><span></a></p>
+            <p><a href="#"><span></a></p>
+            <p><a href="#"><span></a></p>
+            <p><a href="#"><span></a></p> -->
+            <!-- 指针 -->
+            <div class="pointer"></div>
+            <!-- <div class="pointer" ng-style="pointer_angle_{{$index}}"></div> -->
+            <!-- 数值 -->
+            <img ng-src="{{dashboard.pic}}"/>
+          </div>
+          <div class="dashboard_empty" ng-if="activeDevice['dashboard'].length=='0'">暂无仪表盘样式</div>
+          <div class="dashboard_name col-{{100/activeDevice['dashboard'].length}}" ng-repeat="dashboard in activeDevice['dashboard']">
+            <b ng-bind="dashboard.name"></b>
+            <span ng-if="dashboard.val" ng-bind-html="'&lt;br&gt;'+dashboard.val+dashboard.unit"></span>
+          </div>
+        </div>
+      </div>
+      <div class="page_container_bottom">
+        <div class="page_content">
+          <div class="index_block" ng-repeat="pre in device track by $index" ng-class="{ {{pre.deviceId}}:'show_Current_index'}[chosenDevice]" ng-click="manage_index.Monitor.on(pre)">
+            <p style="background-image:url({{pre.deviceImg}})"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div> 
+ </ion-scroll>
+
+       <!-- 底部按钮 -->
+	<div class="bar bar-footer">
+   <table>
+     <tr>
+       <td class="footer_td3"><button class="button button-positive btn_footer" ng-disabled="ischarge" ng-click="toAddperson()" >管理</button></td>
+       <td class="footer_td3"> <button class="button button-positive btn_footer " ng-disabled="isreport" ng-click="toReport()">报告</button></td>
+       <td class="footer_td3"><button class="button button-positive btn_footer" ng-click="toCheckSet()">设置</button></td>
+
+     </tr>
+   </table>
+	</div>
+

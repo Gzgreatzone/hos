@@ -1,0 +1,15 @@
+﻿<style>	
+	.modal-backdrop-bg {
+		opacity: 0 !important;
+	}
+</style>
+<!-- 模板 指标检测提醒 -->
+<div id="modal_show_index" class="modal">
+	<ion-content>
+		<div class="modal_main">
+			<p><span class="title calm">{{index_txt}}</span></p>
+			<p><img ng-src="{{index_img}}"></p>
+			<p><span class="close_btn button button-outline button-calm" ng-click="closeModal()">退出</span></p>
+		</div>
+	</ion-content>
+</div>
