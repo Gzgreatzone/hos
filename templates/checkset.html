@@ -1,49 +1,71 @@
-	<div class="bar bar-header bar-light">
+<!-- 	<div class="bar bar-header bar-light">
 	  <h1 class="title">{{people.name}}</h1>
 	  <button class="button button-positive button_checkset" ng-click="back()">返回</button>
-	</div>
+	</div> -->
+		<div class="header box-vm ">
+		  <div class="w" ng-click="back()">
+	        <img src="img/back1.png" class="vm">
+	        <span class="vm ml10">返回</span>
+	      </div>
+           <div class="flex td fb fs20">
+              {{people.name}}
+           </div>
+			 <div class="w" >
+             <span class="vm mr10">&nbsp&nbsp</span>
+           </div>
+		</div>
 
 
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
  <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
 
-	<div class="list card card_checkset">
+	<div class="list  pt10 ml5 gt-special-list"> 
+      <div class="rp-lt">
+		<div class="box-vm msg animated  bounceInRight">
+			<div class="fs20 ml20 flex td" ng-click="tosetting(1)">血氧测量设置 </div>
+			<i class="icon ion-chevron-right"></i>
+		</div>
+      </div>
+	  <div class="rp-lt">
+		<div class="box-vm msg animated  bounceInRight">
+			<div class="fs20 ml20 flex td" ng-click="tosetting(2)">二氧化碳测量设置 </div>
+			<i class="icon ion-chevron-right"></i>
+		</div>
+      </div>
+      <div class="rp-lt">
+		<div class="box-vm msg animated  bounceInRight">
+			<div class="fs20 ml20 flex td" ng-click="tosetting(3)">肺功能测量设置 </div>
+			<i class="icon ion-chevron-right"></i>
+		</div>
+      </div>
+      <div class="rp-lt">
+		<div class="box-vm msg animated  bounceInRight">
+			<div class="fs20 ml20 flex td" ng-click="tosetting(4)">体重测量设置 </div>
+			<i class="icon ion-chevron-right"></i>
+		</div>
+      </div>
+      <div class="rp-lt">
+		<div class="box-vm msg animated  bounceInRight">
+			<div class="fs20 ml20 flex td" ng-click="tosetting(5)">血压测量设置 </div>
+			<i class="icon ion-chevron-right"></i>
+		</div>
+      </div>
+      <div class="rp-lt">
+		<div class="box-vm msg animated  bounceInRight">
+			<div class="fs20 ml20 flex td" ng-click="tosetting(6)">血糖测量设置 </div>
+			<i class="icon ion-chevron-right"></i>
+		</div>
+      </div>
+      <div class="rp-lt">
+		<div class="box-vm msg animated  bounceInRight">
+			<div class="fs20 ml20 flex td" ng-click="post()">同步到服务器 </div>
+			<i class="icon ion-loop"></i>
+		</div>
+      </div>
 
-	  <a ng-click="toOne()" class="item  item-icon-right item_checkset animated  bounceInRight">
-	    <i class="icon ion-chevron-right"></i>
-	    血氧测量设置 
-	  </a>
-
-	  <a ng-click="toTwo()" class="item  item-icon-right item_checkset animated  bounceInRight">
-	    <i class="icon ion-chevron-right"></i>
-	    二氧化碳测量设置    
-	  </a>
-
-	  <a ng-click="toThree()" class="item  item-icon-right item_checkset animated  bounceInRight">
-	    <i class="icon ion-chevron-right"></i>
-	    肺功能测量设置  
-	  </a>
-
-	  <a ng-click="toFour()" class="item  item-icon-right item_checkset animated  bounceInRight">
-	    <i class="icon ion-chevron-right"></i>
-	    体重测量设置  
-	  </a>
-	  <a ng-click="toFive()" class="item  item-icon-right item_checkset animated  bounceInRight">
-	    <i class="icon ion-chevron-right"></i>
-	    血压测量设置   
-	  </a>
-
-	  <a ng-click="toSix()" class="item  item-icon-right item_checkset animated  bounceInRight">
-	    <i class="icon ion-chevron-right"></i>
-	    血糖测量设置    
-	  </a>
-
-	  <a ng-click="post()" class="item  item-icon-right item_checkset animated  bounceInRight">
-	    <i class=" "></i>
-	    同步到服务器
-	  </a>
-
-
+ 
 	</div>
  </div> 
 </ion-scroll>
+
+

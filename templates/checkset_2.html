@@ -1,156 +1,51 @@
-		       <!--  头部 -->
-	<div class="bar bar-header bar-light">
-	  <h1 class="title">二氧化碳量检测</h1>
-	  <button class="button button-positive btn_checkset" ng-click="back()">返回</button>
-    <button class="button button-positive btn_checkset" ng-click="saveSet(1)">保存</button>
-	</div>
+
+    <div class="header box-vm ">
+      <div class="w" ng-click="back()">
+          <img src="img/back1.png" class="vm">
+          <span class="vm ml10">返回</span>
+        </div>
+           <div class="flex td fb fs20">
+              二氧化碳量检测
+           </div>
+       <div class="w" >
+             <span class="vm mr10" ng-click="saveSet(1)" >保存</span>
+           </div>
+    </div>
 
 
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
  <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
-
-                  <!-- 主体内容	 -->
-  <div class="list card card_checkset animated bounceInRight ">
-  	 <a><button class="button  button-positive btn_checkset_1" ng-click="toggle(show_CO21)">工作模式设置</button></a>
-  	  <ul class="list" ng-show="show_CO21.val">
-        <li class="item item-toggle">
-           检查模式
-           <label class="toggle toggle-assertive">
-             <input type="radio"  checked="" ng-model= "setting[1]['工作模式设置']" name = "operatingMode" value ="检查模式">
-             <div class="track">
-               <div class="handle"></div>
-             </div>
-           </label>
-        </li>
-        <li class="item item-toggle">
-           监测模式
-           <label class="toggle toggle-royal">
-             <input type="radio" ng-model= "setting[1]['工作模式设置']" name = "operatingMode" value="监测模式">
-             <div class="track">
-               <div class="handle"></div>
-             </div>
-           </label>
-        </li>
-      </ul>
-
-
-
-
-  	 <a><button class="button  button-positive btn_checkset_1" ng-click="toggle(show_CO22)">报警设置</button></a>
-       <div class="checkset_text" ng-show="show_CO22.val">
-         <table>
-           <tr>
-             <td><h3>检测值报警设置</h3></td>
-           </tr>
-           <tr>
-             <td>PCO2  报警阈值  ：低于
-                 <input type="number" ng-model="setting[1]['报警设置']['PCO2报警阈值低于']">
-                 <span>高于</span>
-                 <input type="number" ng-model="setting[1]['报警设置']['PCO2报警阈值高于']"></td>
-           </tr>
-           <tr>
-             <td><h3>监测值报警设置</h3></td>
-           </tr>
-           <tr>
-             <td>EtCO2 报警阈值  ：低于
-                 <input type="number" ng-model="setting[1]['报警设置']['EtCO2报警阈值低于']">
-                 <span>高于</span>
-                 <input type="number" ng-model="setting[1]['报警设置']['EtCO2报警阈值高于']"></td>
-           </tr>
-           <tr>
-             <td>RR报警阈值  :低于
-                 <input type="number" ng-model="setting[1]['报警设置']['RR报警阈值低于']">
-                 <span>高于</span>
-                 <input type="number" ng-model="setting[1]['报警设置']['RR报警阈值高于']"></td>
-           </tr>
-           <tr>
-             <td>
-               报警延迟时间(秒) <input type="number" ng-model="setting[1]['报警设置']['报警延迟时间']">
-             </td>
-           </tr>
-         </table>
+    <div class="standard-list mt20">
+       <div class="list" ng-repeat="(key, val) in setting[1] track by $index " >
+          <div class="title box-vm js-event-title"  ng-click="toggle(key)">
+            <i class="ion-plus-circled"></i>
+            <div class="flex ml20 fs18 c-black">{{key}}</div>
+          </div>
+          <div class="{{key}}">
+            <div class="p1rem js-event-list event"  ng-repeat="(key,val) in setting[1][key] ">
+                <label class="item item-input ">
+                  <span class="input-label col-50 c-blue">{{key}}</span>
+                  <input type="number"  ng-model="val">
+                </label>
+            </div>
+          </div>
        </div>
-  	 <a><button class="button  button-positive btn_checkset_1" ng-click="toggle(show_CO23)">正常参数设置</button></a>
-      <div class="checkset_text" ng-show="show_CO23.val">
-        <table>
-          <tr>
-           <td>参考正常值：<input type="number" ng-model="setting[1]['正常参数设置']['参考正常值不低于']">————<input type="number" ng-model="setting[1]['正常参数设置']['参考正常值不高于']"></td>
-        </tr>
-        </table>
-      </div>
-
-
-
-  	 <a><button class="button  button-positive btn_checkset_1" ng-click="toggle(show_CO24)">校正补偿设置</button></a>
-      
-      <div class="checkset_text" ng-show="show_CO24.val">
-        <table>
-          <tr>
-            <td><h3>气体补偿设定</h3></td>
-          </tr>
-          <tr>
-            <td>前O2浓度（%）:<input type="number" ng-model="setting[1]['矫正补偿设置']['前O2浓度']"></td>
-          </tr>
-          <tr>
-            <td><h3>环境值设定</h3></td>
-          </tr>
-          <tr>
-            <td>当前大气压（mmHg）<input type="number" ng-model="setting[1]['矫正补偿设置']['当前大气压']"></td>
-          </tr>
-          <tr>
-            <td>检测气体温度（oC）:  <input type="number" ng-model="setting[1]['矫正补偿设置']['检测气体温度']"></td>
-          </tr>
-          <tr>
-            <td><h3>其他气体补偿设定</h3></td>
-          </tr>
-          <tr>
-            <td>当前He浓度（%）：<input type="number" ng-model="setting[1]['矫正补偿设置']['当前He浓度']"></td>
-          </tr>
-          <tr>
-            <td>当前N2O浓度（%）：<input type="number" ng-model="setting[1]['矫正补偿设置']['当前N2O浓度']"></td>
-          </tr>
-
-        </table>
-      </div>
-
-  	 <a><button class="button  button-positive btn_checkset_1" ng-click="toClear(1)">恢复默认设置</button></a>
-  	 <a><button class="button  button-positive btn_checkset_1" ng-click="toReset(1)">校零</button></a>
-  </div>
+       <div class="list">
+          <div class="title box-vm js-event-title" ng-click="toReset(1)">
+            <i class="ion-plus-circled"></i>
+            <div class="flex ml20 fs18 c-black">恢复默认值</div>
+          </div>
+       </div>
+       <div class="list">
+          <div class="title box-vm js-event-title" ng-click="toClear(1)">
+            <i class="ion-plus-circled"></i>
+            <div class="flex ml20 fs18 c-black">较零</div>
+          </div>
+       </div>
+    </div>
+  
  </div> 
 </ion-scroll>
-
-  <!--   <div class="list card card_checkset">
-     <a href="">
-     	   <button class="button  button-positive btn_checkset_1" ng-click="clear(co2_density)">校零</button>
-     </a>
-     <a href="">
-  			<div class="row row_checkset_1">
-  			  <div class="col">
-  			  	<button class="button  button-positive btn_checkset_1-two">检查模式</button>
-  			  </div>
-  			  <div class="col">
-              <button class="button  button-positive btn_checkset_1-two">监测模式</button>
-  			  </div>
-  			</div>
-     </a>
-     <a>
-     		<button class="button  button-outline button-positive btn_checkset_1">参考正常值xxx到xxx</button>
-     </a>
-    <a href="">
-     	   <button class="button  button-positive btn_checkset_1" ng-click="reset(co2_density)">恢复默认参数</button>
-     </a>
-  </div>
-       滑块 1
-  	<div class="list">
-  	    <title class="item item-divider item-divider_check ">co2浓度</title>
-  		<div class="row">
-  		  <div class="col col-75">气体浓度</div>
-  		  <div class="col ">{{co2_density.val}}</div>
-  		</div>
-  		<div class="item range range-positive">
-  		    <i class="icon ion-ios-sunny-outline"></i>
-  		    <input type="range" name="volume" min="0" max="100" value="33" ng-model="co2_density.val">
-  		    <i class="icon ion-ios-sunny"></i>
-  		</div>
-  	</div>
-  	       滑块 2 -->
+ 
+  
+  	

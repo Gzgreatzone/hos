@@ -1,4 +1,4 @@
-﻿var debug = "false";
+﻿var debug = "true";
 if (window.Android) {debug = "false";}
 
 if (debug == "true") {

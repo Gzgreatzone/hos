@@ -1,8 +1,20 @@
-	<div class="bar bar-header bar-light">
+<!-- 	<div class="bar bar-header bar-light">
 	  <h1 class="title">{{people.name}}</h1>
 	  <button class="button button-positive btn_checkset " ng-click="back()">返回</button>
 	  <button class="button button-positive btn_checkset " ng-click="next()">下一步</button>
-	</div>
+	</div> -->
+		<div class="header box-vm ">
+		  <div class="w" ng-click="back()">
+	        <img src="img/back1.png" class="vm">
+	        <span class="vm ml10">返回</span>
+	      </div>
+           <div class="flex td fb fs20">
+              {{people.name}}
+           </div>
+			 <div class="w" ng-click="next()" >
+             <span class="vm mr10">下一步</span>
+           </div>
+		</div>
 
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
  <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">

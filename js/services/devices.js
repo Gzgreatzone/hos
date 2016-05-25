@@ -1,17 +1,19 @@
 ﻿'use strict';
 
 
-angular.module('chafangbao.services')
+angular.module('chafangbao.services',['chafangbao.factories'])
 .service('kfDevices',
-	['$rootScope',
-		function ($rootScope) {
-			
+	['$rootScope','ThePerson',
+		function ($rootScope,ThePerson) {
+			//var people = ThePerson.get();
+			//var peopleName = people.name;
+			//alert(peopleName);
 			var stat;
-			if (debug == "true") {
-				stat = localStorage.getItem("devicestatus");
-			} else if (debug == "false") {
-				stat = 安卓用键获取值("devicestatus");
-			}
+			// if (debug == "true") {
+			// 	stat = localStorage.getItem("devicestatus");
+			// } else if (debug == "false") {
+			// 	stat = 安卓用键获取值("devicestatus");
+			// }
 
 			if (!stat) {
 				var data = [{
@@ -91,6 +93,17 @@ angular.module('chafangbao.services')
 				//回调数组
 				callBacks : [],
 				//开启 device.open("中文设备","回调","标志字")
+				save : function(msg){
+					var people = ThePerson.get();
+                    var peopleName = people.name;
+                    var indexName = peopleName + "_" + msg.data[0];
+                    if (安卓用键获取值(indexName)) {
+                    	var deviceInfor = 安卓用键获取值("devicestatus") + 安卓用键获取值(indexName);//加一次
+                    } else{
+                    	var deviceInfor = 安卓用键获取值("devicestatus");//直接推入
+                    }
+					安卓设置键值对(indexName, deviceInfor);
+				},
 				open : function (name, callBack, arg) {
 					//alert("name："+name+"\ncallBack："+callBack+"\narg："+arg)
 					var callBackPair = new Object();
@@ -201,12 +214,17 @@ angular.module('chafangbao.services')
 									device.status[i].最后开始时间 = ms;
 									device.status[i].最后结束时间 = ms;
 									device.status[i].最后检测参数 = 真正的消息;
-
-									if (debug == "true") {
-										localStorage.setItem("devicestatus", JSON.stringify(device.status));
-									} else if (debug == "false") {
-										安卓设置键值对("devicestatus", JSON.stringify(device.status));
-									}
+									// var people = ThePerson.get();
+			      //                   var peopleName = people.name;
+			      //                   var indexName = peopleName + "_" + device.status[i]["设备名"];
+			      //                   if (安卓用键获取值(indexName)) {
+			      //                   	var deviceInfor = JSON.stringify(device.status[i]) + 安卓用键获取值(indexName);
+			      //                   } else{
+			      //                   	var deviceInfor = JSON.stringify(device.status[i]);
+			      //                   }
+									// 安卓设置键值对(indexName, deviceInfor);
+									安卓设置键值对("devicestatus", JSON.stringify(device.status[i]));
+									
 								}
 							}
 						}

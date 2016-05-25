@@ -2,7 +2,7 @@
 
 
 angular.module('chafangbao.services')
-.service('kfLogin', function ($interval) {
+.service('kfLogin', function ($interval,$window) {
 	var username = localStorage.getItem('username');
 	var password = localStorage.getItem('password');
 	var autologin = true;
@@ -16,15 +16,20 @@ angular.module('chafangbao.services')
 
 	//定义接口
 	//登录
-	var login = function (user, pwd, cb, auto, callback) {
+	var login = function (user, pwd, auto, callback) {
 		console.log('正在登录系统...');
 		oauth2.jsonp.login(user, pwd, function (r) {
 
 			//判断是否登录失败，失败则回调，然后返回
 			if (r.errcode) {
 				console.log('登录失败，洗洗睡吧');
-				if (cb)
-					cb(r);
+				if(callback){
+			//登录成功，执行回调函数
+			console.log("callback" + callback)
+             
+			callback(r);
+
+			}
 				localStorage.removeItem('userinfo');
 				return;
 			}
@@ -35,9 +40,7 @@ angular.module('chafangbao.services')
 			userinfo = r;
 			isLogin = true;
 			
-			//登录成功，执行回调函数
-			console.log("callback" + callback)
-			callback();
+			
 			
 			//成功,写入localStorage
 			console.log('登录成功');
@@ -71,9 +74,13 @@ angular.module('chafangbao.services')
 
 			//通知后台，用户已登录
 			Android.onBtnLoginClick(r.uid.T[0].uid, r.uid.T[0].username);
+          if(callback){
+			//登录成功，执行回调函数
+			console.log("callback" + callback)
 
-			if (cb)
-				cb(r);
+			callback(r);
+			$window.location.href = "#/index";
+			}
 		});
 	};
 

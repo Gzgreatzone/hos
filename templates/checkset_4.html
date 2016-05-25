@@ -1,41 +1,45 @@
 		       <!--  头部 -->
-	<div class="bar bar-header bar-light">
+<!-- 	<div class="bar bar-header bar-light">
 	  <h1 class="title">体重检查设置</h1>
 	  <button class="button button-positive btn_checkset" ng-click="back()">返回</button>
     <button class="button button-positive btn_checkset" ng-click="saveSet(3)">保存</button>
-	</div>
+	</div> -->
+    <div class="header box-vm ">
+      <div class="w" ng-click="back()">
+          <img src="img/back1.png" class="vm">
+          <span class="vm ml10">返回</span>
+        </div>
+           <div class="flex td fb fs20">
+              体重检查设置
+           </div>
+       <div class="w" >
+             <span class="vm mr10" ng-click="saveSet(3)" >保存</span>
+           </div>
+    </div>
 
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
  <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
-  <!--  内容 -->
-  <div class="list card card_checkset animated bounceInRight">
-  	<a><button class="button  button-positive btn_checkset_1" ng-click="toggle(show_WEI1)">报警设置</button></a>
-      <!-- 隐藏 -->
-  	 <div class="checkset_text" ng-show="show_WEI1.val">
-  	  <table>
-  	  	<tr>
-  	  		<td>体重 报警阈值：低于<input type="number" ng-model="setting[3]['报警设置']['体重报警阈值低于']">高于<input type="number" ng-model="setting[3]['报警设置']['体重报警阈值高于']"></td>
-  	  	</tr>
-        <tr>
-          <td>体重 报警阈值：低于<input type="number" ng-model="setting[3]['报警设置']['BMI报警阈值低于']">高于<input type="number" ng-model="setting[3]['报警设置']['BMI报警阈值高于']"></td>
-        </tr>
-  	  </table>
-     </div>
-  	<a><button class="button  button-positive btn_checkset_1" ng-click="toggle(show_WEI2)">正常参数设置</button></a>
-      <!-- 隐藏 -->
-      <div class="checkset_text" ng-show="show_WEI2.val">
-      	<table>
-      		<tr>
-      			<td>
-      				FEV1%预计值参考正常值<input type="number" ng-model="setting[3]['正常参数设置']['BMI参考正常值不低于']">————<input type="number" ng-model="setting[3]['正常参数设置']['BMI参考正常值不高于']">
-      			</td>
-      		</tr>
-      	</table>
-      </div>
-
-  	<a><button class="button  button-positive btn_checkset_1" ng-click="toReset(3)">恢复默认设置</button></a>
-  </div>
-
- 
+  <div class="standard-list mt20">
+       <div class="list" ng-repeat="(key, val) in setting[3] track by $index" >
+          <div class="title box-vm js-event-title" ng-click="toggle(key)">
+            <i class="ion-plus-circled"></i>
+            <div class="flex ml20 fs18 c-black">{{key}}</div>
+          </div>
+          <div class="{{key}}">
+            <div class="p1rem js-event-list event"  ng-repeat="(key,val) in setting[3][key] ">
+                <label class="item item-input ">
+                  <span class="input-label col-50 c-blue">{{key}}</span>
+                  <input type="number"  ng-model="val">
+                </label>
+            </div>
+          </div>
+       </div>
+       <div class="list">
+          <div class="title box-vm js-event-title" ng-click="toReset(3)">
+            <i class="ion-plus-circled"></i>
+            <div class="flex ml20 fs18 c-black">恢复默认值</div>
+          </div>
+       </div>
+    </div>
  </div> 
 </ion-scroll>

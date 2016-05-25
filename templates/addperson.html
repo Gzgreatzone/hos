@@ -1,21 +1,29 @@
     <link rel="stylesheet" href="css/indexstyle.css">
 
-  <div class="bar bar-header bar-light">
-	  <button class="button button-positive button_check" ng-click="back()">返回</button>
-	  <button class="button button-positive button_check" ng-click="editor()">编辑</button>
-	  <button class="button button-positive button_check" ng-click="save()">保存</button>
-   </div>
+	 <div class="header box-vm">
+	  <div class="w" ng-click="back()">
+	    <img src="img/back1.png" class="vm">
+	    <span class="vm ml10">返回</span>
+	  </div>
+	  <div class="vm ml50" ng-click="editor()">编辑</div>
+	  <div class="flex td fb fs20 pr12p">
+	    {{people.name}}
+	  </div>
+
+	  <div class="ww tr" ng-click="save()">
+	    保存
+	  </div>
+	</div>
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
  <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
   <div class="card_addperson">
 	<div class="row row_addperson">
 	  <div class="col ">
-	   	<div ng-click="takephoto()" id="takephoto" class="takephoto"><img src="img/img2.png" alt=""></div>
+	   	<div ng-click="takephoto()"  class="takephoto"><img ng-src="img/{{people.number}}.png"></div>
 	   <div class="takephoto_text"><h4>{{people.bedNumber}}号床</h4></div>
 	  </div>
 	  <div class="col">
-	  	<div class="crcord">
-	  		<img src="img/img2.png" alt="">
+	  	<div id="takephoto" class="crcord">
 	  	</div>
 	  </div>
 	</div>
@@ -74,5 +82,5 @@
 	  </label>
 	</div>
    </div>
-   </div>
+  </div>
 </ion-scroll>

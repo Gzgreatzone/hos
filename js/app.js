@@ -1,7 +1,7 @@
 'use strict';
-angular.module('chafangbao', ['ionic','chafangbao.controllers', 'chafangbao.services','chafangbao.factories'])
+angular.module('chafangbao', ['ionic','chafangbao.controllers', 'chafangbao.services','chafangbao.factories','ngCordova'])
   
-.run(function($rootScope,$ionicPlatform,$ionicActionSheet,$state,$window) {
+.run(function($rootScope,$ionicPlatform,$ionicActionSheet,$state,$window,$cordovaSQLite) {
         //平台默认设置
       $ionicPlatform.ready(function () {
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -12,16 +12,24 @@ angular.module('chafangbao', ['ionic','chafangbao.controllers', 'chafangbao.serv
         if (window.StatusBar) {
           StatusBar.styleDefault();
         }
+        if (window.cordova) {
+           var  db = $cordovaSQLite.openDB({ name: "my.db" }); //device
+          }
+          else{
+           var db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
+          }
+        $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
         document.body.addEventListener("touchmove", function (e) {
           if ($rootScope.preventDefault == "false") {}
           else {
             e.preventDefault();
           }
         });
-         
+       
+
       });
-
-
+      
+      
       if (debug == "true") {
         $rootScope.debug = true;
       } else if (debug == "false") {

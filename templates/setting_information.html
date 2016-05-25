@@ -1,27 +1,34 @@
-	<div class="bar bar-header bar-light">
-	  <h1 class="title">医院信息设置</h1>
-	  <button class="button button-positive button_checkset" ng-click="back()">返回</button>
-	</div>
-	<div class="list card_setting">
+			<div class="header box-vm ">
+		  <div class="w" ng-click="back()">
+	        <img src="img/back1.png" class="vm">
+	        <span class="vm ml10">返回</span>
+	      </div>
+           <div class="flex td fb fs20">
+             医院信息设置
+           </div>
+			 <div class="w" >
+             <span class="vm mr10">&nbsp&nbsp</span>
+           </div>
+		</div>	<div class="list card_setting">
 	  <label class="item item-input item-input_setting">
 		<span class="input-label col-10">医院名称</span>
-	    <input type="text" placeholder="医院名称" ng-disabled="isDisabled" ng-model="systemSetting.h_name">
+	    <input type="text" placeholder="医院名称" ng-disabled="isDisabled" ng-model="systemSet.h_name">
 	  </label>
 	  <label class="item item-input item-input_setting">
 	    <span class="input-label col-10">科室名</span>
-	    <input type="text" placeholder="科室名" ng-disabled="isDisabled" ng-model="systemSetting.ad_name">
+	    <input type="text" placeholder="科室名" ng-disabled="isDisabled" ng-model="systemSet.ad_name">
 	  </label>
 	  <label class="item item-input item-input_setting">
 	    <span class="input-label col-10">地区</span>
-	    <input type="text" placeholder="地区" ng-disabled="isDisabled" ng-model="systemSetting.area">
+	    <input type="text" placeholder="地区" ng-disabled="isDisabled" ng-model="systemSet.area">
 	  </label>
 	  <label class="item item-input item-input_setting">
 	    <span class="input-label col-10">地址</span>
-	    <input type="text" placeholder="地址" ng-disabled="isDisabled" ng-model="systemSetting.address">
+	    <input type="text" placeholder="地址" ng-disabled="isDisabled" ng-model="systemSet.address">
 	  </label>
 	  <label class="item item-input item-input_setting">
 	    <span class="input-label col-10">电话</span>
-	    <input type="text" placeholder="电话" ng-disabled="isDisabled" ng-model="systemSetting.telephone">
+	    <input type="text" placeholder="电话" ng-disabled="isDisabled" ng-model="systemSet.telephone">
 	  </label>
 		<div class="row">
 		  <div class="col"><button class="button button-positive" ng-click="editor()">编辑</button></div>

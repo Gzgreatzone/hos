@@ -1,7 +1,15 @@
-   <div class="bar bar-header bar-light">
-	  <title class="title">系统设置</title>
-	  <button class="button button-positive button_checkset" ng-click="back()">返回</button>
-   </div>
+  		<div class="header box-vm ">
+		  <div class="w" ng-click="back()">
+	        <img src="img/back1.png" class="vm">
+	        <span class="vm ml10">返回</span>
+	      </div>
+           <div class="flex td fb fs20">
+              {{people.name}}
+           </div>
+			 <div class="w" >
+             <span class="vm mr10">&nbsp&nbsp</span>
+           </div>
+		</div>
    	<div class="list card card_setting">
 
 	  <a ng-click="toPassword()" class="item  item-icon-right item_setting">

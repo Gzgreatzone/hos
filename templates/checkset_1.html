@@ -1,40 +1,45 @@
-	       <!--  头部 -->
-	<div class="bar bar-header bar-light">
-	  <button class="button button-positive btn_checkset" ng-click="back()">返回</button>
-    <h1 class="title">血氧测量设置</h1>
-	  <button class="button button-positive btn_checkset" ng-click="saveSet(0)">保存</button>
 
-	</div>
-
+<div class="header box-vm ">
+  <div class="w" ng-click="back()">
+      <img src="img/back1.png" class="vm">
+      <span class="vm ml10">返回</span>
+    </div>
+       <div class="flex td fb fs20">
+          血氧测量设置
+       </div>
+   <div class="w" >
+         <span class="vm mr10" ng-click="saveSet(0)" >保存</span>
+       </div>
+</div>
 
 
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
  <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
-    <div class="list card card_checkset animated bounceInRight">
-      <div ng-repeat="(key, val) in setting[0] track by $index" >
-        <a href=""><button class="button  button-positive btn_checkset_1" ng-click="toggle(show_OS1)">{{key}}</button></a>
-           <div clsaa="box-vm" ng-repeat="(key,val) in setting[0][key] ">
-              <div class="n dpi">
-                  {{key}}
-              </div>
-              <div class="flex t dpi"><input type="number" ng-model="val"></div>
-           </div>
-      </div>
-      <div>
-        <a href=""><button class="button  button-positive btn_checkset_1" ng-click="toReset(0)">恢复默认值</button></a>
-      </div>
+    <div class="standard-list mt20">
+       <div class="list" ng-repeat="(key, val) in setting[0] track by $index" >
+          <div class="title box-vm js-event-title" ng-click="toggle(key)">
+            <i class="ion-plus-circled"></i>
+            <div class="flex ml20 fs18 c-black">{{key}}</div>
+          </div>
+          <div class="{{key}}">
+            <div class="p1rem js-event-list event"  ng-repeat="(key1,val1) in setting[0][key] track by $index">
+                <label class="item item-input ">
+                  <span class="input-label col-50 c-blue">{{val1}}</span>
+                 <!--  <span class="input-label col-50 c-blue">{{val1}}</span> -->
+                  <input type="number"  ng-value="{{val1}}" ng-model="val1">
+                </label>
+            </div>
+          </div>
+       </div>
+       <div class="list">
+          <div class="title box-vm js-event-title" ng-click="toReset(0)">
+            <i class="ion-plus-circled"></i>
+            <div class="flex ml20 fs18 c-black">恢复默认值</div>
+          </div>
+       </div>
     </div>
-
-  <div class="list card card_checkset animated bounceInRight">
- 
-              	
-          
-
-
-  </div>
-    
-
 
  </div> 
 </ion-scroll>
 
+ 

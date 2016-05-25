@@ -57,6 +57,63 @@ angular.module('chafangbao.factories')
         },
         returnIsCharge:function(){
             return isCharge;
+        },
+        decline:function(obj){
+            var word = "@kf580@";
+            for(var i in obj){
+            var word =  word  + obj[i] +"#";
+            }
+             console.log(word);
+             return word
+        },
+        createNumber:function(){
+            var peopleSt = 安卓用键获取值("peoples");
+            var ran = Math.round(10000*Math.random());
+            var random = ran.toString();
+            if(peopleSt.indexOf(random)!=-1){
+                this.createNumber();
+            }else{
+               return random;
+            }
+        },
+        qrcod:function(obj){
+             if (obj.number) { //假如存在，
+             var baseqrcord = new Base64();
+             var baseWord = baseqrcord.encode(this.decline(obj));
+             $("#takephoto").qrcode({ 
+              width: 300,
+              height:300, 
+              text: baseWord
+              });
+           } else {
+             obj.number = this.createNumber();//生成编号
+             var baseqrcord = new Base64();
+             var baseWord = baseqrcord.encode(this.decline(obj));
+             $("#takephoto").qrcode({ 
+              width: 300,  
+              height:300, 
+              text: baseWord
+              }); 
+           }
+        },
+        restore:function(obj,str){
+            if (str.indexOf("@kf580@")!= -1) {
+              var baseW = str.replace(/@kf580@/, "");
+              console.log(baseW);
+              var baseWord = baseW.split("#");
+              console.log(baseWord);
+              var j = 0;
+              for(var i in obj){
+                obj[i] = baseWord[j];
+                j++;
+              }
+              return obj;
+            } else {}
+        },
+        backqrcord:function(str){   //解码
+            var clearword = new Base64();
+            var clearWord = clearword.decode(str);
+            return clearWord;
         }
     };
     

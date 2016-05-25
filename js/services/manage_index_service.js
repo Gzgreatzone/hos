@@ -43,8 +43,11 @@ angular.module('chafangbao.services')
 					},
 					/* 点击指标设备，显示指标检测界面 */
 					Monitor : {
+						save : function (msg) {
+							kfDevices.save(msg);
+						},
 						init : function () {
-							console.log("初始化");
+							
 							//清除仪表盘样式
 							$("#js_style_2").empty();
 							//清除仪表盘之前数据
@@ -60,7 +63,8 @@ angular.module('chafangbao.services')
 						},
 						on : function (Device) {
 							this.init();
-
+							console.log(Device);
+							this.de = Device;
 							//某个仪器高亮
 							Scope.chosenDevice = Device['deviceId'];
 
@@ -159,11 +163,14 @@ angular.module('chafangbao.services')
 							}
 						},
 						callback : function (msg) {
+							//console.log(JSON.stringify(msg));
+							//var abc = JSON.stringify(msg);
+							//console.log(JSON.parse(abc));
 							if (msg) {
 
 								Scope.$apply(function () {
 									msg = eval("(" + msg + ")");
-
+									//console.log(msg);
 									if (msg.msg == "操作成功") {
 										合成语音("检测成功！");
 										$timeout(function() {
@@ -184,6 +191,9 @@ angular.module('chafangbao.services')
 														type : "button-positive",
 														onTap : function(e){
 															合成语音("采纳成功！");
+															//Scope.manage_index.Monitor.save(msg);
+															kfDevices.save(msg);
+
 														}
 													}
 												]

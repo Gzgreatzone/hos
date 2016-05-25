@@ -1,6 +1,6 @@
 'use strict';
 angular.module('chafangbao.controllers')
-.controller('IndexController', function($scope,	$window,$timeout, $ionicLoading,$http,ThePerson) {
+.controller('IndexController', function($scope,	$window,$timeout, $ionicLoading,$http,ThePerson,$cordovaBarcodeScanner,kfLogin,$rootScope) {
     $scope.toCheck = function(){
     	$window.location.href = "#/check";
       ThePerson.setTure();
@@ -9,6 +9,11 @@ angular.module('chafangbao.controllers')
     $scope.toAddPerson = function(){
     	$window.location.href = "#/addperson";
       ThePerson.clear();
+    };
+    $scope.logOut = function(){
+        alert("gg");
+        $rootScope.islogin = false;
+        $window.location.href = '#/login';
     };
     $scope.letters_list = function(){
     	$scope.maxHeight =  document.documentElement.clientHeight;
@@ -22,7 +27,7 @@ angular.module('chafangbao.controllers')
     };
     $scope.letters_list();
 
-
+  
 
     $scope.lettersClick = function(index){
     	$scope.isClick = 'click';
@@ -35,14 +40,25 @@ angular.module('chafangbao.controllers')
     }
 
     $scope.myOrderBy = "+bedNumber";
-
+   
 
 
     $scope.letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","#"];
-    if (debug == "true") {
+    
+    var Arrey = {
+      "peoples":""
+    }
+     for(var i in Arrey){
+     Arrey[i] = 安卓用键获取值(i);
+    }
+    if (Arrey.peoples) {
+      $scope.peoples = JSON.parse(Arrey.peoples);
+    }else if (debug == "true") {
     $http.get('json/peoples.json')
     .success(function(response){
          $scope.peoples = response;
+         Arrey.peoples = JSON.stringify($scope.peoples);
+          安卓设置键值对("peoples",Arrey["peoples"]);
      });
     } else if(debug == "false") {
      var str = Android.getURL('/web/hos/json/peoples.json');
@@ -58,29 +74,29 @@ angular.module('chafangbao.controllers')
 
 
     }
-    // $scope.sannerCR = function(){
-    //     document.addEventListener("deviceready", function () {
+    $scope.sannerCR = function(){
+        document.addEventListener("deviceready", function () {
 
-    //       $cordovaBarcodeScanner
-    //         .scan()
-    //         .then(function(barcodeData) {
-    //            alert(barcodeData);
-    //           // Success! Barcode data is here 扫描数据：barcodeData.text
-    //         }, function(error) {
-    //           // An error occurred
-    //         });
+          $cordovaBarcodeScanner
+            .scan()
+            .then(function(barcodeData) {
+               alert(barcodeData);
+              // Success! Barcode data is here 扫描数据：barcodeData.text
+            }, function(error) {
+              // An error occurred
+            });
 
 
-    //       // NOTE: encoding not functioning yet
-    //       $cordovaBarcodeScanner
-    //         .encode(BarcodeScanner.Encode.TEXT_TYPE, "http://www.nytimes.com")
-    //         .then(function(success) {
-    //           // Success!
-    //         }, function(error) {
-    //           // An error occurred
-    //         });
+          // NOTE: encoding not functioning yet
+          $cordovaBarcodeScanner
+            .encode(BarcodeScanner.Encode.TEXT_TYPE, "http://www.nytimes.com")
+            .then(function(success) {
+              // Success!
+            }, function(error) {
+              // An error occurred
+            });
 
-    //     }, false);
-    // }
+        }, false);
+    }
 
  })

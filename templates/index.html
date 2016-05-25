@@ -7,13 +7,15 @@
 	<header class="fixed">
 		
 		<div class="header box-vm ">
-		   <div class="w" ng-click="back()">
-             <span class="vm ml10">退出</span>
+		   <div class="w">
+             <span class="vm ml10"  ng-click="logOut()">退出</span>
            </div>
            <div class="flex td fb fs20">
               <h2>患者列表</h2>
            </div>
-
+			 <div class="w" >
+             <span class="vm mr10">&nbsp&nbsp</span>
+           </div>
 		</div>
 		<div class="header_2">
 			<div class="shift">
@@ -57,7 +59,7 @@
    	  	<div class="col col-10">
    	  	<a class=" ion-android-checkbox-outline-blank if_{{people.beInHospital}}"   ></a>
    	  	</div>
-   	  	<div class="col col-10 col_center"><img ng-src="img/{{people.bedNumber}}.png" ></div>
+   	  	<div class="col col-10 col_center"><img ng-src="img/{{people.number}}.png" ></div>
    	  	<div class="col col-33">{{people.name}}</div>
    	  	<div class="col col-10">{{people.sex}}</div>
    	  	<div class="col col-10">{{people.address}}</div>
