@@ -55,7 +55,7 @@
  <div class="sort_box"> 
    <div class="sort_list" ng-repeat="people in peoples  | orderBy:myOrderBy |  filter: nameFilter  track by $index 
      " > 
-   	  <div class="row row_index animated  bounceInRight" ng-click = "toThePerson(people)">
+   	  <div class="row row_index " id="people.name" ng-click = "toThePerson(people)">
    	  	<div class="col col-10">
    	  	<a class=" ion-android-checkbox-outline-blank if_{{people.beInHospital}}"   ></a>
    	  	</div>

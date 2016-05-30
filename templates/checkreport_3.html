@@ -1,0 +1,190 @@
+    <div class="header box-vm ">
+      <div class="w" ng-click="back()">
+          <img src="img/back1.png" class="vm">
+          <span class="vm ml10">返回</span>
+        </div>
+           <div class="flex td fb fs20">
+              {{people.name}}
+           </div>
+       <div class="w" >
+             <span class="vm mr10">打印</span>
+           </div>
+    </div>
+
+
+<ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
+ <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+
+    
+ <div class="list card card_checkreport_1"> 
+        <h3>xxx医院xxx检查报告</h3>
+
+  <table>
+    <tr>
+      <td class="td-3">
+        科室：{{people.department}}
+      </td>
+      <td class="td-3">
+        病区：{{people.area}}
+      </td>
+      <td class="td-3">
+        床号:{{people.bedNumber}}
+      </td>
+    </tr>
+    <tr>
+       <td>
+          住院号/门诊号:{{people.number}}
+       </td>
+    </tr>
+    <tr>
+      <td class="td-3">
+           姓名：{{people.name}}
+      </td>
+      <td class="td-3">
+        性别：{{people.sex}}
+      </td>
+      <td class="td-3">
+        年龄:{{people.age}}
+      </td>
+    </tr>
+    <tr>
+       <td>检查日期:</td>
+    </tr>
+    <tr>
+       <td>检查结果:</td>
+    </tr>
+
+  </table>
+
+  <table>
+        <tr>
+          <td>摘要</td>
+        </tr>
+        <tr>
+          <td class="td-5 tdcolor-6">开始时间</td>
+          <td class="td-5 tdcolor-6"></td>
+        </tr>   
+        <tr>
+          <td class="td-5 tdcolor-6">开始时间</td>
+          <td class="td-5 tdcolor-6"></td>
+        </tr>
+        <tr>
+          <td class="td-5 tdcolor-6">开始时间</td>
+          <td class="td-5 tdcolor-6"></td>
+        </tr> 
+        <tr>
+          <td class="td-5 tdcolor-6">开始时间</td>
+          <td class="td-5 tdcolor-6"></td>
+        </tr> 
+        <tr>
+          <td class="td-5 tdcolor-6">开始时间</td>
+          <td class="td-5 tdcolor-6"></td>
+        </tr>
+        <tr>
+          <td class="td-5 tdcolor-6">开始时间</td>
+          <td class="td-5 tdcolor-6"></td>
+        </tr> 
+        <tr>
+          <td class="td-5 tdcolor-6">开始时间</td>
+          <td class="td-5 tdcolor-6"></td>
+        </tr>   
+  </table>
+  <table>
+    <tr>
+      <td class="td-5">趋势图</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <img src="img/spo.png" alt="">
+      </td>
+    </tr>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+    <td>呼末二氧化碳结果</td>
+    <td></td>
+    </tr>
+    <tr>
+      <td class="td-3 tdcolor-6">时间<br/></td>
+      <td class="td-3 tdcolor-6">cscscssccsss<br/>hhhhh</td>
+    </tr>
+    <tr>
+      <td class="td-3 tdcolor-6">110</td>
+      <td class="td-3 tdcolor-6">cscscssccsss</td>
+    </tr>
+    <tr>
+      <td class="td-3 tdcolor-6">110</td>
+      <td class="td-3 tdcolor-6">cscscssccsss</td>
+    </tr>   
+    <tr>
+      <td class="td-3 tdcolor-6">110</td>
+      <td class="td-3 tdcolor-6">cscscssccsss</td>
+    </tr> 
+  </table>
+
+  <table>
+    <tr>
+      <td class="td-1 tdcolor-1">
+        时间
+      </td>
+      <td class="td-2 tdcolor-1">
+        PH
+      </td>
+      <td class="td-3 tdcolor-1">
+        Paco2（mmHg）
+      </td>
+      <td class="td-4 tdcolor-1">
+        Pao2 <br>（mmHg）
+      </td>
+    </tr>
+
+    <tr>
+      <td class="td-1 tdcolor-2">
+        v{{one.time}}
+      </td>
+      <td class="td-2 tdcolor-2">
+        v{{one.PH}}
+      </td>
+      <td class="td-3 tdcolor-2">
+        v{{one.Paco2}}
+      </td>
+      <td class="td-4 tdcolor-2">
+        v{{one.Pao2}}
+      </td>
+    </tr>
+
+    <tr>
+      <td class="td-1 tdcolor-3">
+        v{{two.time}}
+      </td>
+      <td class="td-2 tdcolor-3">
+        v{{two.PH}}
+      </td>
+      <td class="td-3 tdcolor-3">
+        v{{two.Paco2}}
+      </td>
+      <td class="td-4 tdcolor-3">
+        v{{two.Pao2}}
+      </td>
+    </tr>
+  </table>
+ </div>
+  <div class=" card_checkreport_1 ">
+    <table >
+    <tr>
+      <td class="td-5">检查人员</td>
+      <td class="td-5">日期</td>
+    </tr>
+    </table>
+  </div>
+ </div>
+
+</div> 
+<!--   <div class="scroll-bar scroll-bar-h">
+  <div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(6px, 0px, 0px) scaleX(1); width: 20px;">
+  </div>
+</div> -->
+ </ion-scroll>

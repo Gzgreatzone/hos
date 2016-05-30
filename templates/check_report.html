@@ -18,50 +18,19 @@
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
  <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
 	<div class="list  pt10 ml5 gt-special-list"> 
-      <div class="rp-lt">
-		<div class="box-vm msg animated  bounceInRight">
-			<div class="fs20 ml20 flex td" ng-click="toCheckReport()">血氧测量报告 </div>
+      <div class="rp-lt" ng-repeat = "x in reportCass">
+		<div class="box-vm msg ">
+			<div class="fs20 ml20 flex td" ng-click="toCheckReport(x)">{{x}} </div>
 			<i class="icon ion-chevron-right"></i>
 		</div>
       </div>
-	  <div class="rp-lt">
-		<div class="box-vm msg animated  bounceInRight">
-			<div class="fs20 ml20 flex td" ng-click="toCheckReport()">二氧化碳测量报告 </div>
-			<i class="icon ion-chevron-right"></i>
-		</div>
-      </div>
+	  
       <div class="rp-lt">
-		<div class="box-vm msg animated  bounceInRight">
-			<div class="fs20 ml20 flex td" ng-click="toCheckReport()">肺功能测量报告 </div>
-			<i class="icon ion-chevron-right"></i>
-		</div>
-      </div>
-      <div class="rp-lt">
-		<div class="box-vm msg animated  bounceInRight">
-			<div class="fs20 ml20 flex td" ng-click="toCheckReport()">体重测量报告 </div>
-			<i class="icon ion-chevron-right"></i>
-		</div>
-      </div>
-      <div class="rp-lt">
-		<div class="box-vm msg animated  bounceInRight">
-			<div class="fs20 ml20 flex td" ng-click="toCheckReport()">血压测量报告 </div>
-			<i class="icon ion-chevron-right"></i>
-		</div>
-      </div>
-      <div class="rp-lt">
-		<div class="box-vm msg animated  bounceInRight">
-			<div class="fs20 ml20 flex td" ng-click="toCheckReport()">血糖测量报告 </div>
-			<i class="icon ion-chevron-right"></i>
-		</div>
-      </div>
-      <div class="rp-lt">
-		<div class="box-vm msg animated  bounceInRight">
+		<div class="box-vm msg ">
 			<div class="fs20 ml20 flex td" ng-click="toCheckReport()">综合报告  </div>
 			<i class="icon ion-loop"></i>
 		</div>
       </div>
-
- 
 	</div>
 
 

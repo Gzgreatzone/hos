@@ -27,10 +27,11 @@
             <div class="flex ml20 fs18 c-black">{{key}}</div>
           </div>
           <div class="{{key}}">
-            <div class="p1rem js-event-list event"  ng-repeat="(key,val) in setting[4][key] ">
+            <div class="p1rem js-event-list event"  ng-repeat="(key1,val1) in setting[4][key] track by $index">
                 <label class="item item-input ">
-                  <span class="input-label col-50 c-blue">{{key}}</span>
-                  <input type="number"  ng-model="val">
+                  <span class="input-label col-50 c-blue">{{key1}}</span>
+                 <!--  <span class="input-label col-50 c-blue">{{val1}}</span> -->
+                  <input type="number" ng-change="watchSet(4,key,key1,val1)"  ng-model="val1">
                 </label>
             </div>
           </div>

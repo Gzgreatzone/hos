@@ -16,6 +16,7 @@ angular.module('chafangbao.factories')
      beginDate:"",
      endDate:""
     };
+    var reportName = "";
     var isReport = true;
     var isCharge = true;
     return {
@@ -51,6 +52,12 @@ angular.module('chafangbao.factories')
             
             isReport = false;
             isCharge = false;
+        },
+        setReportName:function(x){
+          reportName = x;
+        },
+        returnReportName:function(){
+          return reportName;
         },
         returnIsReport:function(){
             return isReport;
@@ -108,7 +115,7 @@ angular.module('chafangbao.factories')
                 j++;
               }
               return obj;
-            } else {}
+            } else {alert("that information is no useful");return false;}
         },
         backqrcord:function(str){   //解码
             var clearword = new Base64();

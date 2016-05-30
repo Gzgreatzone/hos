@@ -1,13 +1,25 @@
-﻿var debug = "true";
+﻿//自动判断是否处于debug模式
+var debug = "true";
 if (window.Android) {debug = "false";}
 
+//如果处于debug模式,则定义所有的仿真接口
 if (debug == "true") {
 	console.log("模拟安卓的js加载成功");
 	if (!window.Android) {
 		window.is_debug = true;
+		
+		//向console输出终端信息
 		function android_log(name, msg) {
 			console.log('\n      %c调用android原生接口:%c' + name + '\n      %c' + msg + '\n\n', 'color:#777', 'color:indianred', 'color:royalblue');
 		};
+		// -------------
+		// variable    : window.Android
+		// description : 安卓接口大全
+		// parameters  : 
+		// return      : 
+		// author      : 
+		// comment     : 
+		// -------------
 		window.Android = {
 			setCallback : function () {
 				var delayTime = Math.floor(Math.random() * 3) * 1000;
@@ -139,28 +151,10 @@ if (debug == "true") {
 			},
 			getEventPage : function (index, pageSize) {
 				android_log("getEventPage", JSON.stringify(arguments));
-				/* var eventSample = function (i) {
-				var x = new Object();
-				var now = new Date();
-				x.createTime = moment();
-				x.content = "亲，该吸氧了，准备好了没？今天要吸1小时" + "(" + x.createTime + " " + i + ")";
-				x.eventId = "oxygen_o2_zl";
-				x.faceImg = "sample.jpg";
-				x.id = "1449152013373HIFJKQ";
-				x.macImg = "sample.jpg";
-				x.status = "1";
-				x.type = "0";
-				return x;
-				};
-				var retEvents = new Object();
-				retEvents.code = "0";
-				retEvents.data = new Array();
-				for (var i = 0; i < pageSize; i++) {
-				retEvents.data[i] = eventSample(i);
-				};
-				var retEventStr = JSON.stringify(retEvents);
-				return retEventStr; */
 				return '{"code":"0","data":[{"content":"亲，您要检测血压啦，要听话哦！","createTime":"2016-03-29?16:06:04","eventId":"check_bloodpress_nojc","faceImg":"/patientpage/images/face/angry.gif","id":"1458547564704HLWMRH","macImg":"/patientpage/images/xyj_on.png","status":"0","type":"0"},{"content":"亲，请测量血压哟","createTime":"2016-03-21?16:05:04","eventId":"check_bloodpress_jc","faceImg":"/patientpage/images/face/happy.gif","id":"1458547504257ZWGKYM","macImg":"/patientpage/images/xyj_on.png","status":"0","type":"0"},{"content":"亲，请打开血压计哟","createTime":"2016-03-21?16:02:05","eventId":"check_bloodpress_noon","faceImg":"/patientpage/images/face/sorry.gif","id":"1458547325931OV6G3J","macImg":"/patientpage/images/xyj_on.png","status":"0","type":"0"},{"content":"亲，请测量血压哟","createTime":"2016-03-21?16:00:05","eventId":"check_bloodpress_jc","faceImg":"/patientpage/images/face/happy.gif","id":"1458547205245BFK61A","macImg":"/patientpage/images/xyj_on.png","status":"0","type":"0"},{"content":"亲，您要用药啦，要听话哦！","createTime":"2016-03-20?12:37:09","eventId":"medic_no_ph","faceImg":"/patientpage/images/face/angry.gif","id":"1458448629113OJQPZ8","macImg":"","status":"0","type":"0"},{"content":"亲，用药时间到，请按时用药","createTime":"2016-03-20?12:35:03","eventId":"medic_use_zl","faceImg":"/patientpage/images/face/happy.gif","id":"145844850359681SJKB","macImg":"","status":"0","type":"0"},{"content":"亲，用药时间到，请按时用药","createTime":"2016-03-20?12:30:23","eventId":"medic_use_zl","faceImg":"/patientpage/images/face/happy.gif","id":"145844822337997R14N","macImg":"","status":"0","type":"0"},{"content":"亲，您要用呼吸机啦，要听话哦！","createTime":"2016-03-20?11:03:22","eventId":"o2mac_no_ph","faceImg":"/patientpage/images/face/angry.gif","id":"1458443002902MFXA4S","macImg":"/patientpage/images/oxygen.png","status":"0","type":"0"},{"content":"亲，您要用呼吸机啦，要听话哦！","createTime":"2016-03-20?10:00:38","eventId":"o2mac_no_ph","faceImg":"/patientpage/images/face/angry.gif","id":"1458439238287J63GVJ","macImg":"/patientpage/images/oxygen.png","status":"0","type":"0"},{"content":"亲，您要检测血氧饱和度啦，要听话哦！","createTime":"2016-03-20?09:18:58","eventId":"check_co2bo2_nophjc","faceImg":"/patientpage/images/face/angry.gif","id":"1458436738604LD9BAK","macImg":"/patientpage/images/img_ey.jpg","status":"0","type":"0"}],"msg":"操作成功！"}';
+			},
+			qrcode: function(){
+				android_log("qrcode", JSON.stringify(arguments));
 			}
 		}
 	};
@@ -169,7 +163,6 @@ if (debug == "true") {
 	}, 500);
 };
 
-/* 开关debug模式，返回值 */
 function debug_state(debug_data, real_data) {
 	if (debug == "true") {
 		return debug_data;
@@ -178,30 +171,47 @@ function debug_state(debug_data, real_data) {
 	}
 };
 
-/* 安卓容错机制 */
-function Android_do_cmd(cmd, a, b, c, d, e, f, g, h) {
+//安卓容错机制(累赘不通用)
+//function Android_do_cmd(cmd, a, b, c, d, e, f, g) {
+//	var args = [];
+//	for (var i = 1; i < arguments.length; i++) {
+//		args.push(arguments[i]);
+//	}
+//	try {
+//		if (arguments.length == 1)
+//			return Android[cmd]();
+//		if (arguments.length == 2)
+//			return Android[cmd](a);
+//		if (arguments.length == 3)
+//			return Android[cmd](a, b);
+//		if (arguments.length == 4)
+//			return Android[cmd](a, b, c);
+//		if (arguments.length == 5)
+//			return Android[cmd](a, b, c, d);
+//		if (arguments.length == 8)
+//			return Android[cmd](a, b, c, d, e, f, g);
+//	} catch (e) {
+//		if (debug == "true") {
+//			console.error(cmd + "\r\n " + args.join() + "\r\n " + e);
+//		} else {
+//			alert(cmd + "\r\n " + args.join() + "\r\n " + e);
+//		}
+//	}
+//}
+
+//错误检测(若接口错误,往console抛出异常)
+function Android_do_cmd(){
 	var args = [];
 	for (var i = 1; i < arguments.length; i++) {
 		args.push(arguments[i]);
 	}
-	try {
-		if (arguments.length == 1)
-			return Android[cmd]();
-		if (arguments.length == 2)
-			return Android[cmd](a);
-		if (arguments.length == 3)
-			return Android[cmd](a, b);
-		if (arguments.length == 4)
-			return Android[cmd](a, b, c);
-		if (arguments.length == 5)
-			return Android[cmd](a, b, c, d);
-		if (arguments.length == 9)
-			return Android[cmd](a, b, c, d, e, f, g, h);
-	} catch (e) {
+	try{
+		Android[arguments[0]].apply(this, args);
+	} catch(e) {
 		if (debug == "true") {
-			console.error(cmd + "\r\n " + args.join() + "\r\n " + e);
+			console.error(arguments[0] + "\r\n " + args.join() + "\r\n " + e);
 		} else {
-			alert(cmd + "\r\n " + args.join() + "\r\n " + e);
+			alert(arguments[0] + "\r\n " + args.join() + "\r\n " + e);
 		}
 	}
 }
@@ -217,6 +227,7 @@ function 安卓设置键值对(key, data) {
 		Android_do_cmd("setcfg", key, data);
 	}
 };
+
 function 安卓用键获取值(key) {
 	var data;
 	if (debug == "true") {
@@ -226,7 +237,6 @@ function 安卓用键获取值(key) {
 	}
 	return data;
 };
-
 
 function 安卓获取页面模板内容(FileUrl) {
 	if (debug == "false") {
@@ -309,9 +319,9 @@ function showReceiveMsg(Data) {
 };
 
 function 事件新增() {
-	Android_do_cmd("addEvent", "1449152013373HIFJKQ", "亲，该吸氧了，准备好了没？今天要吸1小时", "/patientpage/images/face/happy.gif", "/patientpage/images/oxygen.png", "0", "0", "oxygen_o2_zl", "showDelMsg");
-	var NoReadCount = Android_do_cmd("getNoReadCount", "1", "showDelMsg");
-	Android_do_cmd("updateEvent", "1449152013373HIFJKQ", "1", "showDelMsg");
+	Android_do_cmd("addEvent", "1449152013373HIFJKQ", "亲，该吸氧了，准备好了没？今天要吸1小时", "/patientpage/images/face/happy.gif", "/patientpage/images/oxygen.png", "0", "0", "oxygen_o2_zl");
+	var NoReadCount = Android_do_cmd("getNoReadCount", "1");
+	Android_do_cmd("updateEvent", "1449152013373HIFJKQ", "1");
 	Android_do_cmd("getEventList", "showHistoryMsg");
 	return NoReadCount;
 };
@@ -397,76 +407,3 @@ function getTestPic() {
 	console.log("获取不重复随机数图片", testPic); */
 	return testPic.toString();
 }
-/* =========================================================================== */
-//无效函数
-
-/* function 用户登录() {
-var userId = $("#myId").val(),
-name = $("#myName").val();
-Android_do_cmd("onBtnLoginClick", userId, name);
-};
-
-function 视频播放() {
-Android_do_cmd("openPlayer", "test.mp4");
-}
-function 震动测试() {
-console.log("点击按钮震动");
-Android_do_cmd("onVibrator");
-}
-function 设置声音测试(voice) {
-Android_do_cmd("updateAudio", voice);
-}
-function 获取当前声音值测试() {
-var voice = Android_do_cmd("getAudioValue", "showHistoryMsg");
-return voice;
-}
-function 系统关闭测试() {
-Android_do_cmd("closeSystem");
-}
-function 系统重启测试() {
-Android_do_cmd("resetSystem");
-}
-function btnMsg() {
-Android_do_cmd("javaShowMsg");
-}
-function showMsg() {
-$("#spanMsg").text("成功！");
-return "你好！";
-}
-function getPicReturn(img) {
-textGetPic.value = (img);
-}
-function showSpan(data) {
-$("#spanTitile_0").text(data);
-}
-function showClilkMsg(jsondata) {
-var myDate = new Date();
-$("#spanClilk,#modal_show_index .modal_main .title:first").html(jsondata + ", 获取时间:" + myDate.toLocaleTimeString());
-}
-function showMsg(jsondata) {
-var jsonobjs = eval(jsondata);
-document.getElementsByName("txtMsg")[0].value = jsonobjs[0].msg;
-$("#spanTitile_1").html(jsonobjs[0].titile);
-}
-function showHistoryMsg(jsondata) {
-$("#spanHistory").html(jsondata);
-}
-function showDelMsg(jsondata) {
-$("#spanDelete").html(jsondata);
-}
-function show(jsondata) {
-var jsonobjs = eval(jsondata);
-var table = $("#personTable");
-for (var y = 0; y < jsonobjs.length; y++) {
-var tr = table.insertRow(table.rows.length);
-var td1 = tr.insertCell(0);
-var td2 = tr.insertCell(1);
-td2.align = "center";
-var td3 = tr.insertCell(2);
-td3.align = "center";
-td1.html(jsonobjs[y].name);
-td2.html(jsonobjs[y].amount);
-td3.html("<a href='javascript:Android_do_cmd('call',(\"" + jsonobjs[y].phone + "\")'>" + jsonobjs[y].phone + "</a>");
-}
-}
-*/

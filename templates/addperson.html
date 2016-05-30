@@ -16,71 +16,73 @@
 	</div>
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
  <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
-  <div class="card_addperson">
-	<div class="row row_addperson">
-	  <div class="col ">
-	   	<div ng-click="takephoto()"  class="takephoto"><img ng-src="img/{{people.number}}.png"></div>
-	   <div class="takephoto_text"><h4>{{people.bedNumber}}号床</h4></div>
-	  </div>
-	  <div class="col">
-	  	<div id="takephoto" class="crcord">
-	  	</div>
-	  </div>
+	<div class="card_addperson">
+		<div class="row row_addperson">
+		  <div class="col ">
+		   	<div ng-click="takephoto()"  class="takephoto"><img ng-src="img/{{people.number}}.png"></div>
+		   <div class="takephoto_text"><h4>{{people.bedNumber}}号床</h4></div>
+		  </div>
+		  <div class="col">
+		  
+		  	<div id="takephoto"  ng-show="!isQrcord" class="crcord tc"></div>
+		  	<div class="showQrcord takephoto tc mt5"  ng-click="turnQrcord()"><button class="button button-positive">{{isQrcord_text}}</button></div>
+		  </div>
+		</div>
+		<div class="list list_addperson"  >
+		  <label class="item item-input item_addperson" ng-click="insert(yiy,trte)">
+		    <span class="input-label_addperson">编号:</span>
+		    <input type="text" ng-disabled="isDisabled" ng-model="people.number">
+		  </label>
+		  <label class="item item-input item_addperson">
+		    <span class="input-label_addperson">姓名:</span>
+		    <input type="text" ng-disabled="isDisabled" ng-model="people.name">
+		  </label>
+		  <label class="item item-input item_addperson">
+		    <span class="input-label_addperson">性别:</span>
+		    <input type="text" ng-disabled="isDisabled" ng-model="people.sex">
+		    <span class="input-label_addperson">身高（米）:</span>
+		    <input type="text" ng-disabled="isDisabled" ng-model="people.height">
+		  </label>
+		  <label class="item item-input item_addperson">
+		    <span class="input-label_addperson ">年龄:</span>
+		    <input type="text" ng-disabled="isDisabled" ng-model="people.age">
+	        <span class="input-label_addperson ">体重（公斤）:</span>
+		    <input type="text" ng-disabled="isDisabled" ng-model="people.weight">
+		  </label>
+		  <label class="item item-input item_addperson">
+		    <span class="input-label_addperson ">状态:</span>
+		       <select ng-disabled="isDisabled" ng-model="people.beInHospital">
+	                <option value="true">住院中</option>
+	                <option value="outpatient">门诊</option>
+	                <option value="false">已出院</option>
+				</select>
+		  </label>	 
+		  <label class="item item-input item_addperson">
+		    <span class="input-label_addperson ">住院号/病床号:</span>
+		    <input type="text" ng-disabled="isDisabled" ng-model="people.address">
+		  </label>
+		  <label class="item item-input item_addperson">
+		    <span class="input-label_addperson ">病区:</span>
+		    <input type="text" ng-disabled="isDisabled" ng-model="people.area">
+		  </label>
+		  <label class="item item-input item_addperson">
+		    <span class="input-label_addperson ">床号:</span>
+		    <input type="text" ng-disabled="isDisabled" ng-model="people.bedNumber">
+		  </label>
+		  <label class="item item-input item_addperson">
+		    <span class="input-label_addperson ">开始日期:</span>
+		    <input type="text" ng-disabled="isDisabled" ng-model="people.beginDate">
+		  </label>	 
+		  <label class="item item-input item_addperson">
+		    <span class="input-label_addperson ">结束日期:</span>
+		    <input type="text" ng-disabled="isDisabled" ng-model="people.endDate">
+		  </label>
+		  <label class="item item-input item_addperson item_addperson_last">
+		  <span class="input-label_addperson ">结束日期:</span>
+		    <input type="text" ng-disabled="true" ng-model="people.endDate">
+		  </label>
+		</div>
 	</div>
-	<div class="list list_addperson"  >
-	  <label class="item item-input item_addperson" ng-click="insert(yiy,trte)">
-	    <span class="input-label_addperson">编号:</span>
-	    <input type="text" ng-disabled="isDisabled" ng-model="people.number">
-	  </label>
-	  <label class="item item-input item_addperson">
-	    <span class="input-label_addperson">姓名:</span>
-	    <input type="text" ng-disabled="isDisabled" ng-model="people.name">
-	  </label>
-	  <label class="item item-input item_addperson">
-	    <span class="input-label_addperson">性别:</span>
-	    <input type="text" ng-disabled="isDisabled" ng-model="people.sex">
-	    <span class="input-label_addperson">身高（米）:</span>
-	    <input type="text" ng-disabled="isDisabled" ng-model="people.height">
-	  </label>
-	  <label class="item item-input item_addperson">
-	    <span class="input-label_addperson ">年龄:</span>
-	    <input type="text" ng-disabled="isDisabled" ng-model="people.age">
-        <span class="input-label_addperson ">体重（公斤）:</span>
-	    <input type="text" ng-disabled="isDisabled" ng-model="people.weight">
-	  </label>
-	  <label class="item item-input item_addperson">
-	    <span class="input-label_addperson ">状态:</span>
-	       <select ng-disabled="isDisabled" ng-model="people.beInHospital">
-                <option value="true">住院中</option>
-                <option value="outpatient">门诊</option>
-                <option value="false">已出院</option>
-			</select>
-	  </label>	 
-	  <label class="item item-input item_addperson">
-	    <span class="input-label_addperson ">住院号/病床号:</span>
-	    <input type="text" ng-disabled="isDisabled" ng-model="people.address">
-	  </label>
-	  <label class="item item-input item_addperson">
-	    <span class="input-label_addperson ">病区:</span>
-	    <input type="text" ng-disabled="isDisabled" ng-model="people.area">
-	  </label>
-	  <label class="item item-input item_addperson">
-	    <span class="input-label_addperson ">床号:</span>
-	    <input type="text" ng-disabled="isDisabled" ng-model="people.bedNumber">
-	  </label>
-	  <label class="item item-input item_addperson">
-	    <span class="input-label_addperson ">开始日期:</span>
-	    <input type="text" ng-disabled="isDisabled" ng-model="people.beginDate">
-	  </label>	 
-	  <label class="item item-input item_addperson">
-	    <span class="input-label_addperson ">结束日期:</span>
-	    <input type="text" ng-disabled="isDisabled" ng-model="people.endDate">
-	  </label>
-	  <label class="item item-input item_addperson item_addperson_last">
-	  <span class="input-label_addperson ">结束日期:</span>
-	    <input type="text" ng-disabled="true" ng-model="people.endDate">
-	  </label>
-	</div>
-   </div>
+	<div class="pt50"></div>
   </div>
 </ion-scroll>

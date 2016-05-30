@@ -8,7 +8,7 @@ header, footer, section { display: block; }
 html, body { font-family: '微软雅黑', '宋体'; font-size: 100%; width: 100%; background: #fff; height: 100%; color: #3c3c3c; }
 ul, li, ol { list-style: none; }
 i, em, b { font-style: normal; }
-img, select, input { border: none; -webkit-appearance: none; }
+mg, select, input { border: none; -webkit-appearance: none; }
 a, input, img, select { outline: none; }
 textarea { resize: none; outline: none; }
 input::-webkit-input-placeholder {color: #323232;}
@@ -20,6 +20,8 @@ input::-webkit-input-placeholder {color: #323232;}
 .img-url { font-size: 0 !important; }
 .img-url img { width: 100%; text-align: center; }
 .flex { display: block; -webkit-box-flex: 1; z-index: 555; }
+.box-wc {width: 100%;-webkit-box-align:center;}
+.box-c {-webkit-box-align:center;}
 .box-vm { display: box !important; display: -webkit-box !important; width: 100%; -webkit-box-align: center;  }
 .box-vl { display: box !important; display: -webkit-box !important; width: 100%; -webkit-box-align: center; -webkit-box-pack: start; }
 .box-vb { display: box !important; display: -webkit-box !important; width: 100%; -webkit-box-align: end; -webkit-box-pack: center; }
@@ -53,6 +55,7 @@ input::-webkit-input-placeholder {color: #323232;}
 .mt20 { margin-top: 1.25rem !important; }
 .mt50 { margin-top: 2rem !important; }
 .mt8px { margin-top: 24px !important; }
+.mt60 {margin-top: 3.625rem !important}
 .mt80 { margin-top: 4.5rem !important; }
 .mr10 { margin-right: 0.625rem; cursor: pointer; }
 .mr5 { margin-right: 0.3125rem; }
@@ -64,6 +67,8 @@ input::-webkit-input-placeholder {color: #323232;}
 .mb3 { margin-bottom: 1.5rem !important; }
 .p10 { padding: 0.625rem; box-sizing: border-box !important; }
 .pl10 { padding-left: 0.625rem; }
+.pt2 { padding-top: 2%; }
+.pt25{padding-top: 25%};
 .pt10 { padding-top: 0.625rem; }
 .pr10 { padding-right: 0.625rem; }
 .pr12p {padding-right:  12% !important;}
@@ -75,6 +80,7 @@ input::-webkit-input-placeholder {color: #323232;}
 .fs16 { font-size: 1rem !important; }
 .fs18 { font-size: 18px !important; }
 .fs20 { font-size: 1rem !important; }
+.fs25 {font-size: 1.5rem !important; }
 .fs30 { font-size: 2rem !important; }
 .fb { font-weight: bold; }
 .fr { float: right; }
@@ -90,6 +96,8 @@ input::-webkit-input-placeholder {color: #323232;}
 .tr { text-align: right; }
 .tl { text-align: left !important; }
 .dblock { display: block; }
+.dpn {display: none;}
+.dpib{display: inline-block;}
 a, input, img, select { outline: none; }
 textarea { resize: none; outline: none; }
 .txt_search { width: 95%; margin-left: 25px; border-bottom: 1px solid #ccc; border-radius: 5px; height: 25px; text-indent: 15px; font-size: 0.875rem !important; margin-right: 1rem; }
@@ -320,7 +328,7 @@ ul.letter li { }
 .login_footer { position:absolute; bottom:0; left:0; width:100%;}
 .login_footer .i { width: 8rem; }
 .footer { background: #f0f0f0; padding: 0.5rem 0; border-top: 1px solid #ccc; position: relative; z-index: 9999; }
-.footer li { float: left; width: 25%; text-align: center; color: #3c3c3c; }
+.footer li { float: left; width: 50%; text-align: center; color: #3c3c3c; }
 .footer li span { display: inline-block; margin-bottom: 3px; height: 30px; }
 .footer li .fw { background: url(/images/service.png) no-repeat center; background-size: 70%; width: 44px; }
 .footer li .gt { background: url(/images/communicate.png) no-repeat center; background-size: 70%; width: 54px; }
@@ -699,6 +707,14 @@ hr{
 
 
      /*  检查报告 */ 
+.single{
+	display: none;
+}
+.allReport{
+	display: none;
+}
+
+
   .card_checkreport{
     margin-top: 15%;
 	box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
@@ -856,7 +872,37 @@ height: 100px;
 
 
 
+/* 这里是动画的 */
+.ng-enter{
+	transition: 0.75s;
+	opacity: 0;
+}
+.ng-enter-stagger{
+	transition-delay: 0.1s;
+}
+.ng-leave{
+	transition: 0.75s;
+}
+.ng-enter-active{
+	opacity: 1;
+}
+.ng-leave-active{
+	opacity:0;
+}
+
+.standard-list .ng-leave{
+	transition: 0s;
+}
 
 
-/* 这里是沙漏动画的 */
-
+/*日历的*/
+ .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }

@@ -16,16 +16,17 @@
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
  <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
     <div class="standard-list mt20">
-       <div class="list" ng-repeat="(key, val) in setting[1] track by $index " >
-          <div class="title box-vm js-event-title"  ng-click="toggle(key)">
+       <div class="list" ng-hide="$index == 0" ng-repeat="(key, val) in setting[1] track by $index" >
+          <div class="title box-vm js-event-title" ng-click="toggle(key)">
             <i class="ion-plus-circled"></i>
             <div class="flex ml20 fs18 c-black">{{key}}</div>
           </div>
           <div class="{{key}}">
-            <div class="p1rem js-event-list event"  ng-repeat="(key,val) in setting[1][key] ">
+            <div class="p1rem js-event-list event"  ng-repeat="(key1,val1) in setting[1][key] track by $index">
                 <label class="item item-input ">
-                  <span class="input-label col-50 c-blue">{{key}}</span>
-                  <input type="number"  ng-model="val">
+                  <span class="input-label col-50 c-blue">{{key1}}</span>
+                 <!--  <span class="input-label col-50 c-blue">{{val1}}</span> -->
+                  <input type="number" ng-change="watchSet(1,key,key1,val1)"  ng-model="val1">
                 </label>
             </div>
           </div>
@@ -47,5 +48,5 @@
  </div> 
 </ion-scroll>
  
-  
+   
   	

@@ -1,8 +1,21 @@
-<!-- 	<div class="bar bar-header bar-light">
-	  <h1 class="title">{{people.name}}</h1>
-	  <button class="button button-positive btn_checkset " ng-click="back()">返回</button>
-	  <button class="button button-positive btn_checkset " ng-click="next()">下一步</button>
-	</div> -->
+<style>
+    .ng-enter{
+  transition: 0s;
+  opacity: 0;
+}
+.ng-enter-stagger{
+  transition-delay: 0s;
+}
+.ng-leave{
+  transition: 0s;
+}
+.ng-enter-active{
+  opacity: 1;
+}
+.ng-leave-active{
+  opacity:0;
+}
+</style>
 		<div class="header box-vm ">
 		  <div class="w" ng-click="back()">
 	        <img src="img/back1.png" class="vm">
@@ -18,69 +31,56 @@
 
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
  <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+	<div class="pt10 ml5">
+		<div class="mt60 ml50">
+		   <div class=" fs30 fb c-blue">打印设置</div>	
 
-  <div class="list card card_checkreport">
-    <h3><b>打印设置<b></h3>
-   <form class="form_checkreport">	
-	  <label for=""><input type="radio" name="group" ng-model="report" ng-value="single" >单次检查报告<br></label>
-	  <label for=""><input type="radio" name="group" ng-model="report" ng-value="time" >趋势分析报告报告<br></label>
-	              <p>&nbsp &nbsp	起始时间xxxxxx</p>  
-	              <p>&nbsp &nbsp	起始时间xxxxxx</p>
-	  <label for=""><input type="radio" name="group" ng-model="report" ng-value="allReport">全部<br></label>
+		   <form action="" class="mt5 ml5">
+  			 <div class="mt50 pt10 ml20 item " id="{{key}}" ng-click="choose(val)" ng-repeat = "(key,val) in selectValue track by $index">
+  				<label ><i  class="ion-ios-circle-outline "></i><input type="radio" name="group" ng-model = "report" ng-value = "val" > {{key}}</label>
+  			 </div>
+          <div class="mt50 pt10 ml20 dpn" id="dateSelect">
+            <div>
+              <label for="" class="item item-input">
+                <span>开始日期</span>
+                <input class="dpib" type="date" ng-model ="dt1">
+              </label>
+              <label for="" class="item item-input">
+                <span>开始具体时间</span>
+                <input class="dpib" ng-model ="dt1" type="time">
+              </label>
+            </div>
+            <div class="mt5">
+              <label for=""  class="item item-input" >
+                <span>结束日期</span>
+                <input class="dpib" type="date" ng-value="dt2"  ng-model="dt2 | date:'yyyy-MM-dd'" ng-change="checkTime()">
+              </label>
+              <label for=""  class="item item-input">
+                <span>结束具体时间</span>
+                <input class="dpib" type="time" ng-model = "dt2">
+              </label>
+            </div>
+            <div>
+              <input type="text" datetime="yyyy-MM-dd HH:mm:ss" ng-model="dt2">
+            </div>
+            
+          </div>
+		   </form>
+            
+		</div>
 
-   </form>
-    <h3>输入血气分析结果</h3>
-    
-	<table>
-		<tr>
-			<td class="td-1 tdcolor-1">
-				时间
-			</td>
-			<td class="td-2 tdcolor-1">
-				PH
-			</td>
-			<td class="td-3 tdcolor-1">
-				Paco2（mmHg）
-			</td>
-			<td class="td-4 tdcolor-1">
-				Pao2 <br>（mmHg）
-			</td>
-		</tr>
-
-		<tr>
-			<td class="td-1 tdcolor-2">
-				v{{one.time}}
-			</td>
-			<td class="td-2 tdcolor-2">
-				v{{one.PH}}
-			</td>
-			<td class="td-3 tdcolor-2">
-				v{{one.Paco2}}
-			</td>
-			<td class="td-4 tdcolor-2">
-				v{{one.Pao2}}
-			</td>
-		</tr>
-
-		<tr>
-			<td class="td-1 tdcolor-3">
-				v{{two.time}}
-			</td>
-			<td class="td-2 tdcolor-3">
-				v{{two.PH}}
-			</td>
-			<td class="td-3 tdcolor-3">
-				v{{two.Paco2}}
-			</td>
-			<td class="td-4 tdcolor-3">
-				v{{two.Pao2}}
-			</td>
-		</tr>
-	</table>
-	<div class="row row_checkreport">
-	  <div class="col"><button class="button button-positive btn_checkreport" ng-click="next()">确定</button></div>
-	  <div class="col"><button class="button button-positive btn_checkreport" ng-click="back()">取消</button></div>
 	</div>
-   </div>
  </div> 
 </ion-scroll>
+<div class="bar bar-footer">
+	<ul class="box-wc footer clearfix ">
+		<li class = "box-c fs20 pt2" ng-click="back()">
+		   取消
+		</li>
+		<li class="box-c fs20 pt2" ng-click="next()">
+			确定
+		</li>
+	</ul>
+</div>
+
+ 
