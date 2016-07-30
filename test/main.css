@@ -1,0 +1,139 @@
+﻿body {
+	font: 20px '微软雅黑';
+	margin: 0;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+}
+p {
+	margin: 0;
+}
+
+body:after {
+	content: '';
+	width: 0;
+	height: 100%;
+}
+body:after,
+.main_content {
+	display: inline-block;
+	vertical-align: middle;
+}
+.main_content {
+	text-align: initial;
+	position: relative;
+    height: 90%;
+    width: 90%;
+}
+.top_nav_container,
+.middle_main_container,
+.bottom_footer_container {
+	position: relative;
+	width: 100%;
+}
+
+.top_nav,
+.middle_main,
+.bottom_footer {
+    overflow-y: scroll;
+	position: absolute;
+	width: 100%;
+	height: 90%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+.top_nav_container {
+	height: 10%;
+}
+.middle_main_container {
+	height: 50%;
+}
+.bottom_footer_container {
+	height: 40%;
+}
+
+/* 顶部 */
+.status {
+	display: inline-block;
+	float: right;
+}
+
+/* 中间 */
+.middle_main_container [class^="section_"]:not(:first-of-type) {
+	margin-top: .5em;
+}
+.middle_main_container [class^="section_"]:before {
+    content: attr(title);
+    margin-bottom: 0.5em;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+}
+.btnContainer:not(:last-of-type) {
+	margin-bottom: 1em;
+}
+.btnContainer.needLogin {
+	opacity: .5;
+}
+.btnContainer span {
+    margin: 3px;
+    margin-top: 0;
+    margin-left: 0;
+	background: #666;
+	color: #fff;
+	font-size: .8em;
+	letter-spacing: 2px;
+    display: inline-block;
+    vertical-align: top;
+	padding-left: 2px;
+	border: .25em solid transparent;
+}
+.btnContainer span:active {
+	background: #333;
+}
+/* 底部 */
+.bottom_footer {
+	box-shadow: 0 0 8px #666 inset;
+    font-size: 14px;
+}
+
+.debugExpand,
+.debugClear {
+	float: right;
+    margin: .5em;
+    margin-left: 0;
+    margin-bottom: 0;
+    background: #666;
+	position: relative;
+    color: #fff;
+    letter-spacing: 3px;
+    padding-left: 3px;
+    z-index: 1;
+    border: 5px solid transparent;
+}
+.bottom_footer span:active {
+	background: #333;
+}
+.debugWindow {
+	overflow-y: scroll;
+    margin: 10px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.debugWindow textarea {
+	background: transparent;
+	font: 15px '微软雅黑';
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border: 0;
+	outline: none;
+}

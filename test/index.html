@@ -1,0 +1,106 @@
+﻿<html>
+	<head>
+		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"/>
+		<meta http-equiv="pragma" content="no-cache" name="apple-mobile-web-app-capable" content="yes"/>
+		<link rel="shortcut icon" href="../Img/logo.png" mce_href="../Img/logo.png" type="image/x-icon"/>
+		<title>测试页面</title>
+		<script src="../lib/moment/jquery-1.12.0.min.js"></script>
+		<!-- 即时通讯 + Oauth2鉴权 -->
+		<!-- <script src="http://new.kf580.com:8888/OAUTH/kfcoreim.js"></script> -->
+		<script src="./js/main.js"></script>
+		<script src="./js/tree.js"></script>
+		<script src="./js/devices.js"></script>
+		<script src="./js/checkQueue.js"></script>
+		<script src="./js/blueTooth.js"></script>
+		<script src="./js/report.js"></script>
+		<link href="./css/main.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<div class="main_content">
+			<div class="top_nav_container">
+				<div class="top_nav">
+					<div class="btnContainer">
+						<span class="back">返回</span>
+						<span class="refresh">刷新</span>
+						<div class="status">当前用户：</div>
+					</div>		
+				</div>
+			</div>
+			<div class="middle_main_container">
+				<div class="middle_main">
+					<div class="section_1" title="安卓接口测试">
+						<div class="btnContainer">
+							<span class="restartSys">重启系统</span>
+							<span class="closeSys">关闭系统</span>
+						</div>
+						
+						<div class="btnContainer">
+							<div class="deviceContainer">
+								<br />
+								<span>安卓接口:</span>
+								<span class="deviceClose">退出设备检测</span><!-- 
+								--><span class="deviceRestart">重启集成消息服务</span>
+								<br />
+								<span>业务接口:</span>
+								<span class="deviceCallbackSet">未设置检测回调函数</span><!-- 
+								--><span class="deviceCallbackReset">重设检测回调函数</span><!-- 
+								--><span class="deviceRecheck">未开启重复检测</span>
+							</div>
+						</div>
+						
+						<div class="btnContainer">
+							<span class="getURLContent">getURL测试</span> <input type="text" placeholder="请输入文件名(如:index.html)..."/>
+							<span class="getURL">获取</span>
+						</div>
+						
+						<div class="btnContainer login">
+							<span class="name">用户名</span> <input type="text" placeholder="请输入用户名..."/>
+							<span class="pwd">密码</span> <input type="text" placeholder="请输入密码..."/>
+							<span class="submit">登录</span>
+						</div>
+						
+						<div class="btnContainer needLogin">
+							<span class="sendKFEventContent">MQTT信息</span> <input type="text" placeholder="请输入MQTT信息..."/>
+							<span class="sendKFEvent">发送</span>
+							<span class="autoSendOn MQTT">自动发送/开</span>
+							<span class="autoSendOff MQTT">自动发送/关</span>
+						</div>
+						
+						<div class="btnContainer needLogin">
+							<span class="sendMsgToId">接收方id</span> <input type="text" placeholder="请输入接收方id..."/>
+							<span class="sendMsgContent">发送内容</span> <input type="text" placeholder="请输入发送信息..."/>
+							<span class="sendMsg">发送</span>
+							<span class="autoSendOn Msg">自动发送/开</span>
+							<span class="autoSendOff Msg">自动发送/关</span>
+						</div>
+					</div>
+						
+					<div class="section_2" title="测试">
+						<div class="btnContainer">
+							<span class="logicFunc">逻辑表达式</span> <input type="text" placeholder="请输入逻辑表达式..."/>
+							<span class="getParamObj">获取</span>
+						</div>
+						
+						<div class="btnContainer">
+							<span class="treeTest">测试策略树</span>
+							<span class="treeCancel negative">取消策略树</span>
+						</div>
+						
+						<div class="btnContainer">
+							<span class="reportAnalyse" data-name="oxy">生成氧气机评估报告</span>
+							<span class="reportAnalyse" data-name="bre">生成呼吸机评估报告</span>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="bottom_footer_container">
+				<div class="bottom_footer">
+					<span class="debugExpand">全屏</span>
+					<span class="debugClear">清空</span>
+					<div class="debugWindow"><p contenteditable="true"></p></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

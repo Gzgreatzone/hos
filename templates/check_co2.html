@@ -1,0 +1,30 @@
+
+<div class="header box-vm " style="height:48px">
+  <div class="w" ng-click="back()">
+      <img src="img/back1.png" class="vm">
+      <span class="vm ml10"><a>返回</a></span>
+    </div>
+       <div class="flex td fb fs20">
+          co2监测
+       </div>
+   <div class="w" >
+         <span class="vm mr10" " ></span>
+       </div>
+</div>
+
+
+<ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
+ <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);"> 
+   <div class="mt8px" id=""> 
+      <img id="co2table" style="width:100%;height:100%;z-index:-999" src="img/co2table.svg" alt="">
+   
+    </div>
+
+    <div class='mt10'>
+       <label class="item item-input item-input_setting">
+        <button class="button button-outline button-calm input-label col-10" ng-click="timeCounter()">开始计时</button><span class="pl10">{{timeCount}}秒</span>
+      </label>
+    </div>
+    <div><h3>{{co2Val}}数值</h3></div>
+  </div> 
+</ion-scroll>

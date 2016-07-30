@@ -9,8 +9,8 @@
 		"height": 169,
 		"weight": 60,
 		"area":"第一区",
-		"beginDate":"2016年6月15日",
-		"endDate":" "
+		"beginDate":"",
+		"endDate":""
 	},
 	{
 		"name":"李三",
@@ -23,8 +23,8 @@
 		"height": 169,
 		"weight": 60,
 		"area":"第一区",
-		"beginDate":"2016年6月15日",
-		"endDate":" "
+		"beginDate":"",
+		"endDate":""
 	},
 	{
 		"name":"邓三",
@@ -37,7 +37,7 @@
 		"height": 169,
 		"weight": 60,
 		"area":"第一区",
-		"beginDate":"2016年6月15日",
+		"beginDate":"",
 		"endDate":""
 	},
 	{
@@ -51,7 +51,7 @@
 		"height": 169,
 		"weight": 60,
 		"area":"第一区",
-		"beginDate":"2016年6月15日",
+		"beginDate":"",
 		"endDate":""
 	},
 	{
@@ -65,7 +65,7 @@
 		"height": 169,
 		"weight": 60,
 		"area":"第一区",
-		"beginDate":"2016年6月15日",
+		"beginDate":"",
 		"endDate":""
 	},
 	{
@@ -79,7 +79,7 @@
 		"height": 169,
 		"weight": 60,
 		"area":"第一区",
-		"beginDate":"2016年6月15日",
+		"beginDate":"",
 		"endDate":""
 	},
 	{
@@ -93,7 +93,7 @@
 		"height": 169,
 		"weight": 60,
 		"area":"第一区",
-		"beginDate":"2016年6月15日",
+		"beginDate":"",
 		"endDate":""
 	},
 	{
@@ -107,7 +107,7 @@
 		"height": 169,
 		"weight": 60,
 		"area":"第一区",
-		"beginDate":"2016年6月15日",
+		"beginDate":"",
 		"endDate":""
 	}
 ]

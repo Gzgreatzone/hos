@@ -1,6 +1,6 @@
 'use strict';
 angular.module('chafangbao.controllers')
-.controller('IndexController', function($scope,	$window,$timeout, $ionicLoading,$http,ThePerson,$cordovaBarcodeScanner,kfLogin,$rootScope) {
+.controller('IndexController', function($scope,	$window,$timeout,$ionicPopup, $ionicLoading,$http,ThePerson,$cordovaBarcodeScanner,$rootScope,kfDevices) {
 	$scope.toCheck = function(){
 		$window.location.href = "#/check";
 		ThePerson.setTure();
@@ -11,9 +11,22 @@ angular.module('chafangbao.controllers')
 		ThePerson.clear();
 	};
 	$scope.logOut = function(){
-		alert("gg");
-		$rootScope.islogin = false;
-		$window.location.href = '#/login';
+		$ionicPopup.prompt({
+			title : "确定要退出吗",
+			template : "",
+			buttons : [{
+				text : "取消",
+				type : "button-default"
+			}, {
+				text : "确认",
+				type : "button-calm",
+				onTap : function (e) {
+				$rootScope.islogin = false;
+		        $window.location.href = '#/login';
+				}
+			}]
+		});
+		
 	};
 	$scope.letters_list = function(){
 		$scope.maxHeight =  document.documentElement.clientHeight;
@@ -40,28 +53,24 @@ angular.module('chafangbao.controllers')
 	$scope.myOrderBy = "+bedNumber";
 	$scope.letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","#"];
 
-	var pairs = {
-		"peoples":""
-	}
-	for(var i in pairs){
-		pairs[i] = 安卓用键获取值(i);
-	}
-	if (pairs.peoples) {
-		$scope.peoples = JSON.parse(pairs.peoples);
-	}else if (debug == "true") {
+	var peoples = Android.getcfg("peoples");
+	if (peoples) {
+		$scope.peoples = JSON.parse(peoples);
+	}else if (debug ) {
 		$http.get('json/peoples.json')
 		.success(function(response){
 			$scope.peoples = response;
-			pairs.peoples = JSON.stringify($scope.peoples);
-			安卓设置键值对("peoples",pairs["peoples"]);
+			peoples = JSON.stringify($scope.peoples);
+			Android.setcfg("peoples",peoples);
 		});
-	} else if(debug == "false") {
-		var str = Android.getURL('/web/hos/json/peoples.json');
+	} else {
+		if(!window.rootPath)
+			window.rootPath = '/web/hos';
+		var str = Android.getURL(window.rootPath + 'json/peoples.json');
 		$scope.peoples = JSON.parse(str);
+		peoples = JSON.stringify($scope.peoples);
+		Android.setcfg("peoples",peoples);
 	}
-
-
-
 	$scope.toThePerson = function(people){
 		$rootScope.Fn.shake();
 		ThePerson.setFalse();
@@ -70,13 +79,21 @@ angular.module('chafangbao.controllers')
 	}
 	$scope.sannerCR = function(){
 	  	$rootScope.Fn.shake();
-	  	Android.qrcode();
-	  // if (debug==false) {
-	  // 	if (ThePerson.backqrcord(Android.qrcode())) {
-	  // 	 var restoreInfo = ThePerson.restore(ThePerson.get(),ThePerson.backqrcord(Android.qrcode()));
-	  //    ThePerson.setPeople(restoreInfo);
-	  //    $window.location.href = "#/addperson";
-	  //   }
-	  // }
+	  	//Android.qrcode();
+	  	kfDevices.qrcode(function(msg)
+	  		{
+	  			//alert(msg);
+	  			var clearword = ThePerson.backqrcord(msg);
+	  			alert(clearword);
+	  			var peopleOne = ThePerson.get()
+	  			var Info = ThePerson.restore(peopleOne,clearword);
+	  			ThePerson.setPeople(Info);
+	  			alert(Info);
+	  			$window.location.href = "#/addperson";
+	  		});
 	}
+	$('img').error(function(){
+            $(this).attr('src', "img/unset.jpg");
+     });
+	
 })

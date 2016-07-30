@@ -2,7 +2,7 @@
 		<div class="header box-vm ">
 		  <div class="w" ng-click="back()">
 	        <img src="img/back1.png" class="vm">
-	        <span class="vm ml10">返回</span>
+	        <span class="vm ml10"><a>返回</a></span>
 	      </div>
            <div class="flex td fb fs20">
               {{people.name}}
@@ -18,16 +18,16 @@
 
 	<div class="list  pt10 ml5 gt-special-list"> 
       <div class="rp-lt" ng-repeat="setting in settingList track by $index">
-		<div class="box-vm msg " >
+		<a><div class="box-vm msg " >
 			<div class="fs20 ml20 flex td" ng-click="tosetting($index + 1)">{{setting}} </div>
 			<i class="icon ion-chevron-right"></i>
-		</div>
+		</div></a>
       </div>
       <div class="rp-lt">
-		<div class="box-vm msg ">
+		<a><div class="box-vm msg ">
 			<div class="fs20 ml20 flex td" ng-click="post()">同步到服务器 </div>
 			<i class="icon ion-loop"></i>
-		</div>
+		</div></a>
       </div>
 
  

@@ -1,18 +1,16 @@
 'use strict';
 angular.module('chafangbao.controllers')
 .controller('SettingController', function($scope,$timeout, $ionicLoading,$ionicHistory,$window,$http,$rootScope,$ionicPopup) {
-	
 	//页面返回
 	$scope.back = function () {
-		if(pairs.systemSet){
-			var str = pairs.systemSet;  
+		if(systemSet){
+			var str = systemSet;  
 			$scope.systemSet = JSON.parse(str);  //返回时恢复保存时的数据
 			window.history.go(-1);
 		} else{
 			window.history.go(-1);
 		}
 	}
-
 	//页面跳转
 	$scope.toPassword = function(){window.location.href = "#/setting_password";}
 	$scope.toInformation = function(){window.location.href = "#/setting_information";}
@@ -31,7 +29,7 @@ angular.module('chafangbao.controllers')
 					type : "button-default"
 				}, {
 					text : "确认",
-					type : "button-positive",
+					type : "button-calm",
 					onTap : function (e) {
 						var UN = $scope.user.username;
 						var PW = $scope.user.password;
@@ -54,11 +52,10 @@ angular.module('chafangbao.controllers')
 	};
 	
 	//保存按钮的逻辑
-
 	$scope.save = function(){
 		$scope.isDisabled = true;
-		pairs.systemSet = JSON.stringify($scope.systemSet);
-		安卓设置键值对("systemSet",pairs["systemSet"]);
+		systemSet = JSON.stringify($scope.systemSet);
+		Android.setcfg("systemSet",systemSet);
 		
 		alert("保存成功!");
 		console.log('保存完毕,刷新');
@@ -68,33 +65,30 @@ angular.module('chafangbao.controllers')
 	}
 	
 	//初始化系统设置
-	var pairs = {
-		"systemSet":"",
-		"password":"",
-		"username":""
-	}
-	for(var i in pairs){
-		pairs[i] = 安卓用键获取值(i);
-	}
-	if (pairs.systemSet) {
-		$scope.systemSet = JSON.parse(pairs.systemSet);
-		$scope.username = pairs.username;
-		$scope.password = pairs.password;
-	}else if (debug=="true") {
+	
+	var systemSet = Android.getcfg("systemSet");
+	var password = Android.getcfg("passWord");
+	var username = Android.getcfg("userName");
+	if (systemSet) {
+		$scope.systemSet = JSON.parse(systemSet);
+		$scope.username = username;
+		$scope.password = password;
+	}else if (debug) {
 		$http.get('json/systemsetting.json')
 		.success(function(response){
 		$scope.systemSet = response;
 		});
-	}else if(debug=="false"){
-		var str = Android.getURL('/web/hos/json/systemsetting.json');
+	} else {
+		if(!window.rootPath)
+			window.rootPath = '/web/hos/';
+		var str = Android.getURL(window.rootPath + 'json/systemsetting.json');
 		$scope.systemSet = JSON.parse(str);
 	}
-
 	$scope.editPassword = function (){
 		if ($scope.oldPassword == $rootScope.passWord) {   //如果密码正确
 			if ($scope.newPassword_1 == $scope.newPassword_2) {
 				$rootScope.passWord = $scope.newPassword_2;   //保存密码
-				安卓设置键值对("password",$scope.newPassword_2);  //保存本地
+				Android.setcfg("passWord",$scope.newPassword_2);  //保存本地
 			}else{
 				alert("前后密码不一致");
 			}

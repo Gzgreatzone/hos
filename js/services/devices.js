@@ -2,7 +2,7 @@
 
 
 angular.module('chafangbao.services',['chafangbao.factories'])
-.service('kfDevices', ['$rootScope','ThePerson', function ($rootScope,ThePerson) {
+.service('kfDevices', ['$rootScope','ThePerson','$timeout', function ($rootScope,ThePerson,$timeout) {
 	//
 	// 仪器的属性封装
 	//
@@ -12,68 +12,63 @@ angular.module('chafangbao.services',['chafangbao.factories'])
 			{
 				设备名 : "呼末二氧化碳",
 				消息标识 : "co2",
-				最后开始时间 : 0,
-				最后结束时间 : 0,
+				最后检测时间 : 0,
 				最后检测参数 : 0
 			}, {
 				设备名 : "肺功能仪",
 				消息标识 : "Lung",
-				最后开始时间 : 0,
-				最后结束时间 : 0,
+				最后检测时间 : 0,
 				最后检测参数 : 0
 			}, {
 				设备名 : "肺功能仪4",
 				消息标识 : "Lung4",
-				最后开始时间 : 0,
-				最后结束时间 : 0,
+				最后检测时间 : 0,
 				最后检测参数 : 0
 			}, {
 				设备名 : "血氧检测仪",
 				消息标识 : "SPO2",
-				最后开始时间 : 0,
-				最后结束时间 : 0,
+				最后检测时间 : 0,
 				最后检测参数 : 0
 			}, {
 				设备名 : "血糖仪",
 				消息标识 : "GLU",
-				最后开始时间 : 0,
-				最后结束时间 : 0,
+				最后检测时间 : 0,
 				最后检测参数 : 0
 			}, {
 				设备名 : "睡眠呼吸初筛仪",
 				消息标识 : "SLEEP",
 				最后开始时间 : 0,
-				最后结束时间 : 0,
+				最后检测时间 : 0,
 				最后检测参数 : 0
 			}, {
 				设备名 : "体重计",
 				消息标识 : "Weight",
 				最后开始时间 : 0,
-				最后结束时间 : 0,
+				最后检测时间 : 0,
 				最后检测参数 : 0
 			}, {
 				设备名 : "血压计",
 				消息标识 : "血压",
 				最后开始时间 : 0,
-				最后结束时间 : 0,
+				最后检测时间 : 0,
 				最后检测参数 : 0
 			}, {
 				设备名 : "用药管理",
 				消息标识 : "Drug",
 				最后开始时间 : 0,
-				最后结束时间 : 0,
+				最后检测时间 : 0,
 				最后检测参数 : 0
 			}, {
 				设备名 : "氧气机",
 				消息标识 : "O2",
 				最后开始时间 : 0,
-				最后结束时间 : 0,
+				最后检测时间 : 0,
 				最后检测参数 : 0
 			}, {
 				设备名 : "呼吸机",
 				消息标识 : "Br",
 				最后开始时间 : 0,
-				最后结束时间 : 0,
+				最后检测时间 : 0,
 				最后检测参数 : 0
 			}
 		];
@@ -90,24 +85,33 @@ angular.module('chafangbao.services',['chafangbao.factories'])
 		callBacks : [],
 		
 		//====注: 麟翔编写的方法
-		save : function(msg){
-			//console.log(msg);
+		save : function (Signal) {
 			var people = ThePerson.get();
-			if (people.name) {  //名字不存在将不会存储
-				var peopleName = people.name;  //键值名字
-				var indexName = peopleName + "_" + msg.data[0]; //仪器名
-				var indexName_time = indexName + "_" +  JSON.parse(安卓用键获取值("devicestatus"))["最后开始时间"];
-				if (安卓用键获取值(indexName)) {  //索引是否存在
-					var timeStamp = JSON.parse(安卓用键获取值("devicestatus"))["最后开始时间"]+"#"+安卓用键获取值(indexName); //时间戳加长
-					var deviceInfor = 安卓用键获取值("devicestatus");  //直接推入本次检测的数据
+			if (people.name) {    
+			    //键值名字
+				var peopleName = people.name;  
+				//人名和仪器名
+				var indexName = peopleName + "_" + Signal; 
+				var lastCheck = JSON.parse(Android.getcfg("deviceStatus"));
+				var lastCheckTime = lastCheck['最后检测时间'];
+				var indexName_time = indexName + "_" +  lastCheckTime;
+				 //索引是否存在
+				if (Android.getcfg(indexName)) {  
+					var timeStamp = lastCheckTime+"#"+Android.getcfg(indexName); //时间戳加长
 				} else{
-					var deviceInfor = 安卓用键获取值("devicestatus");  //直接推入本次检测的数据
-					var timeStamp = JSON.parse(安卓用键获取值("devicestatus"))["最后开始时间"];  //直接录入时间戳
+					//直接录入时间戳
+					var timeStamp =lastCheckTime.toString();  
 				}
-				安卓设置键值对(indexName,timeStamp);  //时间戳键入索引
-				安卓设置键值对(indexName_time,deviceInfor);  //存储本次检测信息
-			}
+				Android.setcfg(indexName,timeStamp);  //时间戳键入索引
+				//Android.setcfg(indexName_time,deviceInfor);  //存储本次检测信息
+				Android.setcfg(indexName_time,JSON.stringify(lastCheck));  //存储本次检测信息
+
+		    }
 		},
+		// delete : function(Signal) {
+		// 	var people = ThePerson.get();
+		// 	if (people.name) {}
+		// },
 		
 		//开启 device.open("中文设备","回调","标志字")
 		open : function (name, callBack, arg) {
@@ -168,7 +172,106 @@ angular.module('chafangbao.services',['chafangbao.factories'])
 			}
 			return null;
 		},
+		// 获取当前设备
+		getCurrentDevice_BySignal : function (Signal) {
+			var i;
+			for (i in device.status) {
+				var status = device.status[i];
+				if (status['消息标识'] == Signal) {
+					return status;
+				}
+			}
+		},
+		getCurrentDevice : function (Signal) {
+			var status = device.getCurrentDevice_BySignal(Signal);
+			if (status['消息标识'] == Signal) {
+				var j;
+				for (j in device.callBacks) {
+					var callback = device.callBacks[j];
+					if (callback['name'] == status['设备名']) {
+						// 执行回调并移除该回调
+						device.callBacks.splice(j, 1);
+						j--;
+						return {
+							status : status,
+							callback : callback.callBack
+						};
+					}
+				};
+			}
+		},
+		getDeviceEvent : function () {
+			$timeout(function () {
+				device2.getDeviceEvent();
+			}, 500);
+		},
+		// 根据检测项，放回object类型的值
+		getRes : function (Key, Val) {
+			var Res;
+			var people = ThePerson.get();
 
+			if (Key == "Weight") { // 对于”体重“，返回值是一个number,要先把返回值变成一个object再让其进入object的操作中！
+				Res = {
+					weight : Val,
+					bmi : parseFloat(parseFloat(Val / (Math.pow($rootScope.Pad_user.infoList.Height / 100, 2))).toFixed(1).replace('.0', ''))
+				};
+			} else if (Key == "co2") { // 对于”co2“，返回值是一个number,要先把返回值变成一个object再让其进入object的操作中！
+				Res = {
+					co2 : Val
+				};
+			} else if (Key == "GLU") { // 对于”GLU“，返回值是一个number,要先把返回值变成一个object再让其进入object的操作中！
+				Res = {
+					GLU : Val
+				};
+			} else {
+				Res = eval("(" + Val + ")");
+			}
+			return Res;
+		},
+		storage : function (Status, result) {
+			if (Status) {
+				var date = new Date();
+				var ms = date.getTime();
+				Status.最后检测时间 = ms;
+				// 判断已经检测了多少次
+				var repeatCheck = false; // 是否多次重复检测
+				var i;
+				for (i in DEVICE) {
+					var pre = DEVICE[i];
+					if (pre['id'] == Status.设备名) {
+						if (pre['checkTimes'] > 1) {
+							repeatCheck = true;
+							if (pre['currentTimes'] == 0) {
+								var p;
+								var q = {};
+								for (p in result) {
+									q[p] = [];
+								}
+								Status.最后检测参数 = q;
+							}
+						}
+					}
+				}
+				if (repeatCheck) {
+					var j;
+					for (j in result) {
+						Status.最后检测参数[j].push(result[j]);
+					}
+					// for(j in result) {
+					// 	if (Status.最后检测参数[j].length == DEVICE[Status.消息标识].checkTimes ) {
+					// 		this.save(Status);
+					// 		break;
+					// 	}
+					// }
+				} else {
+					Status.最后检测参数 = result;
+					//this.save(Status);
+				}				   
+			} else {
+				console.error("status不存在");
+			}
+			Android.setcfg("deviceStatus", JSON.stringify(Status));
+		},
 		//二维码
 		qrcode: function(callback) {
 			qrcodeCallback = callback;
@@ -186,69 +289,49 @@ angular.module('chafangbao.services',['chafangbao.factories'])
 	//             : 所以,重载该函数,让所有的结果获取后能够自动判断分发到对应的回调函数中
 	// -------------
 	window.AndroidCallBack = function (消息标识, msgKey) {
-		
-		if(消息标识 == 'qrcode') {
-			if(qrcodeCallback)
-				qrcodeCallback(msgKey);
-		}
-		//设备服务数据消息
-		if (消息标识 == "设备服务输出消息") {
-			var msg = eval("(" + Android_do_cmd("getMsg", msgKey) + ")").type;
-			$rootScope.$apply(function () {
-				$rootScope.txt_activeDevice = msg.substring(msg.indexOf("n") + 1, msg.length);
-				合成语音($rootScope.txt_activeDevice);
-			})
-		//将获得的设备数据分发到对应的注册回调中
-		} else {
-			//运行回调方法
-			for (var i in device.status) {
-				//生成指标的字符串
-				var 判断指标;
-				if (debug == "true") {
-					判断指标 = device.status[i].设备名 + 'APP' == 消息标识;
-				} else if (debug == "false") {
-					判断指标 = device.status[i].消息标识 == 消息标识;
-				}
-				//遍历回调函数数组,执行回调函数
-				if (判断指标) {
-					for (var j = 0; j < device.callBacks.length; j++) {
-						//回调函数所需结果跟当前结果匹配,执行回调函数
-						if (device.callBacks[j].name == device.status[i].设备名) {
-							var 真正的消息;
-							var date = new Date();
-							var ms = date.getTime();
-							//如果是DEBUG模式,就给一个假数据
-							if (debug == "true") {
-								var debugResult = {
-									血氧检测仪 : "'SPO2', '{spo2:98,hr:64}'",
-									呼末二氧化碳 : "'co2', '32.11'",
-									肺功能仪 : "'Lung', '{fev1:1.59,fev6:7.5}'",
-									肺功能仪4 : "'Lung4', '{fev1:1.12,fev6:1.5}'",
-									体重计 : "'Weight', '74.9'",
-									呼吸机 : "'Breath', 'rate:8.4,vol:488.4,lasttime:[[1448150465649,1448164865649],[1448168465649,1448182865649],[1448186465649,1448198201849]]}'",
-									氧气机 : "'O2', '{rate:16.9,o2:90.6,vol:45,lasttime:[[1448168850781,1448168850781]]}'",
-									血压计 : "'血压', '{收缩压:160,舒张压:115}'",
-									血糖仪 : "'GLU', '11.2'",
-									用药管理 : "'DRUG', '1'"
-								};
-								真正的消息 = "{code:0,data:[" + debugResult[device.callBacks[j].name] + "],msg:'操作成功'}";
-							//如果在安卓中运行,就给真数据
-							} else if (debug == "false") {
-								真正的消息 = Android_do_cmd("getMsg", msgKey);
-							}
-							//执行回调
-							device.callBacks[j].callBack(真正的消息);
-							device.callBacks.splice(j, 1);
-							j--;
-							//更新设备状态
-							device.status[i].最后开始时间 = ms;
-							device.status[i].最后结束时间 = ms;
-							device.status[i].最后检测参数 = 真正的消息;
-							安卓设置键值对("devicestatus", JSON.stringify(device.status[i]));
-						}
-					}
-				}
+		//alert(msgKey);
+		if(消息标识 == 'QRCODE') {
+			if(qrcodeCallback){
+				var codeStr = Android_do_cmd("getMsg",msgKey);
+				qrcodeCallback(codeStr);
 			}
+		}
+		
+		var getMsg = Android_do_cmd("getMsg", msgKey) || msgKey;
+		// if (!window.recieveDeviceMsg(消息标识, getMsg)) {
+		// 			return;
+		// }
+		if (!window.recieveDeviceMsg(消息标识, getMsg)) {
+					return;
+		}
+		
+		// 获取参数
+		
+
+		// 判断是否为接收消息，是的话退出
+		if (debug) {
+			var deviceId = 消息标识.replace(/APP/g, '');
+			getMsg = "{code:0,data:[" + debugResult(deviceId) + "],msg:'操作成功'}";
+			$timeout(function () {
+				window.AndroidCallBack('', "{code:0,data:['" + deviceId + "', '用户退出'],msg:'用户退出'}");
+			}, 500);
+		}
+
+		// 检测成功，返回结果
+		var 真实的消息 = eval("(" + getMsg + ")");
+		//alert(getMsg);
+		// 本次、对应检测设备的设备“消息标识”
+		var signal = 真实的消息['data'][0];
+		var result = device.getRes(signal, 真实的消息['data'][1]);
+		var msg = 真实的消息['msg'];
+		var code = 真实的消息['code'];
+		//window.checkWord =  真实的消息;
+		if (msg == '操作成功') { // 运行回调方法
+			var currentDevice = device.getCurrentDevice(signal);
+			currentDevice.callback(signal, result);
+			device.storage(currentDevice.status, result);
+		} else {
+			kfFn.tips.show("检测失败，msg:" + msg);
 		}
 	}
 	return device;

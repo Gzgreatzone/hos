@@ -2,13 +2,13 @@
     <div class="header box-vm ">
       <div class="w" ng-click="back()">
           <img src="img/back1.png" class="vm">
-          <span class="vm ml10">返回</span>
+          <span class="vm ml10"><a>返回</a></span>
         </div>
            <div class="flex td fb fs20">
               二氧化碳量检测
            </div>
        <div class="w" >
-             <span class="vm mr10" ng-click="saveSet(1)" >保存</span>
+             <span class="vm mr10" ng-click="saveSet(1)" ><a>保存</a></span>
            </div>
     </div>
 
@@ -16,6 +16,24 @@
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
  <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
     <div class="standard-list mt20">
+       <div class="list">
+          <div class="title box-vm js-event-title" ng-click="toggle('coWork')">
+            <i class="ion-plus-circled"></i>
+            <div class="flex ml20 fs18 c-black">工作模式设置</div>
+          </div>
+            <div class="coWork">
+              <div class="p1rem js-event-list event">
+                  <label class="item item-input ">
+                    <span class="input-label col-50 c-blue">工作模式</span>
+                   <!--  <span class="input-label col-50 c-blue">{{val1}}</span> -->
+                    <select ng-change="setModel(co2CheckModel)" ng-model="co2CheckModel">
+                        <option value="检测模式">&nbsp&nbsp检测模式&nbsp&nbsp</option>
+                        <option value="监测模式">&nbsp&nbsp监测模式&nbsp&nbsp</option>
+                    </select>
+                  </label>
+              </div>
+            </div>
+       </div>
        <div class="list" ng-hide="$index == 0" ng-repeat="(key, val) in setting[1] track by $index" >
           <div class="title box-vm js-event-title" ng-click="toggle(key)">
             <i class="ion-plus-circled"></i>

@@ -1,28 +1,33 @@
 'use strict';
-
+//--------------
+// name        : 
+// type        : 
+// dependences : 
+// usage       : 
+//             : 
+// copyright   : 
+//--------------
 angular.module('chafangbao.directives')
-.directive(
-  // Collection-repeat image recycling while loading
-  // https://github.com/driftyco/ionic/issues/1742
-  'resetImg', function ($document) {
-    return {
-      restrict: 'A',
-      link: function($scope, $element, $attributes) {
-        var applyNewSrc = function (src) {
-          var newImg = $element.clone(true);
+.directive('errSrc', function() {
+  return {
+    link: function(scope, element, attrs) {
+      element.bind('error', function() {
+        if (attrs.src != attrs.errSrc) {
+          attrs.$set('src', attrs.errSrc);
+        }
+      });
+    }
+  }
+});
 
-          newImg.attr('src', src);
-          $element.replaceWith(newImg);
-          $element = newImg;
-        };
-
-        $attributes.$observe('src', applyNewSrc);
-        $attributes.$observe('ngSrc', applyNewSrc);
-      }
-    };
-  };
-);
-
+//--------------
+// name        : 
+// type        : 
+// dependences : 
+// usage       : 
+//             : 
+// copyright   : 
+//--------------
 .myDirective(
   'expander', function(){
         return {
@@ -39,4 +44,16 @@ angular.module('chafangbao.directives')
         }
     };
    };
+
   );
+.erDirective('errSrc', function() {
+  return {
+    link: function(scope, element, attrs) {
+      element.bind('error', function() {
+        if (attrs.src != attrs.errSrc) {
+          attrs.$set('src', attrs.errSrc);
+        }
+      });
+    }
+  }
+});

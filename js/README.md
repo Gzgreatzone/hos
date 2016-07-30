@@ -28,3 +28,7 @@
 
 
 
+2016.6.2更新
+ 将安卓键值/取值全部替换为Android。setcfg或者Android.getcfg。浏览器端暂时可用
+
+

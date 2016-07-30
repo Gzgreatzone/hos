@@ -1,10 +1,5 @@
-﻿<style>	
-	.loading-container {
-		right: 240px;
-		display: -webkit-box;
-	}
+﻿<!-- 模板 Loading -->
+<style>
+	.loading-container {right: 240px;display: -webkit-box;}
 </style>
-<!-- 模板 全屏浏览内容 -->
-<div id="modal_loading">
-	加载中...
-</div>
+<div id="modal_loading" ng-bind-html="Fn.tips.arr['txt']"></div>

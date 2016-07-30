@@ -2,13 +2,13 @@
 		<div class="header box-vm ">
 		  <div class="w" ng-click="back()">
 	        <img src="img/back1.png" class="vm">
-	        <span class="vm ml10">返回</span>
+	        <span class="vm ml10"><a>返回</a></span>
 	      </div>
            <div class="flex td fb fs20">
               {{people.name}}
            </div>
 			 <div class="w" >
-             <span class="vm mr10">打印</span>
+             <span class="vm mr10"><a>打印</a></span>
            </div>
 		</div>
 
@@ -16,93 +16,317 @@
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
  <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
 	<div class="pt10 ml5 tc">
-		<div class="tc mt50 fs30 fb">
-			{{systemSet.h_name}}医院{{systemSet.ad_name}}{{systemSet.address}}区
+			<div class="tc mt50 fs30 fb" >
+				{{systemSet.h_name}}医院{{systemSet.ad_name}}</br></br>{{systemSet.address}}区
+			</div>
+			<div class="tc mt50 fs25 fb">
+				{{reportName}}
+			</div>
 		</div>
-		<div class="tc mt50 fs25 fb">
-			{{reportName}}
-		</div>
-	</div>
-	<div class="pt10 ml5 tc">
-		
-	</div>
+		 <div class="list card card_checkreport_1 pb10"> 
+				<!-- 通用 -->
+				<table>
+					<tr>
+						<td class="td-5">
+						     姓名：{{people.name}}
+						</td>
+						<td class="td-5">
+							编号：{{people.number}}
+						</td>
+					</tr>
+					<tr>
+						<td class="td-5">
+						     性别：{{people.sex}}
+						</td>
+						<td class="td-5">
+							年龄：{{people.age}}
+						</td>
+					</tr>
+					<tr>
+						<td class="td-5">
+						     身高（cm）：{{people.height}}
+						</td>
+						<td class="td-5">
+							体重：{{people.weight}}
+						</td>
+					</tr>
+					<tr>
+						<td class="td-5">
+						     类别：{{people.beInHospital | stateFilter}}
+						</td>
+						<td class="td-5">
+							门诊号：{{people.address}}
+						</td>
+					</tr>
+					<tr>
+						<td class="td-5">
+						     床号：{{people.bedNumber}}
+						</td>
+						<td class="td-5">
+							
+						</td>
+					</tr>
+					<tr>
+						<td class="td-5">
+						     开始时间：{{people.beginDate | date:'yyyy-MM-dd'}}
+						</td>
+						<td class="td-5">
+							结束时间：{{people.end | date:'yyyy-MM-dd'}}
+						</td>
+					</tr>
+				</table>
+			    <!-- 针对不同的报告显示 -->
+			<div ng-switch="reportName">
+					<div ng-switch-when="血氧测量报告">
+						<table>
+							 <caption><em>检查结果</em></caption>
+							<tr>
+								<td class="td-3">检测时间</td>
+								<td class="td-3">脉搏血氧饱和度（%）</td>
+								<td class="td-3">心率（次/分钟）</td>
+							</tr>
+							<tr>
+								<td class="td-3">{{reportList[0]["最后检测时间"] | date:'yyyy-MM-dd'}}</td>
+								<td class="td-3">{{para[0]['spo2']}}</td>
+								<td class="td-3">{{para[0]['hr']}}</td>
+							</tr>
+						</table>
+						<table>
+							<caption>参考值</caption>
+							<tr ng-repeat="(key,val) in referenceValue[0]">
+								<td class="td-5">{{key}}</td>
+								<td class="td-5">{{val}}</td>
+							</tr>
+						</table>
+						<div class="fs20 pt30">正常脉率范围 :60次/min----100次/min</div>
+					</div>
+					<div ng-switch-when="二氧化碳测量报告">
+						<table >
+							 <caption><em>检查结果</em></caption>
+							<tr>
+								<td class="td-1">检测时间</td>
+								<td class="td-1">第一次</td>
+								<td class="td-1">第二次</td>
+								<td class="td-1">第三次</td>
+								<td class="td-1">最佳结果</td>
+							</tr>
+							<tr >
+								<td class="td-1">{{reportList[0]["最后检测时间"] | date:'yyyy-MM-dd'}}</td>
+								<td class="td-1">{{reportList[0]['最后检测参数']['co2'][0]}}</td>
+								<td class="td-1">{{reportList[0]['最后检测参数']['co2'][1]}}</td>
+								<td class="td-1">{{reportList[0]['最后检测参数']['co2'][2]}}</td>
+								<td class="td-1">{{reportList[0]['最后检测参数']['co2'] | max}}</td>
+							</tr>
+						</table>
+						<canvas id="co2List" class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series" chart-options="{showTooltips:false}"></canvas> 
+						<div class="fs20 pt1rem">参考值</div>
+						<table>
+							<tr ng-repeat = "(key,val) in referenceValue[1]">
+								<td class="td-3">{{key}}</td>
+								<td class="td-3">{{val}}</td>
+							</tr>
+						</table>
+					</div>
+					<div ng-switch-when="二氧化碳监测报告"></div>
+					
+					<div ng-switch-when="肺功能测量报告">
+						<table>
+							<tr>
+								<td class="td-25">参数</td>
+								<td class="td-25">正常预计</td>
+								<td class="td-25">测试</td>
+								<td class="td-25">%预测值</td>
+							</tr>
+							<tr>
+								<td class="td-25">FEV1（升）</td>
+								<td class="td-25">3.06</td>
+								<td class="td-25">{{para[0]['fev1'] | max}}</td>
+								<td class="td-25">{{(para[0]['fev1'] | max) / 3.06 | number:4 | percentage }}</td>
+							</tr>
+							<tr>
+								<td class="td-25">FEV6（升）</td>
+								<td class="td-25">3.56</td>
+								<td class="td-25">{{para[0]['fev6'] | max}}</td>
+								<td class="td-25">{{(para[0]['fev6'] | max) / 3.56  | number:4 | percentage }}</td>
+							</tr>
+							<tr>
+								<td class="td-25">FEV1/FEV6（比率）</td>
+								<td class="td-25">0.80</td>
+								<td class="td-25">{{(para[0]['fev1'] | max)/(para[0]['fev6'] | max) | number:2}}</td>
+								<td class="td-25">{{((para[0]['fev1'] | max)/(para[0]['fev6'] | max))/0.80 | number:4 | percentage }}</td>
+							</tr>
+						</table>
+						<p>参考值</p>
+						<table>
+					 		<caption>阻塞指数</caption>
+					 		<tr ng-repeat="(key,val) in referenceValue[3]">
+					 			<td class="td-5">{{key}}</td>
+					 			<td class="td-5">{{val}}</td>
+					 		</tr>
+					 	</table>
+					 	<table>
+							<caption>COPD分级（GOLD）</caption>
+							<tr ng-repeat="(key,val) in referenceValue[4]">
+								<td class="td-5">{{key}}</td>
+								<td class="td-5">{{val}}</td>
+							</tr>
+					 	</table>
+					</div>
+					<div ng-switch-when="肺功能COPD6测量报告">
+						<table>
+							<caption>结果</caption>
+							<tr>
+								<td class="td-1">参数</td>
+								<td class="td-1">正常预计值</td>
+								<td>测试1</td>
+								<td>测试2</td>
+								<td>测试3</td>
+								<td>最佳测试</td>
+								<td>%预计值</td>
+							</tr>
+							<tr>
+								<td class="td-1">FEV1（升）</td>
+								<td class="td-1">3.06</td>
+								<td>{{para[0]['fev1'][0]}}</td>
+								<td>{{para[0]['fev1'][1]}}</td>
+								<td>{{para[0]['fev1'][2]}}</td>
+								<td>{{para[0]['fev1'] | max}}</td>
+								<td>{{(para[0]['fev1'] | max) / 3.06 | number:4 | percentage}}</td>
+							</tr>
+							<tr>
+								<td class="td-1">FEV6（升）</td>
+								<td class="td-1">3.56</td>
+								<td>{{para[0]['fev6'][0]}}</td>
+								<td>{{para[0]['fev6'][1]}}</td>
+								<td>{{para[0]['fev6'][2]}}</td>
+								<td>{{para[0]['fev6'] | max}}</td>
+								<td>{{(para[0]['fev6'] | max) / 3.56 | number:4 | percentage}}</td>
+							</tr>
+							<tr>
+								<td class="td-1">FEV1/FEV6（比率）</td>
+								<td class="td-1">0.80</td>
+								<td>{{para[0]['fev1'][0] / para[0]['fev6'][0] | number:4 | percentage}}</td>
+								<td>{{para[0]['fev1'][1] / para[0]['fev6'][1] | number:4 | percentage}}</td>
+								<td>{{para[0]['fev1'][2] / para[0]['fev6'][2] | number:4 | percentage}}</td>
+								<td>{{(para[0]['fev1'] | max) / (para[0]['fev6'] | max) | number:4 | percentage}}</td>
+								<td>{{((para[0]['fev1'] | max) / (para[0]['fev6'] | max)) / 0.80 | number:4 | percentage}}</td>
+							</tr>
+						</table>
+						<p>肺龄：{{lungAge  | number:0}}岁</p>
+						<p>阻塞指数：{{}}</p>
+					 	<p>说明：	正常，非COPD 可能受限</p>
+					 	<div>
+							<img style="width:100%; height:100%" src="img/lungpara.svg" alt="">
+						</div>
+					 	<table>
+					 		<caption>阻塞指数</caption>
+					 		<tr ng-repeat="(key,val) in referenceValue[3]">
+					 			<td class="td-5">{{key}}</td>
+					 			<td class="td-5">{{val}}</td>
+					 		</tr>
+					 	</table>
+					 	<table>
+							<caption>COPD分级（GOLD）</caption>
+							<tr ng-repeat="(key,val) in referenceValue[4]">
+								<td class="td-5">{{key}}</td>
+								<td class="td-5">{{val}}</td>
+							</tr>
+					 	</table>
+					</div>
+					<div ng-switch-when="体重测量报告">
+						<table>
+							<caption>检测结果</caption>
+							<tr>
+								<td class="td-3">检测时间</td>
+								<td class="td-3">体重（kg）</td>
+								<td class="td-3">BMI</td>
+							</tr>
+							<tr>
+								<td class="td-3">{{reportList[0]["最后开始时间"] | date:'yyyy-MM-dd'}}</td>
+								<td class="td-3">{{para[0]['weight']}}</td>
+								<td class="td-3">{{para[0]['bmi'] | number:2}}</td>
+							</tr>
+						</table>
+					</div>
+					<div ng-switch-when="血压测量报告">
+						<table>
+							<caption>检测结果</caption>
+							<tr>
+								<td class="td-3">检测时间</td>
+								<td class="td-3">收缩压（mmHg）</td>
+								<td class="td-3">舒张压（mmHg）</td>
+							</tr>
+							<tr>
+								<td class="td-3">{{reportList[0]["最后开始时间"] | date:'yyyy-MM-dd'}}</td>
+								<td class="td-3">{{para[0]['收缩压']}}</td>
+								<td class="td-3">{{para[0]['舒张压']}}</td>
+							</tr>
+						</table>
+						<p>参考值：</p>
+						<table>
+							<caption>血压水平定义</caption>
+							<tr>
+								<td class="td-3"></td>
+								<td class="td-3">收缩压（mmHg）</td>
+								<td class="td-3">舒张压（mmHg）</td>
+							</tr>
+							<tr>
+								<td class="td-3">
+									<ul ng-repeat="(key,val) in referenceValue[6]['收缩压（mmHg）']">
+										<li>{{key}}</li>
+									</ul>
+								</td>
+								<td class="td-3">
+                                    <ul ng-repeat="(key,val) in referenceValue[6]['收缩压（mmHg）']">
+										<li>{{val}}</li>
+									</ul>
+								</td>
+								<td class="td-3">
+									<ul ng-repeat="(key,val) in referenceValue[6]['舒张压（mmHg）']">
+										<li>{{val}}</li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div ng-switch-when="血糖测量报告">
+						<table>
+							<caption>检测结果</caption>
+							<tr>
+								<td class="td-2">检测时间</td>
+								<td class="td-2">空腹血糖（mmol/L）</td>
+							</tr>
+							<tr>
+								<td class="td-2">{{reportList[0]["最后检测时间"] | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+								<td class="td-2">{{reportList[0]['最后检测参数']['GLU']}}</td>
+							</tr>
+						</table>
+						<p>参考值</p>
+						<table>
+							<caption>空腹血糖（FBG）标准（葡萄糖氧化酶法  单位：mmol/L）</caption>
+							<tr ng-repeat="(key,val) in referenceValue[7]">
+								<td class="td-5">{{key}}</td>
+					 			<td class="td-5">{{val}}</td>
+							</tr>
+						</table>
+					</div>
+			</div>
+			<div class="fs20 pt1rem">医生意见</div>
+			<!-- 专门为血氧报告 -->
+			<div ng-switch="reportName">
+				<div ng-switch-when="血氧测量报告">
+					<ul class="dpib">
+						<li class="ml3rem dpib">缺氧状况</li><li class="ml3rem dpib">正常&nbsp □ </li><li class="ml3rem dpib">偏低&nbsp □ </li><li class="ml3rem dpib">低于氧疗标准&nbsp □ </li>
+					</ul>
+					<ul class="dpib">
+						<li class="ml3rem dpib">脉率状况</li><span></span><li class="ml3rem dpib">正常&nbsp □ </li><li class="ml3rem dpib">偏高&nbsp □ </li><li class="ml3rem dpib">偏低&nbsp □ </li>
+					</ul>
+			    </div>
+			</div>
+			<div class="pt2rem bdbb"></div>
+			<div class="pt2rem bdbb"></div>
+			<div class="fs20 mb60 pt1rem"><span>医生（技师）______________日期_____________</span></div>
+		</div>		
  
  </div> 
 </ion-scroll>
-
- <div class="list card card_checkreport_1">
-<!-- 	   		<
-
-	<table>
-		<tr>
-			<td class="td-3">
-				科室：{{people.department}}
-			</td>
-			<td class="td-3">
-				病区：{{people.area}}
-			</td>
-			<td class="td-3">
-				床号:{{people.bedNumber}}
-			</td>
-		</tr>
-		<tr>
-		   <td>
-		      住院号/门诊号:{{people.number}}
-		   </td>
-		</tr>
-		<tr>
-			<td class="td-3">
-			     姓名：{{people.name}}
-			</td>
-			<td class="td-3">
-				性别：{{people.sex}}
-			</td>
-			<td class="td-3">
-				年龄:{{people.age}}
-			</td>
-		</tr>
-		<tr>
-		   <td>检查日期:</td>
-		</tr>
-		<tr>
-		   <td>检查结果:</td>
-		</tr>
-
-	</table>
-	<table>
-		<tr>
-			<td class=" td-5 tdcolor-1">Etco2</td>
-			<td class=" td-5 tdcolor-1">检查时间</td>
-		</tr>
-		<tr>
-			<td class="td-3 tdcolor-4">110</td>
-			<td class="td-3 tdcolor-5">cscscssccsss</td>
-		</tr>
-		<tr>
-			<td class="td-3 tdcolor-4">110</td>
-			<td class="td-3 tdcolor-5">cscscssccsss</td>
-		</tr>
-		<tr>
-			<td class="td-3 tdcolor-4">110</td>
-			<td class="td-3 tdcolor-5">cscscssccsss</td>
-		</tr>
-		<tr>
-			<td>反应曲线图</td>
-		</tr>
-		<tr>
-			<td>
-				<img src="img/spo.png" alt="">
-			</td>
-		</tr>
-
-	</table>
-
- </div>
- <div class=" card_checkreport_1 ">
-	  <table >
-		<tr>
-			<td class="td-5">检查人员</td>
-			<td class="td-5">日期</td>
-		</tr>
-	  </table>
- </div> -->

@@ -3,96 +3,86 @@
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="js/jquery.charfirst.pinyin.js"></script>
 <script type="text/javascript" src="js/sort.js"></script> -->
-	       <!-- 头部 -->
-	<header class="fixed">
-		
-		<div class="header box-vm ">
-		   <div class="w">
-             <span class="vm ml10"  ng-click="logOut()">退出</span>
-           </div>
-           <div class="flex td fb fs20">
-              <h2>患者列表</h2>
-           </div>
-			 <div class="w" >
-             <span class="vm mr10">&nbsp&nbsp</span>
-           </div>
+<!-- 头部 -->
+<header class="fixed">
+	<div class="header box-vm ">
+		<div class="w">
+			<span class="vm ml10"  ng-click="logOut()">退出</span>
 		</div>
-		<div class="header_2">
-			<div class="shift">
-		        <select ng-model="myOrderBy" >
-	               <option  value="+bedNumber" >按床位升序</option>
-	               <option  value="-bedNumber" >按床位降序</option>
-	            </select>
-			</div>
-			<div class="select">
-                <select ng-model="nameFilter.beInHospital" ng-init="nameFilter.beInHospital='true'">
-	                <option value="true">住院中</option>
-	                <option value="e" >全部</option>
-	                <option value="outpatient">门诊</option>
-	                <option value="false">已出院</option>
-	            </select>				
-			</div>
-			<div class="search">
-				<input class="noneinput txt_search" type="text"  ng-model="nameFilter.name" >
-			</div>
-			<div class="icon_index">
-				<i class="icon ion-ios-search-strong "></i>
-			</div>
-			<div class="icon_index">
-				<i ng-click="toAddPerson()" class="ion-ios-plus-outline " ></i>
-			</div>
-		
+		<div class="flex td fb fs20">
+			<h3>成员列表</h3>
 		</div>
-
-
-	</header>
-        <!-- 容器 -->
-<ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll scroll-view_index">
- <div class="scroll " style="transform: translate3d(0px, 0px, 0px) scale(1);">
-     
-       <!-- 病人 -->
-    
- <div class="sort_box"> 
-   <div class="sort_list" ng-repeat="people in peoples  | orderBy:myOrderBy |  filter: nameFilter  track by $index 
-     " > 
-   	  <div class="row row_index " id="people.name" ng-click = "toThePerson(people)">
-   	  	<div class="col col-10">
-   	  	<a class=" ion-android-checkbox-outline-blank if_{{people.beInHospital}}"   ></a>
-   	  	</div>
-   	  	<div class="col col-10 col_center"><img ng-src="img/{{people.number}}.png" ></div>
-   	  	<div class="col col-33">{{people.name}}</div>
-   	  	<div class="col col-10">{{people.sex}}</div>
-   	  	<div class="col col-10">{{people.address}}</div>
-   	  	<div class="col col-20 is_{{people.beInHospital}}">{{people.bedNumber}}床</div>
-   	  </div>
-   </div>
- </div>
-
-
- </div>
+		<div class="w" >
+			<span class="vm mr10">&nbsp&nbsp</span>
+		</div>
+	</div>
+	<div class="header_2">
+		<div class="shift">
+			<select ng-model="myOrderBy" >
+				<option  value="+bedNumber" >按序号升序</option>
+				<option  value="-bedNumber" >按序号降序</option>
+			</select>
+		</div>
+		<div class="select">
+			<select ng-model="nameFilter.beInHospital" ng-init="nameFilter.beInHospital='true'">
+				<option value="true">住院中</option>
+				<option value="e" >全部</option>
+				<option value="outpatient">门诊</option>
+				<option value="false">已出院</option>
+			</select>				
+		</div>
+		<div class="search">
+			<input class="noneinput txt_search" type="text"  ng-model="nameFilter.name" >
+		</div>
+		<div class="icon_index">
+			<i class="icon ion-ios-search-strong "></i>
+		</div>
+		<div class="icon_index">
+			<i ng-click="toAddPerson()" class="ion-ios-plus-outline " ></i>
+		</div>
+	</div>
+</header>
+<!-- 容器 -->
+<ion-scroll zooming="true" direction="y" style="width:100% ; height: 75%";class="scroll-view ionic-scroll scroll-view_index">
+	<div class="scroll " style="transform: translate3d(0px, 0px, 0px) scale(1);">
+	<!-- 病人 -->
+		<div class="sort_box"> 
+			<div class="sort_list" ng-repeat="people in peoples  | orderBy:myOrderBy |  filter: nameFilter  track by $index 
+			" > 
+			<div class="row row_index " id="people.name" ng-click = "toThePerson(people)">
+				<div class="col col-10">
+					<a class=" ion-android-checkbox-outline-blank if_{{people.beInHospital}}"   ></a>
+				</div>
+				<div class="col col-10 col_center" >
+					<div class="col_inside" style="background-image: url(img/{{people.number}}.png)"></div>
+				</div>
+				<div class="col col-33">{{people.name}}</div>
+				<div class="col col-10">{{people.sex}}</div>
+				<div class="col col-10">{{people.address}}</div>
+				<div class="col col-20 is_{{people.beInHospital}}">{{people.bedNumber}}号</div>
+			</div>
+			</div>
+		</div>
+	</div>
 </ion-scroll>
 
+<!-- <div class="initials">
+	<ul>
+		<li ng-repeat="letter in letters" ng-style="lettersStyle" ng-click="lettersClick(letter)" class="color_{{isClick}}"  id="{{letter}}">
+			<p ng-bind="letter">  </p>
+		</li>
+	</ul>
+</div> -->
 
-
-	<div class="initials">
-		<ul>
-			<li ng-repeat="letter in letters" ng-style="lettersStyle" ng-click="lettersClick(letter)" class="color_{{isClick}}"  id="{{letter}}">
-				<p ng-bind="letter">  </p>
-			</li>
-		</ul>
-	</div>
-    <div class="letteronclick_{{isShow}}">
-    	<p > {{letter_onclick}} </p>
-    </div>
-
+<div class="letteronclick_{{isShow}}">
+	<p > {{letter_onclick}} </p>
+</div>
 
 <div class="bar bar-footer">
- <table>
- 	<tr>
- 		<td class="footer_td5"><button class="button btn_footer button-positive" ng-click="sannerCR()">扫描输入</button></td>
- 		<td class="footer_td5"><button class="button btn_footer button-positive" ng-click="toCheck()">快速检测</button></td>
- 	</tr>
- </table>
-  
-  
+	<table>
+		<tr>
+			<td class="footer_td5"><button class="button btn_footer button-outline button-calm" ng-click="sannerCR()">扫描输入</button></td>
+			<td class="footer_td5"><button class="button btn_footer button-outline button-calm" ng-click="toCheck()">快速检测</button></td>
+		</tr>
+	</table>
 </div>

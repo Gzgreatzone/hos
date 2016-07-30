@@ -19,14 +19,14 @@
 		<div class="header box-vm ">
 		  <div class="w" ng-click="back()">
 	        <img src="img/back1.png" class="vm">
-	        <span class="vm ml10">返回</span>
+	        <span class="vm ml10"><a>返回</a></span>
 	      </div>
            <div class="flex td fb fs20">
               {{people.name}}
            </div>
-			 <div class="w" ng-click="next()" >
-             <span class="vm mr10">下一步</span>
-           </div>
+         <div class="w"  ng-click="next()" >
+               <span class="vm mr10"><a>下一步</a></span>
+         </div>
 		</div>
 
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
@@ -40,36 +40,71 @@
   				<label ><i  class="ion-ios-circle-outline "></i><input type="radio" name="group" ng-model = "report" ng-value = "val" > {{key}}</label>
   			 </div>
           <div class="mt50 pt10 ml20 dpn" id="dateSelect">
-            <div>
-              <label for="" class="item item-input">
-                <span>开始日期</span>
-                <input class="dpib" type="date" ng-model ="dt1">
-              </label>
-              <label for="" class="item item-input">
-                <span>开始具体时间</span>
-                <input class="dpib" ng-model ="dt1" type="time">
-              </label>
-            </div>
-            <div class="mt5">
-              <label for=""  class="item item-input" >
-                <span>结束日期</span>
-                <input class="dpib" type="date" ng-value="dt2"  ng-model="dt2 | date:'yyyy-MM-dd'" ng-change="checkTime()">
-              </label>
-              <label for=""  class="item item-input">
-                <span>结束具体时间</span>
-                <input class="dpib" type="time" ng-model = "dt2">
-              </label>
-            </div>
-            <div>
-              <input type="text" datetime="yyyy-MM-dd HH:mm:ss" ng-model="dt2">
-            </div>
             
+            <form name="myForm" >
+               <label for="exampleInput" class="item item-input">
+               <span>开始日期</span>
+               <input type="date" ng-change="checkTime()" id="exampleInput" name="input_begin" ng-model="theDate.begin"
+                   placeholder="yyyy-MM-dd"  required />
+                <span>{{theDate.begin | date: "HH:mm:ss"}}</span>
+               </label>
+               <label for="exampleInput_2" class="item item-input">
+                  <span>结束日期</span>
+                  <input type="date" ng-change="checkTime()" id="exampleInput_2" name="input_end" ng-model="theDate.end"
+                   placeholder=" yyyy-MM-dd"  required /> 
+                   <span>{{theDate.end | date: "HH:mm:ss"}}</span>
+               </label>
+                 <span class="error" ng-show="myForm.input_begin.$error.required || myForm.input_end.$error.required ">
+                     Required!</span>
+                 <span class="error" ng-show="myForm.input_begin.$error.date || myForm.input_end.$error.date ">
+                     Not a valid date!</span>
+            </form>
           </div>
+          
 		   </form>
-            
+       
 		</div>
 
 	</div>
+  <div class="list card card_checkreport_1 pb10"> 
+       <!-- 专门给Co2 -->
+          <div  ng-switch="reportName">
+              <div ng-switch-when="二氧化碳测量报告">
+                    <!-- <table>
+                        <caption>请输入血气分析结果</caption>
+                        <tr>
+                           <td class="td-1" >时间</td>
+                           <td class="td-1"  >PH</td>
+                           <td  class="td-1" >PaCO2(mmHg)</td>
+                           <td  class="td-1" >PaO2(mmHg)</td>
+                           <td  class="td-1" ></td>
+                        </tr>
+                        <tr ng-repeat="(key,val) in co2AddList track by $index">
+                            <td><input ng-change="watchSet(key,val,'time')" ng-model="val['time']" type="datetime-local"></td>
+                            <td ><input ng-change="watchSet(key,val,'PH')" ng-model="val['PH']" type="number"></td>
+                            <td><input ng-change="watchSet(key,val,'PaCO2')" ng-model="val['PaCO2']" type="number"></td>
+                            <td ><input ng-change="watchSet(key,val,'PaO2')" ng-model="val['PaO2']" type="number"></td>
+                            <td ><button class="button button-assertive" ng-click="co2Add.del(key)">删除</button></td>
+                        </tr>
+                    </table> -->
+                    <div class="row">
+                      <div class="col">时间</div>
+                      <div class="col">PH</div>
+                      <div class="col">PaCO2(mmHg)</div>
+                      <div class="col">PaO2(mmHg)</div>
+                      <div class="col"></div>
+                    </div>
+                    <div class="row" ng-repeat="(key,val) in co2AddList track by $index">
+                        <div class="col timeInputHide"><input class="" ng-change="watchSet(key,val,'time')" ng-model="val['time']" type="datetime-local"></div>
+                        <div class="col"><input ng-change="watchSet(key,val,'PH')" ng-model="val['PH']" type="number"></div>
+                        <div class="col"><input ng-change="watchSet(key,val,'PaCO2')" ng-model="val['PaCO2']" type="number"></div>
+                        <div class="col"><input ng-change="watchSet(key,val,'PaO2')" ng-model="val['PaO2']" type="number"></div>
+                        <div class="col"><button class="button button-assertive" ng-click="co2Add.del(key)">删除</button></div>
+                    </div>
+                   <button class="button button-positive" ng-click="co2Add.add()">添加</button>
+              </div>
+          </div> 
+  </div>
  </div> 
 </ion-scroll>
 <div class="bar bar-footer">
@@ -77,7 +112,7 @@
 		<li class = "box-c fs20 pt2" ng-click="back()">
 		   取消
 		</li>
-		<li class="box-c fs20 pt2" ng-click="next()">
+		<li class="box-c fs20 pt2" ng-disabled = "canNotBeNext" ng-click="next()">
 			确定
 		</li>
 	</ul>

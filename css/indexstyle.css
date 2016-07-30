@@ -17,27 +17,30 @@ header{
     text-align: center;
     background: #f2f0f1;
     border-bottom: 1px solid #e6e6e6;
-    height: 3rem;
-    padding: 0 1rem;
+    height: 2.5rem;
+    padding: 0px 0.25rem;
     box-sizing: border-box;
 }
 .header h2{
     padding-top: 1%;
 }
 .header_2{
-    display: box !important; display: -webkit-box !important; width: 100%; -webkit-box-align: center;   
-    padding: 0 2rem 0 3rem;
+    display: box !important;
+    display: -webkit-box !important;
+    width: 100%;
+    -webkit-box-align: center;
+    padding: 0 0.25rem 0 0.25rem;
     box-sizing: border-box;
-    height: 4rem;
+    height: 2rem;
     border-bottom: 1px solid #e6e6e6;
 }
 .shift{
     background: url(/web/hos/img/sort.png) no-repeat right center;padding-right: 1.5rem;
 }
 .select{
-    margin-left: 2.5rem;
+    margin-left: 0.5rem;
     background: url(/web/hos/img/sort.png) no-repeat right center;
-    padding-right: 1.5rem;
+    padding-right: 1rem;
 }
 .fixed input{
     border-right: #000000 0px solid;
@@ -112,16 +115,30 @@ outline:0;
     float: left;
     margin:25px 0px 0px 25px;
 }
+.pic{
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin:25px 0px 0px 25px;
+}
+.pic background-image{
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin:25px 0px 0px 25px;
+}
 .sort_box{
+    
     width: 100%;
     padding-top: 1%;
     overflow: hidden;
 }
 .sort_list{
+    font-size: 80%;
     position: relative;
     height: 10%;
     border-bottom: 1px solid #ddd;
-    width: 90%;
+    width: 95%;
     margin: auto;
     
 }
@@ -199,7 +216,6 @@ width: 11px;
   text-overflow: clip;
   height: 22px;
   }
-
 .header tr{width: 100%;}
 .header table{width: 100%;}
 .col-10 a{
@@ -211,13 +227,20 @@ width: 11px;
     max-width: 20px;
 
 }
-.col-10 img{
+.col_center{
+    background: center/cover no-repeat;
+    background-size: contain;
     width: 30px;
     height: 30px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
+    background-image: url(unset.jpg);
 }
+.col_inside{
+     background: center/cover no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+}
+
 .mylabel{
     padding: 0px;
 }

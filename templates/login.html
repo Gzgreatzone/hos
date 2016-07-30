@@ -1,11 +1,13 @@
  
           <!--   表单 -->
+<div class="login_all">
     <div class="loginmain">
       <h1>{{systemSet.h_name}}医院</h1>
       <h2>{{systemSet.ad_name}}</h2>
       <h2>{{systemSet.address}}</h2>
       <h3 class="title_chafan">KF580查房工具包</h3>
     </div>
+
     <form class="login_from" name = "login_form" novalidate>
         <div class="list list-inset">
           <label class="item item-input">
@@ -16,11 +18,15 @@
           </label>
         </div>
     </form>
+</div>
     <form class="login_from login_submit">
-      <button class="button button-positive login_button " ng-click="toIndex()" ng-disabled = "login_form.user.$dirty && login_form.user.$invalid || login_form.pw.$dirty && login_form.pw.$invalid">
+      <button class="button  button-outline button-calm login_button " ng-click="toIndex()" ng-disabled = "login_form.user.$dirty && login_form.user.$invalid || login_form.pw.$dirty && login_form.pw.$invalid">
          登陆
       </button>
-      <button class="button button-positive login_button" ng-click="toSetting()">
+      <button class="button button-outline button-calm login_button" ng-click="toSetting()">
          系统设置
       </button>
+      <!--  <button class="button button-outline button-positive login_button" onclick="window.location.href='http://192.168.1.232/apitest'">
+         检查
+      </button> -->
     </form>
