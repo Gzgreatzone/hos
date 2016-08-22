@@ -10,29 +10,29 @@
 		<span class="vm mr10">&nbsp&nbsp</span>
 	</div>
 </div>
-<div class="list card_setting">
+<div class="list card_setting info_setting">
 	<label class="item item-input item-input_setting">
-		<span class="input-label col-10">名称</span>
-		<input type="text" placeholder="医院名称" ng-disabled="isDisabled" ng-model="systemSet.h_name">
+		<span class="input-label info_span col-10">名称</span>
+		<input type="text" class="info_input"  ng-disabled="isDisabled" ng-model="systemSet.h_name">
 	</label>
 	<label class="item item-input item-input_setting">
-		<span class="input-label col-10">版本名</span>
-		<input type="text" placeholder="科室名" ng-disabled="isDisabled" ng-model="systemSet.ad_name">
+		<span class="input-label info_span col-10">科室</span>
+		<input type="text" class="info_input"  ng-disabled="isDisabled" ng-model="systemSet.ad_name">
 	</label>
 	<label class="item item-input item-input_setting">
-		<span class="input-label col-10">地区</span>
-		<input type="text" placeholder="地区" ng-disabled="isDisabled" ng-model="systemSet.area">
+		<span class="input-label info_span col-10">病区</span>
+		<input type="text" class="info_input"  ng-disabled="isDisabled" ng-model="systemSet.area">
 	</label>
 	<label class="item item-input item-input_setting">
-		<span class="input-label col-10">地址</span>
-		<input type="text" placeholder="地址" ng-disabled="isDisabled" ng-model="systemSet.address">
+		<span class="input-label info_span col-10">地址</span>
+		<input type="text" class="info_input"  ng-disabled="isDisabled" ng-model="systemSet.address">
 	</label>
 	<label class="item item-input item-input_setting">
-		<span class="input-label col-10">电话</span>
-		<input type="text" placeholder="电话" ng-disabled="isDisabled" ng-model="systemSet.telephone">
+		<span class="input-label info_span col-10">电话</span>
+		<input type="text" class="info_input"  ng-disabled="isDisabled" ng-model="systemSet.telephone">
 	</label>
 	<div class="row">
-		<div class="col"><button class="button button-positive" ng-click="toEditor()">编辑</button></div>
-		<div class="col"><button class="button button-positive" ng-click="save()">保存</button></div>
+		<div class="col"><button class="button button-positive cg" ng-click="toChange()" ng-init="setting='编辑'"><!-- 编辑 -->{{setting}}</button></div>
+		<!-- <div class="col"><button class="button button-positive cgg" ng-click="save()">保存</button></div> -->
 	</div>
 </div>

@@ -1,6 +1,7 @@
+
 'use strict';
 angular.module('chafangbao.filters')
-.filter('min', function () {
+.filter('min', function () {                    //最小值过滤器
   return function (input) {
     //console.log(input);
     var out;
@@ -17,7 +18,7 @@ angular.module('chafangbao.filters')
 
 
 angular.module('chafangbao.filters')
-.filter('avg', function () {
+.filter('avg', function () {                  //平均值过滤器
   return function (input) {
     var out;
     var sum = 0;
@@ -32,7 +33,7 @@ angular.module('chafangbao.filters')
 });
 
 angular.module('chafangbao.filters')
-.filter('max', function () {
+.filter('max', function () {                //最大值
   return function (input) {
     var out;
     if (input) {
@@ -428,6 +429,22 @@ angular.module('chafangbao.filters')
   };
 });
 
+'use strict';
+angular.module('chafangbao.filters')
+.filter('maxforco2', function () {
+  return function (input) {
+    var out;
+    if (input) {
+      //console.log(input);
+      for (i = 1;i < input.length;i++) {
+        if (input[i] > out || out === undefined || out === null) {
+          out = input[i];
+        }
+      }
+    }
+    return out;
+  };
+});
 
 
 //这个是状态过滤器

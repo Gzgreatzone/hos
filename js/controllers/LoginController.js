@@ -1,11 +1,14 @@
 'use strict';
 angular.module('chafangbao.controllers')
-.controller('LoginController', function($scope,$rootScope,$timeout, $ionicLoading,$window,$http,locals,$ionicPopup) {
+.controller('LoginController', function($scope,$rootScope,$timeout, $ionicLoading,$window,$http,$ionicPopup) {
+
+//初始化定义
 
 	var systemSet = Android.getcfg("systemSet");
 	var password = Android.getcfg("passWord");
 	var username = Android.getcfg("userName");
 
+	//看本地有没有，否则去拿
 	if (systemSet) {
 		$scope.systemSet = JSON.parse(systemSet);
 		$scope.username = username;
@@ -16,12 +19,14 @@ angular.module('chafangbao.controllers')
 			$scope.systemSet = response;
 		});
 	}else {
-		var str = Android.getURL('/web/hos/json/systemsetting.json');
+		var str = Android.getURL(window.rootPath+'json/systemsetting.json');
 		$scope.systemSet = JSON.parse(str);
 	}
 	$scope.toSetting = function () {
 		$window.location.href = '#/setting';
 	};
+
+//跳转
 
 	$scope.toIndex = function(){   
 	//判断登陆逻辑

@@ -1,19 +1,19 @@
 <div class="header box-vm">
-	<div class="ww" ng-click="back()">
-		<img src="img/back1.png" class="vm">
+	<div class="ww" ng-click="isDeviceAble || back()">
+		<img src="img/back1.png" class="vm"> 
 		<span class="vm ml10"><a>返回</a></span>
 	</div>
-	<div class="flex td fb fs20">
-		{{people.name}}
+	<div class="flex td fb fs20" ng-bind ="people.name" >
+		<!-- {{people.name}} -->
 	</div>
 	
-	<div class="ww tr" ng-click="sannerCR()">
+	<div class="ww tr" ng-click="isDeviceAble || sannerCR()">
 		<a>扫描二维码</a>
 	</div>
 </div>
-<div ng-show="deviceMsg.show" class="fl stateMsg"><span>{{deviceMsg.content}}</span></div>
-<div class="fl"><button ng-click = "exit()" class="button button-clam">强制退出仪器</button></div>
-<div class="fl"><a href="../hos/test/index.html">跳跳糖</a></div>
+<!-- <div  class="fl stateMsg"><span>{{deviceOutMsg}}</span></div> -->
+<div class="fr"><button ng-click = "exit()" class="button button-clam">强制退出仪器</button></div>
+<!-- <div class="fl"><a href="../hos/test/index.html">跳跳</a></div> -->
 
 <!-- 头部标题 -->
 <!--    <div class="bar bar-header bar-light">
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="page_container_bottom">
+			<div class="page_container_bottom" >
 				<div class="page_content">
 					<!-- <div class="index_block" ng-repeat="pre in device track by $index" ng-click="manage_index.Monitor.on(pre)">
 						<p style="background-image:url({{pre.deviceImg}})"></p>
@@ -60,7 +60,7 @@
 					ng-if="!pre.hidden"
 					 ng-repeat="pre in device track by $index" 
 					 ng-class="{ '{{pre.deviceId}}':'show_Current_index'}[chosenDevice]" 
-					 ng-click="manage_index.Monitor.on(pre);manage_index.showResArr();">
+					 ng-click="isServiceable || isDeviceAble || manage_index.Monitor.on(pre);manage_index.showResArr();">
 						<p style="background-image:url({{pre.deviceImg}})"></p>
 					</div>
 					
@@ -73,9 +73,9 @@
 <div class="bar bar-footer">
 	<table>
 		<tr>
-			<td class="footer_td3"><button class="button button-outline button-calm btn_footer" ng-disabled="ischarge" ng-click="toAddperson()" >管理</button></td>
-			<td class="footer_td3"> <button class="button button-outline button-calm btn_footer " ng-disabled="isreport" ng-click="toReport()">报告</button></td>
-			<td class="footer_td3"><button class="button button-outline button-calm btn_footer" ng-click="toCheckSet()">设置</button></td>
+			<td class="footer_td3"><button class="button button-outline button-calm btn_footer" ng-disabled="ischarge" ng-click="isDeviceAble || toAddperson()" >管理</button></td>
+			<td class="footer_td3"> <button class="button button-outline button-calm btn_footer " ng-disabled="isreport" ng-click="isDeviceAble || toReport()">报告</button></td>
+			<td class="footer_td3"><button class="button button-outline button-calm btn_footer" ng-click="isDeviceAble || toCheckSet()">设置</button></td>
 		</tr>
 	</table>
 </div>

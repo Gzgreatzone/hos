@@ -1,5 +1,17 @@
-﻿<!-- 模板 Loading -->
-<style>
-	.loading-container {right: 240px;display: -webkit-box;}
+﻿<style>
+	.modal-backdrop-bg {
+		opacity: 0 !important;
+	}
+	#modal_show_index .scroll {
+		height: 100%;
+	}
 </style>
-<div id="modal_loading" ng-bind-html="Fn.tips.arr['txt']"></div>
+<div id="modal_show_index" class="modal">
+	<ion-content overflow-scroll="false">
+		<div class="indexMonitor" ng-if="Monitor_on">
+			<p><span class="title calm">{{txt_activeDevice}}<br>{{deviceMsg.content}}</span></p>
+			<p><b style="background-image:url({{activeDevice.deviceImg}})"></b></p>
+			<p><span class="close_btn button button-outline button-calm" ng-click="manage_index.Modal.exit();">退出</span></p>
+		</div>
+	</ion-content>
+</div>

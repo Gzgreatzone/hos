@@ -5,7 +5,7 @@
 .item ,.button{font-size: 1vw;} */
 * { margin: 0; padding: 0; }
 header, footer, section { display: block; }
-html, body { font-family: '微软雅黑', '宋体'; font-size: 100%; width: 100%; background: #fff; height: 100%; color: #3c3c3c; }
+html, body { font-family: '微软雅黑', '宋体'; font-size: 14px; width: 100%; background: #fff; height: 100%; color: #3c3c3c; }
 ul, li, ol { list-style: none; }
 i, em, b { font-style: normal; }
 mg, select, input { border: none; -webkit-appearance: none; }
@@ -47,6 +47,7 @@ input::-webkit-input-placeholder {color: #323232;}
 .lh20 { line-height: 1.25rem; }
 .box-s { box-sizing: border-box !important; }
 .bd-none { border: none !important; }
+.m50 {margin: 1rem !important;} /*新增*/
 .ml-zero { margin-left: 0 !important; }
 .ml5 { margin-left: 0.3125rem; }
 .ml10 { margin-left: 0.025rem; }   /*改*/
@@ -89,7 +90,7 @@ input::-webkit-input-placeholder {color: #323232;}
 .fs14 { font-size: 14px !important; overflow: hidden; }
 .fs16 { font-size: 0.5rem !important; }
 .fs18 { font-size: 15px !important; }
-.fs20 { font-size: 0.75rem !important; }  /* 改*/
+.fs20 { font-size: 1rem !important; }  /* 改*/
 .fs25 {font-size: 1.5rem !important; }
 .fs30 { font-size: 1rem !important; }    /* 改*/
 .fb { font-weight: bold; }
@@ -108,8 +109,23 @@ input::-webkit-input-placeholder {color: #323232;}
 .dblock { display: block; }
 .dpn {display: none;}
 .dpib{display: inline-block;}
+.row{
+	font-size: 1rem;
+	text-align: center;
+}
 a, input, img, select { outline: none; }
 textarea { resize: none; outline: none; }
+input[type="number"]{  /*新增*/
+    display: block;
+    padding-top: 0;
+    padding-left: 0;
+    height: 2rem;
+    color: #111;
+    vertical-align: middle;
+    font-size: 1rem;
+    line-height: 2rem;
+}
+select{font-size: 1.15rem;}
 .txt_search { width: 95%; margin-left: 25px; border-bottom: 1px solid #ccc; border-radius: 5px; height: 25px; text-indent: 15px; font-size: 0.875rem !important; margin-right: 1rem; }
 .div_count { background: #F23366; border-radius: 20px; width: 20px; height: 20px; color: white; text-align: center; line-height:20px;}
 .div_count_black { background: #C3C3C3; border-radius: 20px; width: 20px; height: 20px; color: white; text-align: center; line-height: 20px; }
@@ -381,8 +397,12 @@ header{
     padding: 0px 0.25rem;
     box-sizing: border-box;
 }
-.header h2{
-    padding-top: 1%;
+.header h2 {
+/*    padding-top: 1%;
+*/    margin: 0;
+    padding: 0 !important;
+    font-size: 1.2rem;
+    vertical-align: middle;
 }
 
 .header .w {
@@ -904,7 +924,7 @@ height: 100px;
 
  .bar .button, .bar button{
 	
-	font-size: 2.5vw;
+	font-size: 1.1rem;
 }
 .footer_td5 .button, .footer_td3 button{
 	 /*line-height: 50px !important; */

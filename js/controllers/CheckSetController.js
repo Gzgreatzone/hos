@@ -1,8 +1,8 @@
 'use strict';
 angular.module('chafangbao.controllers')
-.controller('CheckSetController', function($scope,$timeout,$http, $ionicLoading,$ionicHistory,$window,$ionicPopup,ThePerson,locals,$cacheFactory,$ionicModal,$rootScope) {
+.controller('CheckSetController', function($scope,$timeout,$http, $ionicLoading,$ionicHistory,$window,$ionicPopup,ThePerson,$cacheFactory,$ionicModal,$rootScope) {
 
-	//初始化
+//初始化
 	$scope.people = ThePerson.get();
 	var setting = Android.getcfg("setting");
 	if(setting) {
@@ -13,11 +13,11 @@ angular.module('chafangbao.controllers')
 			$scope.setting = response;
 		});
 	} else {
-		var str = Android.getURL('/web/hos/json/base.json');
+		var str = Android.getURL(window.rootPath+'/json/base.json');
 		//$scope.$apply($scope.setting , function(){console.log($scope.setting)})
 		$scope.setting = JSON.parse(str);
 	}
-	//结束
+//路由配置
 	$scope.back = function(){
 		//复原没有保存的数据（修改但是没有保存）跳回时候如果不点击保存时不会保存的
 		if(setting){
@@ -28,6 +28,7 @@ angular.module('chafangbao.controllers')
 			window.history.go(-1);
 		}
 	}	
+
 
 	$scope.settingList = [
 		"血氧测量设置",
@@ -57,7 +58,7 @@ angular.module('chafangbao.controllers')
 		}, 1000);
 	}
 
-	/*基本值设定*/
+/*基本值设定*/
 	$scope.toggle = function(val){
 		$(document).ready(function(){
 			$("."+val).toggle(500);
@@ -68,48 +69,32 @@ angular.module('chafangbao.controllers')
 	$scope.clear = function(num){
 		if (debug) {
 			$http.get('json/base.json').success(function(response){
-				$scope.setting[num] = response[num];   //还原被复原的一块
+				$scope.setting[num] = response[num];   						//还原被复原的一块
 				var str = JSON.stringify($scope.setting);
 				Android.setcfg("setting",str);
-				// $scope.openModal();
-				// $timeout(function() {
-				// 	$scope.closeModal();
-				// }, 1000);   
 			});
 		} else {
-			var str = Android.getURL('/web/hos/json/base.json');
+			var str = Android.getURL(window.rootPath + '/json/base.json');
 			var response = JSON.parse(str);
-			$scope.setting[num] = response[num];   //还原被复原的一块
+			$scope.setting[num] = response[num];   							//还原被复原的一块
 			var str = JSON.stringify($scope.setting);
-			Android.setcfg("setting",str);  //保存到本地
-			// $scope.openModal();
-			// $timeout(function() {
-			// 	$scope.closeModal();
-			// }, 1000);
+			Android.setcfg("setting",str);  								//保存到本地
 		} 
 	}
 
 	$scope.reset = function(num){
 		if (debug) {
 			$http.get('json/base.json').success(function(response){
-				$scope.setting[num] = response[num];   //还原被复原的一块
+				$scope.setting[num] = response[num];   						//还原被复原的一块
 				var str = JSON.stringify($scope.setting);
-				Android.setcfg("setting",str);  //保存到本地
-				// $scope.openModal();
-				// $timeout(function() {
-				// 	$scope.closeModal();
-				// }, 1000);   
+				Android.setcfg("setting",str);  							//保存到本地
 			});
 		} else {
-			var str = Android.getURL('/web/hos/json/base.json');
+			var str = Android.getURL(window.rootPath + '/json/base.json');
 			var response = JSON.parse(str);
-			$scope.setting[num] = response[num];   //还原被复原的一块
+			$scope.setting[num] = response[num];   							//还原被复原的一块
 			var str = JSON.stringify($scope.setting);
-			Android.setcfg("setting",str);  //保存到本地
-			// $scope.openModal();
-			// $timeout(function() {
-			// 	$scope.closeModal();
-			// }, 1000);
+			Android.setcfg("setting",str);  								//保存到本地
 		} 
 	}
 	$scope.toClear = function(num){
@@ -124,8 +109,7 @@ angular.module('chafangbao.controllers')
 					text: '<b>确定</b>',
 					type: 'button-calm',
 					onTap:function(e) {
-						//$scope.clear(num);
-						$scope.openModal();
+						$scope.openModal();									//打开模板
 					}
 				},
 			] ,
@@ -151,14 +135,7 @@ angular.module('chafangbao.controllers')
 		})
 	}
 
-	$scope.ready = function(){    //动画
-		$scope.isShow = 'show';
-		$timeout(function () {
-			$scope.isShow = 'unshow';
-		}, 1500);
-	}
-
-	//初始化
+//初始化
 	$scope.saveSet = function(){
 		var str  = JSON.stringify($scope.setting);
 		console.log($scope.setting[0]);
@@ -169,9 +146,7 @@ angular.module('chafangbao.controllers')
 			title	: "保存成功"
 		})
 	}
-	//为了适配PC调试和安卓真实环境
-	if(!window.rootPath)
-			window.rootPath = '/web/hos/';
+//模块定义	
 	if(debug)
 	{
 		//当运行环境是PC时,使用http协议,模板是通过get请求获取的
@@ -199,7 +174,7 @@ angular.module('chafangbao.controllers')
 				$scope.inforText = "操作成功";
 				$scope.exitText = "退出"
 				$scope.exitBoole = false;
-		}, 15000);
+		}, 10000);
 		
 	};
 	$scope.closeModal = function () {
@@ -207,6 +182,11 @@ angular.module('chafangbao.controllers')
 	};
 	$scope.setModel = function (val) {
 		$rootScope.co2CheckModel = val;
+		if (val == "监测模式") {
+			$ionicPopup.alert({
+			title	: "如果需要请进行报警设置"
+			})
+		}
 	}
 	$scope.watchSet =function(num,key,key1,val1){  
 		//监视修改值，若有修改，马上与setting绑定

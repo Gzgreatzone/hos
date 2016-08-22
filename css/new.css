@@ -1,0 +1,438 @@
+.mybutton{
+	padding: 0 !important;
+	width: 10vw;
+}
+.item-icon-right .icon {
+    right: 5px;
+}
+.item-icon-right .icon {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    font-size: 20px;
+}
+.out{
+	font-size: 16px;
+}
+.sure{
+	color: #11c1f3;
+	background-color: white;
+	border: 1px solid #11c1f3 !important;
+	border-radius: 3px;
+}
+/*.cancel{
+	color: #11c1f3;
+	background-color: white;
+	border: 1px solid #11c1f3 !important;
+}*/
+.cancel {
+    color: #000000;
+    background-color: #E9E9E9;
+    border: 1px solid #E9E9E9 !important;
+    border-radius: 3px;
+}
+.ff202{
+	margin: auto;
+	width: 6rem;
+	border: 0;
+}
+.myinput-label {
+    padding: 7px 10px;
+    color: #FFF;
+    background-color: #11c1f3;
+    border-radius: 3px;
+}
+.card_setting {
+    padding-top: 37%;
+    text-align: center;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+    width: 60%;
+    margin-left: 20%;
+}
+.item_setting {
+    background-color: #11c1f3;
+    color: #fff !important;
+    margin-bottom: 5%;
+    border-top-right-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+    padding: 14px;
+    font-size: 1rem;
+}
+.standard {
+    width: 90%;
+    margin: auto;
+}
+.cg {
+    background-color: #fff !important;
+    margin-top: 3rem;
+    color: #fff !important;
+    width: 25%;
+    border: 1px solid #11c1f3 !important;
+	border-radius: 3px;
+}
+.cgg{
+    background-color: #11C1F3 !important;
+    margin-top: 3rem;
+    width: 50%;
+}
+.item-radio input:checked + .radio-content .item-content {
+    background: #11c1f3;
+    color: white;
+}
+.item-radio {
+    padding: 0;
+    margin-bottom: 20px;
+    border: 2px solid #11C1F3 !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+}
+.radio-icon{
+	color: white;
+}
+.item-content {
+    color: #11C1F3;
+}
+.info_setting{
+    width: 90%;
+    left: 5%;
+    margin: 0;
+    padding-top: 20%;
+}
+.info_span {
+    width: 30% !important;
+    max-width: 200px;
+    background-color: #11C1F3;
+    color: white;
+}
+.info_input{
+    background-color: white !important;
+}
+/*病人信息录入页面部分*/
+.new_add{
+    width: 90%;
+    left: 5%;
+    margin: 0;
+    padding: 0;
+}
+.input-label_addperson {
+    display: table;
+    padding: 7px 4px 7px 0px;
+    max-width: 200px;
+    color: #444;
+    font-size: .9em;
+    width: 8rem;
+    text-align: center;
+    background-color: #11C1F3;
+    color: white;
+    border-radius: 3px;
+}
+.list_addperson input {
+    width: 50%;
+    margin-left: 20%;
+    /*text-align: center;*/
+    background: white;
+    font-size: 16px;
+}
+hr{
+    margin:  0;
+/*    width: 94%;
+    margin-left: 3%;
+    border-color: #96E8FF;
+    background-color: #96E8FF);*/
+}
+.qr_color{
+	background-color: #11C1F3 !important;
+}
+.list_addperson select {
+	margin-left: 20%;
+	font-size: 1rem;
+	background-color: white;
+	color: black;
+}
+.item_addperson {
+    border-style: none;
+    border-bottom: 1px solid #A6EBFF;
+    margin-bottom: 5px;
+}
+.ww {
+    min-width: 4rem !important;
+    width: initial !important;
+    text-align: center;
+    height: 100%;
+    line-height: 3.5rem !important;
+    font-size: 16px !important;
+    margin-left: 0 !important;
+}
+.header{
+	height: 3.5rem !important;
+}
+.button.button-positive {
+    background-color: #11C1F3 !important;
+}
+/*CO2监测模式页面*/
+.item-input_setting {
+    margin-top: 5%;
+    border: 0;
+    border-bottom: 1px solid #ddd;
+    width: 90%;
+    margin-left: 5%;
+}
+.real_data{
+	width: 90%;
+	margin: 10px 0;
+	margin-left: 5%;
+	color: #000;
+}
+.data{
+	display: inline-block;
+	width: 49%;
+	font-size: 1.1rem;
+}
+.real_data div{
+	margin: 2px 0;
+}
+.data a{
+	font-size: .8rem;
+	color: red;
+}
+.timeCount{
+    width: 50%;
+    text-align: center;
+    font-size: 1.5rem;
+}
+.timeButton{
+    width: 30%;
+    margin: 0 10%;
+}
+.warming{
+	width: 90%;
+	margin: 2rem 0;
+	margin-left: 5%;
+	border: 1px solid red;
+	border-top: 0;
+	border-bottom: 0;
+	height: 10rem;
+	overflow: scroll;
+}
+h3{
+	text-align: center;
+	/*position: fixed;*/
+}
+.warming p{
+	margin: 0 .5rem;
+}
+/*二氧化碳检测设置*/
+.c-blue {
+    color: #fff;
+    background-color: #5abefa;
+    text-align: center;
+    padding: .5rem;
+    margin-right: 2rem;
+    border-radius: 3px;
+}
+
+#dateSelect span{
+	margin-right: 16px;
+}
+/*#dateSelect input{
+	padding: 0;
+}*/
+.m50 {
+    margin: 1rem !important;
+    padding-bottom: 10px;
+}
+.t-blue{
+    text-align: left;
+    background-color: white;
+    color: #5ABEFA;
+}
+/*仪表盘*/
+.dashboard{
+    max-width: inherit;
+    width: 50% !important;
+}
+#manage_index .page_container {
+    margin: 0 auto;
+}
+.dashboard_name {
+    position: absolute;
+    font-size: 16px;
+    margin: auto;
+    height: 2em;
+    line-height: 2em;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+}
+#manage_index .index_block {
+    padding: 2px;
+    width: 25%;
+    height: 50%;
+}
+.bar-footer td{
+    text-align: center;
+}
+#manage_index .page_container_top {
+    height: 30%;
+}
+#manage_index .page_container_bottom {
+     top: 0 !important; 
+    height: 55%;
+}
+.input-label {
+    display: table;
+    padding: 7px 10px !important;
+    font-size: 16px;
+}
+/*测试字体适配*/
+input[type="number"] {
+    height: 32px !important;
+    font-size: 16px !important;
+    line-height: 32px !important;
+}
+.p1rem {
+    padding: 12px !important;
+
+}
+.item-input {
+    padding: 6px 16px !important;
+}
+.header h2 ,.header .fs20 {
+    font-size: 1.3rem !important;
+}
+.fs30,select,.item_setting,.col-40 a,.col-20 a{
+    font-size: 16px !important;
+}
+.box-vm .ww a,.header .w a{
+    font-size: 16px;
+}
+.col-10 a,.input-label_addperson,.header_2 select{
+    font-size: 14px !important;
+}
+.footer_td5 button,.footer_td3 button{
+    font-size: 20px !important;
+}
+{
+    font-size: 16px !important;
+}
+.card_checkreport_1 a{
+    font-size: 12px !important;
+    color: red;
+}
+.fs20 {
+    font-size: 16px !important;
+}
+.bar .button, .bar button {
+    font-size: 16px !important;
+    width: 6rem;
+}
+
+.card_checkreport_1 button{
+    min-height: 32px;
+    line-height: 32px;
+}
+.col-40 input,.col-20 input {
+    padding: 0;
+    font-size: 16px;
+    height: 32px !important;
+    text-align: center;
+    vertical-align: text-bottom;
+    /*height: 60px !important;*/
+    border-bottom: 1px solid #a8a8a8;
+    /*border-radius: 3px;*/
+    background-color: white !important;
+}
+.card_checkreport_1 .col-40,.card_checkreport_1 .col-20{
+    padding: 0 2px;
+    margin-bottom: 3px;
+}
+.timeInputHide {
+    max-width: 40% !important;
+}
+.card_checkreport_1 .row {
+    font-size: 16px;
+    text-align: center;
+    /*align-items: center;*/
+}
+.bar-footer table{
+    height: 100%;
+}
+.bar-footer td{
+    vertical-align: middle;
+}
+
+.header .w {
+    width: 4rem;
+    font-size: 16px !important;
+    height: 100%;
+    line-height: 3.5rem !important;
+}
+.header div i{
+    font-size: 24px;
+}
+.header_2 {
+    display: box !important;
+    display: -webkit-box !important;
+    width: 100%;
+    -webkit-box-align: center;
+    padding: 0 1.25rem 0 1.25rem !important;
+    box-sizing: border-box;
+    height: 2.4rem !important;
+
+    border-bottom: 1px solid #e6e6e6;
+}
+.fb {
+    font-weight: 100;
+}
+span{
+    font-size: 16px;
+}
+.dashboard_name b{
+    font-size: 12px;
+}
+/*媒体查询适配*/
+@media (max-width: 700px) and (min-width: 600px) {
+    html{
+        font-size: 24px !important;
+    }
+    .header h2{
+        font-weight: bold;
+    }
+    .fb {
+    font-weight: bold;
+    }
+    .out {
+        font-size: .9rem;
+    }
+    .header div i {
+        font-size: 1.2rem;
+    }
+    .box-vm .ww a, .header .w a {
+        font-size: .9rem;
+    }
+    .header .fontt {
+        font-size: .9rem !important;
+    }
+    span {
+        font-size: .9rem;
+    }
+    .dashboard_name b{
+        font-size: 100%;
+    }
+}
+
+ input[disabled] {
+    cursor: default;
+    background: #c2c2c2;
+}

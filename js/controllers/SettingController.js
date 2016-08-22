@@ -1,22 +1,23 @@
 'use strict';
 angular.module('chafangbao.controllers')
 .controller('SettingController', function($scope,$timeout, $ionicLoading,$ionicHistory,$window,$http,$rootScope,$ionicPopup) {
-	//页面返回
+//页面返回
 	$scope.back = function () {
 		if(systemSet){
 			var str = systemSet;  
-			$scope.systemSet = JSON.parse(str);  //返回时恢复保存时的数据
+			$scope.systemSet = JSON.parse(str);  			//返回时恢复保存时的数据
 			window.history.go(-1);
 		} else{
 			window.history.go(-1);
 		}
 	}
-	//页面跳转
+//页面跳转
 	$scope.toPassword = function(){window.location.href = "#/setting_password";}
 	$scope.toInformation = function(){window.location.href = "#/setting_information";}
 	$scope.toLanguage = function(){window.location.href = "#/setting_language";}
 	$scope.user = {};
-	//编辑按钮的逻辑
+
+//编辑按钮的逻辑
 	$scope.isDisabled = true;
 	$scope.toEditor = function(){
 		$ionicPopup.prompt({
@@ -26,7 +27,10 @@ angular.module('chafangbao.controllers')
 			rootScope : $rootScope,
 			buttons : [{
 					text : "取消",
-					type : "button-default"
+					type : "button-default",
+					onTap : function(){
+						$scope.setting = "编辑";
+					}
 				}, {
 					text : "确认",
 					type : "button-calm",
@@ -47,6 +51,7 @@ angular.module('chafangbao.controllers')
 			]
 		});
 	}
+	//编辑
 	$scope.editor = function(){
 		$scope.isDisabled = false;
 	};
@@ -62,6 +67,16 @@ angular.module('chafangbao.controllers')
 		location.reload();
 		//alert("保存成功，下次登陆生效");
 		//window.href.location = window.href.location;
+	}
+	// 新的编辑保存按钮机制
+	$scope.toChange = function(){
+		if($scope.setting == "编辑"){
+			$scope.setting = "保存";
+			$scope.toEditor()
+		}else{
+			$scope.setting = "编辑";
+			$scope.save()
+		}
 	}
 	
 	//初始化系统设置
@@ -79,11 +94,12 @@ angular.module('chafangbao.controllers')
 		$scope.systemSet = response;
 		});
 	} else {
-		if(!window.rootPath)
-			window.rootPath = '/web/hos/';
+		// if(!window.rootPath)
+			// window.rootPath = '/web/hos/';
 		var str = Android.getURL(window.rootPath + 'json/systemsetting.json');
 		$scope.systemSet = JSON.parse(str);
 	}
+	//判断密码
 	$scope.editPassword = function (){
 		if ($scope.oldPassword == $rootScope.passWord) {   //如果密码正确
 			if ($scope.newPassword_1 == $scope.newPassword_2) {
@@ -97,3 +113,4 @@ angular.module('chafangbao.controllers')
 		}
 	}
 });
+	

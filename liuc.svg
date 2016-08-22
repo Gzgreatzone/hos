@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="560px" height="960px" viewBox="0 0 560 960" enable-background="new 0 0 560 960" xml:space="preserve">
+<text transform="matrix(1 0 0 1 59 51.667)" fill="#FF1D25" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">点击按钮触发：Monitor.on  </text>
+<g>
+	<rect x="210" y="48" width="90" height="4"/>
+	<polygon points="300,43.101 311.045,49.478 300,55.854 	"/>
+</g>
+<text transform="matrix(1 0 0 1 322.333 51.667)" fill="#FF1D25" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">check : 判断是否含有必备条件身高信息</text>
+<line fill="none" x1="439" y1="63" x2="439" y2="94"/>
+<polygon points="428.334,91 439,102.333 451.666,91 443,91 443.666,59 439,59 436.333,91 "/>
+<text transform="matrix(1 0 0 1 333.667 119.6655)" fill="#FF931E" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">checkQueue里面的执行检查（gonext）</text>
+<polygon points="282,108 270.667,118.667 282,131.333 282,122.667 314,123.333 314,118.667 282,116 "/>
+<text transform="matrix(1 0 0 1 255 144.3325)" fill="#FF1D25" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">pair.Modal.open();</text>
+<text transform="matrix(1 0 0 1 270.668 162.333)" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">打开模板</text>
+<polygon points="112.668,169 123.334,180.333 136,169 127.334,169 128,137 123.334,137 120.667,169 "/>
+<text transform="matrix(1 0 0 1 90.9995 119.6665)" fill="#00FF00" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">devices里的调用仪器</text>
+<text transform="matrix(1 0 0 1 36.332 301.3442)" fill="#FF0000" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">再次回来执行checkController里面的回调函数</text>
+<text transform="matrix(1 0 0 1 78.9995 194.999)" fill="#FF1D25" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">开始接收蓝牙消息</text>
+<text transform="matrix(1 0 0 1 78.9995 207.666)"><tspan x="0" y="0" fill="#FF1D25" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">，每一次对应的蓝牙消息都会语言播报，</tspan><tspan x="0" y="14.4" fill="#FF1D25" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">文字提醒，直到出结果那条出现</tspan></text>
+<polygon points="119.668,281 130.334,292.333 143,281 134.334,281 135,249 130.334,249 127.667,281 "/>
+<text transform="matrix(1 0 0 1 112.668 240.9995)" fill="#00FF00" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">缓存数据</text>
+<polygon points="86.668,433 97.334,444.333 110,433 101.334,433 102,401 97.334,401 94.667,433 "/>
+<polygon points="164.668,424 175.334,435.333 188,424 179.334,424 180,392 175.334,392 172.667,424 "/>
+<polygon points="151.778,493.725 151.306,509.28 168.276,510.223 162.148,504.095 185.247,481.938 181.947,478.639 157.434,499.381 
+	"/>
+<polygon points="224.392,521.223 239.947,521.694 240.89,504.725 234.762,510.852 212.605,487.754 209.306,491.053 230.048,515.566 
+	"/>
+<polygon points="119.668,350 130.334,361.333 143,350 134.334,350 135,318 130.334,318 127.667,350 "/>
+<text transform="matrix(1 0 0 1 85.666 379.6655)" fill="#FF1D25" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">是否采纳本次结果？</text>
+<text transform="matrix(1 0 0 1 66.999 427.6626)" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">否</text>
+<text transform="matrix(1 0 0 1 194.999 427.6626)" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">是</text>
+<text transform="matrix(1 0 0 1 18.3325 474.7295)"><tspan x="0" y="0" fill="#FF1D25" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">表盘可用</tspan><tspan x="0" y="14.4" fill="#FF1D25" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">不保存，用户退出</tspan></text>
+<text transform="matrix(1 0 0 1 156.668 462.9956)" fill="#FF1D25" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">执行checkAgain</text>
+<text transform="matrix(1 0 0 1 160.3335 478.6382)" fill="#C1272D" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="10">是不是多次测量</text>
+<text transform="matrix(1 0 0 1 134.999 521.6592)" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="10">否</text>
+<text transform="matrix(1 0 0 1 228.999 494.4307)" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="10">是</text>
+<text transform="matrix(1 0 0 1 98.3325 536.3262)" fill="#00FF00" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">保存,</text>
+<rect x="32.5" y="4.5" fill="#C1272D" stroke="#000000" stroke-miterlimit="10" width="17" height="10"/>
+<rect x="32.5" y="23.5" fill="#0071BC" stroke="#000000" stroke-miterlimit="10" width="19" height="10"/>
+<rect x="143.5" y="4.5" fill="#F7931E" stroke="#000000" stroke-miterlimit="10" width="26" height="10"/>
+<rect x="143.5" y="23.5" fill="#00FF00" stroke="#000000" stroke-miterlimit="10" width="26" height="10"/>
+<text transform="matrix(1 0 0 1 59 14.5)" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">checkcontroller</text>
+<text transform="matrix(1 0 0 1 188 9.5)" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">checkQueue</text>
+<text transform="matrix(1 0 0 1 70.668 32.5)" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">bluetooth</text>
+<text transform="matrix(1 0 0 1 188.667 31.8335)" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">devices</text>
+<text transform="matrix(1 0 0 1 36.332 454.7695)" fill="#FF931E" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">清空队列</text>
+<polygon points="189.84,512.262 194.728,520.439 200.745,512.394 196.695,512.344 197.281,489.428 195.101,489.401 193.58,512.307 
+	"/>
+<text transform="matrix(0.839 0 0 1 171 509.1025)" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="10.7272">没到三次</text>
+<text transform="matrix(1 0 0 1 173 539.5977)" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="9.6499">继续</text>
+<text transform="matrix(1 0 0 1 235.6665 530.3281)" fill="#7AC943" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">保存结果</text>
+<text transform="matrix(1 0 0 1 225.0981 546.9932)" fill="#FF931E" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">进行下一次检测</text>
+<text transform="matrix(1 0 0 1 36.332 318)" fill="#FF1D25" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">出来结果，指针转</text>
+<text transform="matrix(1 0 0 1 47 336.3267)" fill="#FF1D25" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="12">退出模板</text>
+<line fill="none" x1="176.334" y1="550.325" x2="209.306" y2="566.325"/>
+<line fill="none" x1="156.668" y1="546.993" x2="209.306" y2="566.325"/>
+<line stroke="#000000" stroke-miterlimit="10" x1="195.333" y1="526.993" x2="240.89" y2="586.325"/>
+<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="240.89" y1="586.325" x2="333.667" y2="580.992"/>
+<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="338.334" y1="222.326" x2="333.667" y2="580.992"/>
+<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="338.334" y1="222.326" x2="381.667" y2="137"/>
+<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="369" y1="141.662" x2="381.667" y2="137"/>
+<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="385.667" y1="144.333" x2="381.667" y2="137"/>
+</svg>

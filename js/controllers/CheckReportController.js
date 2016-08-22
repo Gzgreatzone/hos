@@ -53,6 +53,7 @@ angular.module('chafangbao.controllers')
        begin: new Date(2015, 0, 2, 0, 1, 0),
        end:   new Date(2017, 0, 1, 23, 59, 59)
     }
+
 	$scope.creatReportTime = function () {
 		if ($scope.reportList) {
 			var dataNumber = [];
@@ -74,14 +75,15 @@ angular.module('chafangbao.controllers')
      //dataIndex是数据的索引名字，indexNameTime是其中的数据
      //reportName是报告名字，reportlist是报告的列表
      $scope.getData = function (){
-     	    $scope.reportList = [];
-			var dateBegin = $scope.theDate.begin;
-			var dateEnd = $scope.theDate.end;
+     	    $scope.reportList = [];									//初始化一个空表
+			var dateBegin = $scope.theDate.begin;					//开始时间
+			var dateEnd = $scope.theDate.end;						//结束时间
 			//获取索引值
-			$scope.reportName = ThePerson.returnReportName();
+			$scope.reportName = ThePerson.returnReportName();       //获得报告名字
 			$scope.indexName = $scope.people.name + "_" + $scope.reportCass[$scope.reportName];
 			console.log($scope.indexName);
 			if (Android.getcfg($scope.indexName)) {
+				//如果能拿到索引名字
 		        var timeIndex = Android.getcfg($scope.indexName).split("#");
 			    console.log(timeIndex);
 				for (var i = 0; i < timeIndex.length; i++) {
@@ -99,24 +101,25 @@ angular.module('chafangbao.controllers')
 			}
      }
     
-
+     //判断时间是否规范
 	$scope.checkTime = function(){
-		$scope.canNotBeNext = true;
-		$scope.nowDt = new Date();
+		$scope.canNotBeNext = true;          				//不能调到报告细节页面
+		$scope.nowDt = new Date();							//获得现在时间
 		console.log($scope.nowDt.valueOf());
+
 		if ($scope.theDate.begin.valueOf()>$scope.nowDt.valueOf()) {
 			alert("开始日期不能选择未来的日期");
-		}else if ($scope.theDate.begin.valueOf()>$scope.theDate.end.valueOf()) {
+		} else if ($scope.theDate.begin.valueOf()>$scope.theDate.end.valueOf()) {
 			alert("开始日期大于结束日期");
-		}else{
-			$scope.canNotBeNext = false;
+		} else{
+			$scope.canNotBeNext = false;					//可以跳转
 			$scope.getData();
 			$scope.co2List = angular.copy($scope.reportList);
 		}
 	}
 
 	 
-     //alert($scope.theDate.begin.valueOf());
+     //拿到报告名字
      $scope.reportName = ThePerson.returnReportName();
 
      $scope.next = function(){		
@@ -132,11 +135,11 @@ angular.module('chafangbao.controllers')
 		        //跳转
 				if ($scope.selected == "single") {
 					//alert("woalicscs");
-					$window.location.href = "#/checkreport_1";
+					$window.location.href = "#/checkreport_2";
 
 				}
 				else if ($scope.selected == "time") {
-					$window.location.href = "#/checkreport_2";
+					$window.location.href = "#/checkreport_1";
 					
 				} 
 				else if ($scope.selected == "allReport") {
@@ -173,9 +176,11 @@ angular.module('chafangbao.controllers')
             $scope.co2AddList.pop(key);
         }
     }
+
+    //检测变化函数
     $scope.watchSet = function (key,val,value){
-    	 $scope.co2AddList[key][val] = val[value];
-    	 ThePerson.saveCo2List($scope.co2AddList);
+    	 $scope.co2AddList[key][val] = val[value];					//每次变化都会更新到model
+    	 ThePerson.saveCo2List($scope.co2AddList);					//保存添加的数据到factory里面
     }
 });
 

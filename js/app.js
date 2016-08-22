@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('chafangbao', ['ionic','chafangbao.controllers', 'chafangbao.services','chafangbao.factories','chafangbao.filters', 'ngCordova','chart.js','ngAnimate'])
+angular.module('chafangbao', ['ionic','chafangbao.controllers', 'chafangbao.services','chafangbao.factories','chafangbao.filters','chart.js','ngAnimate'])
 
 .run(function($rootScope,$ionicPlatform,$ionicActionSheet,$state,$window,$ionicLoading,$timeout) {
 	$ionicPlatform.ready(function () {
@@ -25,7 +25,7 @@ angular.module('chafangbao', ['ionic','chafangbao.controllers', 'chafangbao.serv
 		$rootScope.debug = false;
 	}
 	
-	$rootScope.co2CheckModel = "监测模式";
+	$rootScope.co2CheckModel = "检测模式";
 	$rootScope.deviceMsg = {
 		"content":'',
 		"show":false
@@ -42,29 +42,6 @@ angular.module('chafangbao', ['ionic','chafangbao.controllers', 'chafangbao.serv
 		stop_Voice : function () {
 			Android_do_cmd("stopSpeaking");
 		},
-		//获取未读消息
-		getNoReadCount : function () {
-			console.log("获取未读信息");
-			var msg_noReadCount = Android_do_cmd("getMsgCount", "0"),
-			event_noReadCount = Android_do_cmd("getNoReadCount", "0");
-
-			if (msg_noReadCount == 0) {
-				msg_noReadCount = '';
-			}
-			if (event_noReadCount == 0) {
-				event_noReadCount = '';
-			}
-			for (var i in URLS) {
-				var urlName = URLS[i]['name'];
-				if (urlName == "chatlist_page") {
-					URLS[i]['badge'] = msg_noReadCount;
-				} else if (urlName == "remind_page") {
-					URLS[i]['badge'] = event_noReadCount;
-				}
-			}
-			console.log("未读消息：" + msg_noReadCount, "未读事件：" + event_noReadCount);
-		},
-		//写入设置
 		setCfg: function (Key, Val, Callback) {
 			var val;
 			if (Callback == "delay") {
@@ -99,58 +76,7 @@ angular.module('chafangbao', ['ionic','chafangbao.controllers', 'chafangbao.serv
 			} else {
 				return Android.getcfg(Key);
 			}
-		},
-		tips : {
-					arr : {
-						showBackdrop : false,
-						templateUrl : './templates/modal_loading.html'
-					},
-					init : function () {
-						if (!debug) {
-							this.arr['template'] = 安卓获取页面模板内容(this.arr['templateUrl']);
-							delete this.arr['templateUrl'];
-						};
-						this.arr['hasInit'] = true;
-					},
-					show : function (Txt, delay, hideAtLast) {
-						if (hideAtLast) {
-							console.info("判断该提醒是否只是测试数据时使用，若为true，最后上线要去掉（取消下面return的注释）");
-							//return;
-						}
-						if (!this.arr['hasInit']) {
-							this.init();
-						}
-						this.arr['txt'] = Txt;
-
-						$ionicLoading.show(this.arr);
-
-						var This = this;
-						if (!delay) {
-							$timeout(function () {
-								This.hide();
-							}, 5000);
-						} else if (typeof delay == "number") {
-							$timeout(function () {
-								This.hide();
-							}, delay);
-						}
-					},
-					hide : function () {
-						$ionicLoading.hide();
-					}
-		},
-		deviceMsg : {
-					show : false,
-					content : '',
-					func : function (Content, isShow) {
-						$rootScope.deviceMsg.content = this.content = Content;
-						$rootScope.deviceMsg.show = this.show = isShow;
-					},
-					init : function () {
-						$rootScope.deviceMsg = {};
-						this.func('', false);
-					}
-		}
+		 }
 	};
 
 	//登录的用户信息
@@ -186,27 +112,32 @@ angular.module('chafangbao', ['ionic','chafangbao.controllers', 'chafangbao.serv
 	if (Android.getcfg("loginTime")) {
 		if ($rootScope.nowTime > parseInt(Android.getcfg("loginTime"))+1800000) {
 			$rootScope.availableTime = false; //有效时间已过
-		}else{
-			$rootScope.availableTime = true; //有效时间已过
+		} else {
+			//有效时间已过
+			$rootScope.availableTime = true; 
 		}
-	}else{
-			$rootScope.availableTime = false; //不存在之前登陆时间
+	} else {
+			//不存在之前登陆时间
+			$rootScope.availableTime = false; 
 		}
 
 	$rootScope.islogin = false;
-	if(Android.getcfg("userName") && Android.getcfg("passWord")){  //判断有没有本地存储的账号密码
+	if(Android.getcfg("userName") && Android.getcfg("passWord")){  	
+		//判断有没有本地存储的账号密码，如果有就去本地拿
 		$rootScope.userName = Android.getcfg("userName");
 		$rootScope.passWord = Android.getcfg("passWord");
 		if ($rootScope.availableTime) {
 		    $rootScope.islogin = true;
 		}
-	}
-	else{
+	} else {
+		//如果没有就自己定义
 		$rootScope.islogin = false;
 		$rootScope.userName = "admin";  //初始化
 		$rootScope.passWord = "123";
 	}
+
 	if (!$rootScope.islogin || !$rootScope.availableTime) {
+		//时间过期或者没有登陆就会回到登陆页面
 		$window.location.href = '#/login';
 	}
 

@@ -14,10 +14,11 @@
 
 
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
- <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
-	<div class="pt10 ml5 tc">
+    <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+
+	  	<div class="pt10 ml5 tc">
 			<div class="tc mt50 fs30 fb" >
-				{{systemSet.h_name}}医院{{systemSet.ad_name}}</br></br>{{systemSet.address}}区
+				{{systemSet.h_name}}{{systemSet.ad_name}}</br></br>{{systemSet.area}}区
 			</div>
 			<div class="tc mt50 fs25 fb">
 				{{reportName}}
@@ -44,10 +45,10 @@
 					</tr>
 					<tr>
 						<td class="td-5">
-						     身高（cm）：{{people.height}}
+						     身高(kg)：{{people.height}}
 						</td>
 						<td class="td-5">
-							体重：{{people.weight}}
+							体重(kg)：{{people.weight}}
 						</td>
 					</tr>
 					<tr>
@@ -68,10 +69,10 @@
 					</tr>
 					<tr>
 						<td class="td-5">
-						     开始时间：{{people.beginDate | date:'yyyy-MM-dd'}}
+						     开始时间：{{reportList[reportList.length - 1]["最后检测时间"] | date: 'yyyy-MM-dd'}}
 						</td>
 						<td class="td-5">
-							结束时间：{{people.end | date:'yyyy-MM-dd'}}
+							结束时间：{{reportList[0]["最后检测时间"] | date: 'yyyy-MM-dd'}}
 						</td>
 					</tr>
 				</table>
@@ -81,24 +82,30 @@
 						<table>
 							 <caption><em>检查结果</em></caption>
 							<tr>
-								<td class="td-3">检测时间</td>
+								<td class="td-3"></td>
 								<td class="td-3">脉搏血氧饱和度（%）</td>
 								<td class="td-3">心率（次/分钟）</td>
+							</tr> 
+							<tr>
+								<td class="td-3">最高值</td>
+								<td class="td-3">{{para | maxForSpo2}}</td>
+								<td class="td-3">{{para | maxForHr}}</td>
 							</tr>
 							<tr>
-								<td class="td-3">{{reportList[0]["最后检测时间"] | date:'yyyy-MM-dd'}}</td>
-								<td class="td-3">{{para[0]['spo2']}}</td>
-								<td class="td-3">{{para[0]['hr']}}</td>
+								<td class="td-3">最低值</td>
+								<td class="td-3">{{para | minForSpo2}}</td>
+								<td class="td-3">{{para | minForHr}}</td>
+							</tr>
+							<tr>
+								<td class="td-3">平均值</td>
+								<td class="td-3">{{para | avgForSpo2}}</td>
+								<td class="td-3">{{para | avgForHr}}</td>
 							</tr>
 						</table>
-						<table>
-							<caption>参考值</caption>
-							<tr ng-repeat="(key,val) in referenceValue[0]">
-								<td class="td-5">{{key}}</td>
-								<td class="td-5">{{val}}</td>
-							</tr>
-						</table>
-						<div class="fs20 pt30">正常脉率范围 :60次/min----100次/min</div>
+						<div class="fs20 pt10">正常脉率范围 :60次/min----100次/min</div>
+						<canvas id="spo2List" class="chart chart-line" chart-data="spo2_data" chart-labels="spo2_labels" chart-legend="true" chart-series="spo2_series" chart-options="{showTooltips:false}"></canvas> 
+								<!-- 心率 -->
+						<canvas id="hrList" class="chart chart-line" chart-data="hr_data" chart-labels="hr_labels" chart-legend="true" chart-series="hr_series" chart-options="{showTooltips:false}"></canvas> 
 					</div>
 					<div ng-switch-when="二氧化碳测量报告">
 						<table >
@@ -110,15 +117,17 @@
 								<td class="td-1">第三次</td>
 								<td class="td-1">最佳结果</td>
 							</tr>
-							<tr >
-								<td class="td-1">{{reportList[0]["最后检测时间"] | date:'yyyy-MM-dd'}}</td>
-								<td class="td-1">{{reportList[0]['最后检测参数']['co2'][0]}}</td>
-								<td class="td-1">{{reportList[0]['最后检测参数']['co2'][1]}}</td>
-								<td class="td-1">{{reportList[0]['最后检测参数']['co2'][2]}}</td>
-								<td class="td-1">{{reportList[0]['最后检测参数']['co2'] | max}}</td>
+							<tr ng-repeat = "(key,val) in reportList">
+								<td class="td-1">{{reportList[key]["最后检测时间"] | date:'yyyy-MM-dd'}}</td>
+								<td class="td-1">{{reportList[key]['最后检测参数']['co2'][0]}}</td>
+								<td class="td-1">{{reportList[key]['最后检测参数']['co2'][1]}}</td>
+								<td class="td-1">{{reportList[key]['最后检测参数']['co2'][2]}}</td>
+								<td class="td-1">{{reportList[key]['最后检测参数']['co2'] | max}}</td>
 							</tr>
 						</table>
-						<canvas id="co2List" class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series" chart-options="{showTooltips:false}"></canvas> 
+						<canvas id="co2List" class="chart chart-line" chart-data="co2_data" chart-labels="co2_labels" chart-legend="true" chart-series="co2_series" chart-options="{showTooltips:false}"></canvas> 
+
+						<canvas id="co2AdderList" class="chart chart-bar" chart-data="co2Adder_data" chart-labels="co2Adder_labels" chart-legend="true" chart-series="co2Adder_series"  chart-options="{showLines:false,dataPointMaxWidth: 20}"></canvas> 
 						<div class="fs20 pt1rem">参考值</div>
 						<table>
 							<tr ng-repeat = "(key,val) in referenceValue[1]">
@@ -131,49 +140,89 @@
 					
 					<div ng-switch-when="肺功能测量报告">
 						<table>
+							<caption>结果总结</caption>
 							<tr>
-								<td class="td-25">参数</td>
-								<td class="td-25">正常预计</td>
-								<td class="td-25">测试</td>
-								<td class="td-25">%预测值</td>
+								<td class="td-25">最高FEV1：</td>
+								<td class="td-25">{{para | maxForLung1}}（升）</td>
+								<td class="td-25">开始日期：</td>
+								<td class="td-25">{{reportList[reportList.length - 1]["最后检测时间"] | date: 'yyyy-MM-dd'}}</td>
 							</tr>
 							<tr>
-								<td class="td-25">FEV1（升）</td>
-								<td class="td-25">3.06</td>
-								<td class="td-25">{{para[0]['fev1'] | max}}</td>
-								<td class="td-25">{{(para[0]['fev1'] | max) / 3.06 | number:4 | percentage }}</td>
+								<td class="td-25">最低FEV1：</td>
+								<td class="td-25">{{para | minForLung1}}（升）</td>
+								<td class="td-25">结束日期：</td>
+								<td class="td-25">{{reportList[0]["最后检测时间"] | date: 'yyyy-MM-dd'}}</td>
 							</tr>
 							<tr>
-								<td class="td-25">FEV6（升）</td>
-								<td class="td-25">3.56</td>
-								<td class="td-25">{{para[0]['fev6'] | max}}</td>
-								<td class="td-25">{{(para[0]['fev6'] | max) / 3.56  | number:4 | percentage }}</td>
+								<td class="td-25">平均FEV1：</td>
+								<td class="td-25">{{para | avgForLung1 | number:2}}（升）</td>
+								<td class="td-25">日数：</td>
+								<td class="td-25">{{(reportList[0]["最后检测时间"] - reportList[reportList.length - 1]["最后检测时间"]) / (1000*60*60*24) | number:0 }}天</td>
 							</tr>
 							<tr>
-								<td class="td-25">FEV1/FEV6（比率）</td>
-								<td class="td-25">0.80</td>
-								<td class="td-25">{{(para[0]['fev1'] | max)/(para[0]['fev6'] | max) | number:2}}</td>
-								<td class="td-25">{{((para[0]['fev1'] | max)/(para[0]['fev6'] | max))/0.80 | number:4 | percentage }}</td>
+								<td class="td-25">最高FEV6：</td>
+								<td class="td-25">{{para | maxForLung2}}（升）</td>
+								<td class="td-25">节数：</td>
+								<td class="td-25">{{reportList.length}}</td>
+							</tr>
+							<tr>
+								<td class="td-25">最低FEV6：</td>
+								<td class="td-25">{{para | minForLung2}}（升）</td>
+								<td class="td-25">好节数：</td>
+								<td class="td-25"></td>
+							</tr>
+							<tr>
+								<td class="td-25">平均FEV6：</td>
+								<td class="td-25">{{para | avgForLung2 | number:2}}（升）</td>
+								<td class="td-25">差节数：</td>
+								<td class="td-25"></td>
+							</tr>
+							<!-- <tr>
+								<td class="td-25">最高FEF 25-75：</td>
+								<td class="td-25"></td>
+								<td class="td-25"></td>
+								<td class="td-25"></td>
+							</tr>
+							<tr>
+								<td class="td-25">最低FEF 25-75：</td>
+								<td class="td-25"></td>
+								<td class="td-25"></td>
+								<td class="td-25"></td>
+							</tr>
+							<tr>
+								<td class="td-25">平均 FEF25-75：</td>
+								<td class="td-25"></td>
+								<td class="td-25"></td>
+								<td class="td-25"></td>
+							</tr> -->
+						</table>
+						<canvas id="lungList" class="chart chart-line" chart-data="lung_data" chart-labels="lung_labels" chart-legend="true" chart-series="lung_series" chart-options="{showTooltips:false}" ></canvas> 
+						<table>
+							<caption>详细数据表</caption>
+							<tr>
+								<td></td>
+								<td>日期时间</td>
+								<td>节最佳FEV1（升）</td>
+								<td>FEV1范围</td>
+								<td>节最佳FEV6（升）</td>
+								<td>节最佳FEF 25-75（升/秒）</td>
+								<td>呼气次数</td>
+								<td>节质量</td>
+							</tr>
+							<tr ng-repeat = "(key,val) in reportList track by $index">
+								<td>{{key + 1}}</td>
+								<td>{{reportList[key]["最后开始时间"] | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+								<td>{{para[key]['fev1'] | max}}</td>
+								<td>0</td>
+								<td>{{para[key]['fev6'] | max}}</td>
+								<td></td>
+								<td>3</td>
+								<td></td>
 							</tr>
 						</table>
-						<p>参考值</p>
-						<table>
-					 		<caption>阻塞指数</caption>
-					 		<tr ng-repeat="(key,val) in referenceValue[3]">
-					 			<td class="td-5">{{key}}</td>
-					 			<td class="td-5">{{val}}</td>
-					 		</tr>
-					 	</table>
-					 	<table>
-							<caption>COPD分级（GOLD）</caption>
-							<tr ng-repeat="(key,val) in referenceValue[4]">
-								<td class="td-5">{{key}}</td>
-								<td class="td-5">{{val}}</td>
-							</tr>
-					 	</table>
 					</div>
 					<div ng-switch-when="肺功能COPD6测量报告">
-						<table>
+					<!-- 	<table>
 							<caption>结果</caption>
 							<tr>
 								<td class="td-1">参数</td>
@@ -186,127 +235,99 @@
 							</tr>
 							<tr>
 								<td class="td-1">FEV1（升）</td>
-								<td class="td-1">3.06</td>
-								<td>{{para[0]['fev1'][0]}}</td>
-								<td>{{para[0]['fev1'][1]}}</td>
-								<td>{{para[0]['fev1'][2]}}</td>
-								<td>{{para[0]['fev1'] | max}}</td>
-								<td>{{(para[0]['fev1'] | max) / 3.06 | number:4 | percentage}}</td>
+								<td class="td-1"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td class="td-1">FEV6（升）</td>
-								<td class="td-1">3.56</td>
-								<td>{{para[0]['fev6'][0]}}</td>
-								<td>{{para[0]['fev6'][1]}}</td>
-								<td>{{para[0]['fev6'][2]}}</td>
-								<td>{{para[0]['fev6'] | max}}</td>
-								<td>{{(para[0]['fev6'] | max) / 3.56 | number:4 | percentage}}</td>
+								<td class="td-1"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td class="td-1">FEV1/FEV6（比率）</td>
-								<td class="td-1">0.80</td>
-								<td>{{para[0]['fev1'][0] / para[0]['fev6'][0] | number:4 | percentage}}</td>
-								<td>{{para[0]['fev1'][1] / para[0]['fev6'][1] | number:4 | percentage}}</td>
-								<td>{{para[0]['fev1'][2] / para[0]['fev6'][2] | number:4 | percentage}}</td>
-								<td>{{(para[0]['fev1'] | max) / (para[0]['fev6'] | max) | number:4 | percentage}}</td>
-								<td>{{((para[0]['fev1'] | max) / (para[0]['fev6'] | max)) / 0.80 | number:4 | percentage}}</td>
+								<td class="td-1"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
-						</table>
-						<p>肺龄：{{lungAge  | number:0}}岁</p>
-						<p>阻塞指数：{{}}</p>
-					 	<p>说明：	正常，非COPD 可能受限</p>
-					 	<div>
-							<img style="width:100%; height:100%" src="img/lungpara.svg" alt="">
-						</div>
-					 	<table>
-					 		<caption>阻塞指数</caption>
-					 		<tr ng-repeat="(key,val) in referenceValue[3]">
-					 			<td class="td-5">{{key}}</td>
-					 			<td class="td-5">{{val}}</td>
-					 		</tr>
-					 	</table>
-					 	<table>
-							<caption>COPD分级（GOLD）</caption>
-							<tr ng-repeat="(key,val) in referenceValue[4]">
-								<td class="td-5">{{key}}</td>
-								<td class="td-5">{{val}}</td>
-							</tr>
-					 	</table>
+						</table> -->
 					</div>
 					<div ng-switch-when="体重测量报告">
 						<table>
 							<caption>检测结果</caption>
 							<tr>
-								<td class="td-3">检测时间</td>
+								<td class="td-3"></td>
 								<td class="td-3">体重（kg）</td>
 								<td class="td-3">BMI</td>
 							</tr>
 							<tr>
-								<td class="td-3">{{reportList[0]["最后开始时间"] | date:'yyyy-MM-dd'}}</td>
-								<td class="td-3">{{para[0]['weight']}}</td>
-								<td class="td-3">{{para[0]['bmi'] | number:2}}</td>
+								<td class="td-3">最高值</td>
+								<td class="td-3">{{weightMax}}</td>
+								<td class="td-3">{{BMImax | number:2}}</td>
+							</tr>
+							<tr>
+								<td class="td-3">最低值</td>
+								<td class="td-3">{{weightMin}}</td>
+								<td class="td-3">{{BMImin | number:2}}</td>
+							</tr>
+							<tr>
+								<td class="td-3">平均值</td>
+								<td class="td-3">{{weightAvg | number:2}}</td>
+								<td class="td-3">{{BMIavg | number:2}}</td>
 							</tr>
 						</table>
+						<canvas id="WeightList" class="chart chart-line" chart-data="Weight_data" chart-labels="Weight_labels" chart-legend="true" chart-series="Weight_series" chart-options="{showTooltips:false}"></canvas> 
+						<canvas id="BMIList" class="chart chart-line" chart-data="BMI_data" chart-labels="BMI_labels" chart-legend="true" chart-series="BMI_series" chart-options="{showTooltips:false}"></canvas> 
 					</div>
 					<div ng-switch-when="血压测量报告">
 						<table>
 							<caption>检测结果</caption>
-							<tr>
-								<td class="td-3">检测时间</td>
-								<td class="td-3">收缩压（mmHg）</td>
-								<td class="td-3">舒张压（mmHg）</td>
-							</tr>
-							<tr>
-								<td class="td-3">{{reportList[0]["最后开始时间"] | date:'yyyy-MM-dd'}}</td>
-								<td class="td-3">{{para[0]['收缩压']}}</td>
-								<td class="td-3">{{para[0]['舒张压']}}</td>
-							</tr>
-						</table>
-						<p>参考值：</p>
-						<table>
-							<caption>血压水平定义</caption>
 							<tr>
 								<td class="td-3"></td>
 								<td class="td-3">收缩压（mmHg）</td>
 								<td class="td-3">舒张压（mmHg）</td>
 							</tr>
 							<tr>
-								<td class="td-3">
-									<ul ng-repeat="(key,val) in referenceValue[6]['收缩压（mmHg）']">
-										<li>{{key}}</li>
-									</ul>
-								</td>
-								<td class="td-3">
-                                    <ul ng-repeat="(key,val) in referenceValue[6]['收缩压（mmHg）']">
-										<li>{{val}}</li>
-									</ul>
-								</td>
-								<td class="td-3">
-									<ul ng-repeat="(key,val) in referenceValue[6]['舒张压（mmHg）']">
-										<li>{{val}}</li>
-									</ul>
-								</td>
+								<td class="td-3">最高值</td>
+								<td class="td-3">{{para | maxForBP1}}</td>
+								<td class="td-3">{{para | maxForBP2}}</td>
+							</tr>
+							<tr>
+								<td class="td-3">最低值</td>
+								<td class="td-3">{{para | minForBP1}}</td>
+								<td class="td-3">{{para | minForBP2}}</td>
+							</tr>
+							<tr>
+								<td class="td-3">平均值</td>
+								<td class="td-3">{{para | avgForBP1 | number:2}}</td>
+								<td class="td-3">{{para | avgForBP1 | number:2}}</td>
 							</tr>
 						</table>
+						<canvas id="BP1List" class="chart chart-line" chart-data="BP1_data" chart-labels="BP1_labels" chart-legend="true" chart-series="BP1_series" chart-options="{showTooltips:false}"></canvas>
+
+						 <canvas id="BP2List" class="chart chart-line" chart-data="BP2_data" chart-labels="BP2_labels" chart-legend="true" chart-series="BP2_series" chart-options="{showTooltips:false}"></canvas> 
 					</div>
 					<div ng-switch-when="血糖测量报告">
+						<canvas id="GLUList" class="chart chart-line" chart-data="GLU_data" chart-labels="GLU_labels" chart-legend="true" chart-series="GLU_series" chart-options="{showTooltips:false}"></canvas>
 						<table>
 							<caption>检测结果</caption>
 							<tr>
 								<td class="td-2">检测时间</td>
 								<td class="td-2">空腹血糖（mmol/L）</td>
 							</tr>
-							<tr>
-								<td class="td-2">{{reportList[0]["最后检测时间"] | date:'yyyy-MM-dd hh:mm:ss'}}</td>
-								<td class="td-2">{{reportList[0]['最后检测参数']['GLU']}}</td>
-							</tr>
-						</table>
-						<p>参考值</p>
-						<table>
-							<caption>空腹血糖（FBG）标准（葡萄糖氧化酶法  单位：mmol/L）</caption>
-							<tr ng-repeat="(key,val) in referenceValue[7]">
-								<td class="td-5">{{key}}</td>
-					 			<td class="td-5">{{val}}</td>
+							<tr ng-repeat="(key,val) in reportList">
+									<td class="td-2">{{reportList[key]["最后检测时间"] | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+									<td class="td-2">{{reportList[key]['最后检测参数']['GLU']}}</td>
 							</tr>
 						</table>
 					</div>
@@ -315,18 +336,17 @@
 			<!-- 专门为血氧报告 -->
 			<div ng-switch="reportName">
 				<div ng-switch-when="血氧测量报告">
-					<ul class="dpib">
-						<li class="ml3rem dpib">缺氧状况</li><li class="ml3rem dpib">正常&nbsp □ </li><li class="ml3rem dpib">偏低&nbsp □ </li><li class="ml3rem dpib">低于氧疗标准&nbsp □ </li>
-					</ul>
-					<ul class="dpib">
-						<li class="ml3rem dpib">脉率状况</li><span></span><li class="ml3rem dpib">正常&nbsp □ </li><li class="ml3rem dpib">偏高&nbsp □ </li><li class="ml3rem dpib">偏低&nbsp □ </li>
-					</ul>
+					<span class="ml3rem">缺氧状况</span><span class="ml3rem">正常</span><span class="ml3rem">偏低</span><span class="ml3rem">低于氧疗标准</span><br>
+					<span class="ml3rem">脉率状况</span><span class="ml3rem">正常</span><span class="ml3rem">偏高</span><span class="ml3rem">偏低</span><br>
 			    </div>
 			</div>
 			<div class="pt2rem bdbb"></div>
 			<div class="pt2rem bdbb"></div>
 			<div class="fs20 mb60 pt1rem"><span>医生（技师）______________日期_____________</span></div>
+			<div class="fs20 pt1rem ">地区{{systemSet.area}}</div>
+			<div class="fs20 pt1rem pb60">电话{{systemSet.telephone}}</div>
 		</div>		
- 
- </div> 
-</ion-scroll>
+    </div> 
+
+ </ion-scroll>
+	

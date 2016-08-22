@@ -9,9 +9,9 @@
 <div id="modal_show_index" class="modal">
 	<ion-content overflow-scroll="false">
 		<div class="indexMonitor" ng-if="Monitor_on">
-			<p><span class="title calm">{{txt_activeDevice}}</span></p>
+			<p><span class="title calm">{{txt_activeDevice}}<br>{{deviceMsg.content}}</span></p>
 			<p><b style="background-image:url({{activeDevice.deviceImg}})"></b></p>
-			<p><span class="close_btn button button-outline button-calm" ng-click="manage_index.Modal.close();">退出</span></p>
+			<p><span class="close_btn button button-outline button-calm" ng-click="manage_index.Modal.exit();">退出</span></p>
 		</div>
 	</ion-content>
 </div>

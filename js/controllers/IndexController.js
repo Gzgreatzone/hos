@@ -1,6 +1,7 @@
 'use strict';
 angular.module('chafangbao.controllers')
-.controller('IndexController', function($scope,	$window,$timeout,$ionicPopup, $ionicLoading,$http,ThePerson,$cordovaBarcodeScanner,$rootScope,kfDevices) {
+.controller('IndexController', function($scope,	$window,$timeout,$ionicPopup, $ionicLoading,$http,ThePerson,$rootScope,kfDevices) {
+//路由配置
 	$scope.toCheck = function(){
 		$window.location.href = "#/check";
 		ThePerson.setTure();
@@ -28,49 +29,32 @@ angular.module('chafangbao.controllers')
 		});
 		
 	};
-	$scope.letters_list = function(){
-		$scope.maxHeight =  document.documentElement.clientHeight;
-		$scope.allHeight = $scope.maxHeight*0.8;
-		$scope.myHeight = $scope.allHeight/28;
-		/*console.log($scope.myHeight);
-		console.log($scope.maxHeight);*/
-		$scope.lettersStyle = {
-			"height" :$scope.myHeight +"px" ,
-		}
-	};
-	$scope.letters_list();
-
-	$scope.lettersClick = function(index){
-		$scope.isClick = 'click';
-		$scope.isShow = 'show';
-		$scope.letter_onclick = index;
-		$timeout(function () {
-			$scope.isClick = "unclick";
-			$scope.isShow = 'unshow';
-		}, 500);
-	}
 
 	$scope.myOrderBy = "+bedNumber";
-	$scope.letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","#"];
 
-	var peoples = Android.getcfg("peoples");
-	if (peoples) {
-		$scope.peoples = JSON.parse(peoples);
-	}else if (debug ) {
-		$http.get('json/peoples.json')
-		.success(function(response){
-			$scope.peoples = response;
+//每次进入都需要刷新
+	$scope.$on("$ionicView.beforeEnter", function () {
+		var peoples = Android.getcfg("peoples");
+		if (peoples) {
+			$scope.peoples = JSON.parse(peoples);
+		}else if (debug ) {
+			$http.get('json/peoples.json')
+			.success(function(response){
+				$scope.peoples = response;
+				peoples = JSON.stringify($scope.peoples);
+				Android.setcfg("peoples",peoples);
+			});
+		} else {
+			// if(!window.rootPath)
+			// 	window.rootPath = '/web/hos';
+			var str = Android.getURL(window.rootPath + 'json/peoples.json');
+			$scope.peoples = JSON.parse(str);
 			peoples = JSON.stringify($scope.peoples);
 			Android.setcfg("peoples",peoples);
-		});
-	} else {
-		if(!window.rootPath)
-			window.rootPath = '/web/hos';
-		var str = Android.getURL(window.rootPath + 'json/peoples.json');
-		$scope.peoples = JSON.parse(str);
-		peoples = JSON.stringify($scope.peoples);
-		Android.setcfg("peoples",peoples);
-	}
+		}
+	});
+
+
 	$scope.toThePerson = function(people){
 		$rootScope.Fn.shake();
 		ThePerson.setFalse();
@@ -86,10 +70,12 @@ angular.module('chafangbao.controllers')
 	  			var clearword = ThePerson.backqrcord(msg);
 	  			alert(clearword);
 	  			var peopleOne = ThePerson.get()
-	  			var Info = ThePerson.restore(peopleOne,clearword);
-	  			ThePerson.setPeople(Info);
-	  			alert(Info);
-	  			$window.location.href = "#/addperson";
+	  			if (ThePerson.restore(peopleOne,clearword)) {
+		  			var Info = ThePerson.restore(peopleOne,clearword);
+		  			ThePerson.setPeople(Info);
+		  			alert(Info);
+		  			$window.location.href = "#/addperson";
+	  			}
 	  		});
 	}
 	$('img').error(function(){

@@ -35,11 +35,11 @@ header{
     border-bottom: 1px solid #e6e6e6;
 }
 .shift{
-    background: url(/web/hos/img/sort.png) no-repeat right center;padding-right: 1.5rem;
+    background: url(../img/sort.png) no-repeat right center;padding-right: 1.5rem; 
 }
 .select{
     margin-left: 0.5rem;
-    background: url(/web/hos/img/sort.png) no-repeat right center;
+    background: url(../img/sort.png) no-repeat right center;
     padding-right: 1rem;
 }
 .fixed input{
@@ -78,7 +78,8 @@ header{
     color: rgb(145, 145, 145);
     border-bottom: #A8A8A8 0px solid;
     background-color: #F6F6F6;
-    -webkit-appearance: none
+    -webkit-appearance: none;
+    font-size: .9rem;/*修改*/
 }
 :focus {
 outline:0;
@@ -223,11 +224,12 @@ width: 11px;
     color: #387ef5;
     overflow: hidden;
     white-space: nowrap;
-    font-size: smaller;
+    font-size: .8rem;
     max-width: 20px;
 
 }
 .col_center{
+    max-width: 35px;
     background: center/cover no-repeat;
     background-size: contain;
     width: 30px;
@@ -236,9 +238,10 @@ width: 11px;
 }
 .col_inside{
      background: center/cover no-repeat;
-    background-size: contain;
+    background-size: cover;
     width: 100%;
     height: 100%;
+    max-width: 35px;
 }
 
 .mylabel{
@@ -266,7 +269,7 @@ width: 11px;
     z-index: 99;
    
 }
-
+.pb500px{ padding-bottom: 500px; }
 .if_true{
     color: #EA1157 !important;
 }

@@ -6,21 +6,25 @@
 <!-- 头部 -->
 <header class="fixed">
 	<div class="header box-vm ">
-		<div class="w">
-			<span class="vm ml10"  ng-click="logOut()">退出</span>
+		<div class="w"  ng-click="logOut()">
+			<span class="vm out ml10">退出</span>
 		</div>
 		<div class="flex td fb fs20">
-			<h3>成员列表</h3>
+			<h2>患者列表</h2>
 		</div>
-		<div class="w" >
+		<div class="icon_index ww" ng-click="toAddPerson()"><!-- 添加按钮移位到header -->
+			<i class="ion-ios-plus-outline " ></i>
+		</div>
+	
+<!-- 		<div class="w" >
 			<span class="vm mr10">&nbsp&nbsp</span>
-		</div>
+		</div> -->
 	</div>
 	<div class="header_2">
 		<div class="shift">
 			<select ng-model="myOrderBy" >
-				<option  value="+bedNumber" >按序号升序</option>
-				<option  value="-bedNumber" >按序号降序</option>
+				<option  value="+bedNumber" >按床位升序</option>
+				<option  value="-bedNumber" >按床位降序</option>
 			</select>
 		</div>
 		<div class="select">
@@ -37,10 +41,10 @@
 		<div class="icon_index">
 			<i class="icon ion-ios-search-strong "></i>
 		</div>
-		<div class="icon_index">
+<!-- 		<div class="icon_index">
 			<i ng-click="toAddPerson()" class="ion-ios-plus-outline " ></i>
 		</div>
-	</div>
+	 --></div>
 </header>
 <!-- 容器 -->
 <ion-scroll zooming="true" direction="y" style="width:100% ; height: 75%";class="scroll-view ionic-scroll scroll-view_index">
@@ -53,13 +57,13 @@
 				<div class="col col-10">
 					<a class=" ion-android-checkbox-outline-blank if_{{people.beInHospital}}"   ></a>
 				</div>
-				<div class="col col-10 col_center" >
-					<div class="col_inside" style="background-image: url(img/{{people.number}}.png)"></div>
+				<div class="col col-10 col_center" style="background-image: url(css/unset.jpg)">
+					<div class="col_inside" style="background-image: url({{people.img}})"></div>
 				</div>
-				<div class="col col-33">{{people.name}}</div>
-				<div class="col col-10">{{people.sex}}</div>
-				<div class="col col-10">{{people.address}}</div>
-				<div class="col col-20 is_{{people.beInHospital}}">{{people.bedNumber}}号</div>
+				<div class="col col-40"><a>{{people.name}}</a></div>
+				<div class="col col-10"><a>{{people.sex}}</a></div>
+				<div class="col col-10"><a>{{people.age}}</a></div>
+				<div class="col col-20 is_{{people.beInHospital}}"><a>{{people.bedNumber}}床</a></div>
 			</div>
 			</div>
 		</div>
@@ -72,11 +76,11 @@
 			<p ng-bind="letter">  </p>
 		</li>
 	</ul>
-</div> -->
+</div>
 
 <div class="letteronclick_{{isShow}}">
 	<p > {{letter_onclick}} </p>
-</div>
+</div> -->
 
 <div class="bar bar-footer">
 	<table>

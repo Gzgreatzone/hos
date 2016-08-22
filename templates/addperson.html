@@ -5,33 +5,33 @@
 	    <img src="img/back1.png" class="vm">
 	    <span class="vm ml10">返回</span>
 	  </div>
-	  <div class="vm ml50" ng-click="editor()">编辑</div>
-	  <div class="flex td fb fs20 pr12p">
+	  <!-- <div class="vm ml50" ng-click="editor()">编辑</div> -->
+	  <div class="flex td fb fs20"><!-- 移除属性 pr12p -->
 	    {{people.name}}
 	  </div>
 
-	  <div class="ww tr" ng-click="save()">
-	    保存
+	  <div class="ww tr fontt" ng-click="toSetting()" ng-init="setting='保存'">
+	    {{setting}}
 	  </div>
 	</div>
-<ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%";class="scroll-view ionic-scroll">
+<ion-scroll zooming="true" direction="y" style="width:100% ; height: 100%" class="scroll-view ionic-scroll">
  <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
 	<div class="card_addperson">
 		<div class="row row_addperson">
 		  <div class="col " ng-show="isQrcord">
-		   	<div ng-click="takephoto()"  class="takephoto"><img ng-src="img/{{people.number}}.png"  ></div>
+		   	<div ng-click="takephoto()"  class="takephoto"><img ng-src="{{people.img}}"  ></div>
 		   <div class="takephoto_text"><h4>{{people.bedNumber}}号</h4></div>
 		  </div>
 		  <div class="col">
 		  
 		  	<div id="takephoto"  ng-show="!isQrcord" class="crcord tc"></div>
-		  	<div class="showQrcord takephoto tc mt5"  ng-click="turnQrcord()"><button class="button button-positive">{{isQrcord_text}}</button></div>
+		  	<div class="showQrcord takephoto tc mt5"  ng-click="turnQrcord()"><button class="qr_color button button-positive">{{isQrcord_text}}</button></div><!-- 新增样式 -->
 		  </div>
 		</div>
-		<div class="list list_addperson" >
+		<div class="list list_addperson new_add" ><!-- 新增样式 -->
 		  <label class="item item-input item_addperson"  ng-click="insert(yiy,trte)" >
 		    <span class="input-label_addperson">编号:</span>
-		    <input ng-class="{true: 'b-deepGrey', false: 'b-white'}[isDisabled]" type="text" ng-disabled="isDisabled" ng-model="people.number" >
+		    <input ng-class="{true: 'b-deepGrey', false: 'b-white'}[isDisabled]" type="text" ng-disabled="true" ng-model="people.number" >
 		  </label>
 		  <label class="item item-input item_addperson" >
 		    <span class="input-label_addperson">姓名:</span>
@@ -45,7 +45,7 @@
 			</select>
 		  </label>
 		  <label class="item item-input item_addperson" >
-			<span class="input-label_addperson">身高（米）:</span>
+			<span class="input-label_addperson">身高（厘米）:</span>
 		    <input ng-class="{true: 'b-deepGrey', false: 'b-white'}[isDisabled]" type="number" ng-disabled="isDisabled" ng-model="people.height" >
 		  </label>
 		  <label class="item item-input item_addperson" >
@@ -58,14 +58,14 @@
 		  </label>
 		  <label class="item item-input item_addperson" >
 		    <span class="input-label_addperson ">状态:</span>
-		       <select ng-disabled="isDisabled" ng-model="people.beInHospital">
+		       <select ng-disabled="isDisabled" ng-change="creatDate(people.beInHospital)" ng-model="people.beInHospital">
 	                <option value="true">住院中</option>
 	                <option value="outpatient">门诊</option>
 	                <option value="false">已出院</option>
 				</select>
-		  </label>	 
+		  </label> 
 		  <label class="item item-input item_addperson">
-		    <span class="input-label_addperson ">住院号/病床号:</span>
+		    <span class="input-label_addperson ">住院号/门诊号:</span>
 		    <input ng-class="{true: 'b-deepGrey', false: 'b-white'}[isDisabled]" type="number" ng-disabled="isDisabled" ng-model="people.address">
 		  </label>
 		  <label class="item item-input item_addperson" >
@@ -78,18 +78,18 @@
 		  </label>
 		  <label class="item item-input item_addperson" >
 		    <span class="input-label_addperson ">开始日期:</span>
-		    <input type="date" placeholder=" yyyy-MM-dd" ng-class="{true: 'b-deepGrey', false: 'b-white'}[isDisabled]"  ng-disabled="isDisabled" ng-model="beginDate" ng-change="updateTime()" >
-		  </label>	 
-		  <label class="item item-input item_addperson  " >
-		    <span class="input-label_addperson ">结束日期:</span>
-		    <input type="date" placeholder=" yyyy-MM-dd" ng-class="{true: 'b-deepGrey', false: 'b-white'}[isDisabled]" ng-disabled="true"  ng-model="endDate" ng-change="updateTime()">
+		    <input type="date" placeholder=" yyyy-MM-dd" ng-class="{true: 'b-deepGrey', false: 'b-white'}[isDisabled]"  ng-disabled="isDisabled" ng-model="people.beginDate" ng-change="updateTime()" >
 		  </label>
-		  <label class="item item-input item_addperson item_addperson_last ">
+		  <label class="item item-input item_addperson  " >
+		    <span class="input-label_addperson ">最后编辑日期:</span>
+		    <input type="date" placeholder=" yyyy-MM-dd" ng-class="{true: 'b-deepGrey', false: 'b-white'}[isDisabled]" ng-disabled="true"  ng-model="people.editDate" ng-change="updateTime()">
+		  </label>
+		  <label class="item item-input item_addperson  ">
 		  <span class="input-label_addperson ">结束日期:</span>
-		    <input type="date" placeholder=" yyyy-MM-dd" ng-class="{true: 'b-deepGrey', false: 'b-white'}[isDisabled]" ng-disabled="true" ng-model="endDate" ng-change="updateTime()">
+		    <input type="date" placeholder=" yyyy-MM-dd" ng-class="{true: 'b-deepGrey', false: 'b-white'}[isDisabled]" ng-disabled="true" ng-model="people.endDate" ng-change="updateTime()">
 		  </label>
 		</div>
 	</div>
-	<div class="pt50"></div>
+	<div  class="pb500px h150px"></div>
   </div>
 </ion-scroll>

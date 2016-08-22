@@ -187,6 +187,10 @@ if (debug) {
 				android_log("getMsg", key);
 				return key;
 			},
+			getPic : function () {
+				android_log("getEventPage", JSON.stringify(arguments));
+				return 'sssss'
+			},
 			//打开摄像头扫描二维码
 			qrcode: function(){
 				android_log("qrcode", JSON.stringify(arguments));

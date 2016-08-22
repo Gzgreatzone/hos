@@ -2,7 +2,7 @@
 
 
 angular.module('chafangbao.services',['chafangbao.factories'])
-.service('kfDevices', ['$rootScope','ThePerson','$timeout', function ($rootScope,ThePerson,$timeout) {
+.service('kfDevices', ['$rootScope','$timeout', function ($rootScope,$timeout) {
 	//
 	// 仪器的属性封装
 	//
@@ -78,6 +78,8 @@ angular.module('chafangbao.services',['chafangbao.factories'])
 
 	//设备二维码的回调函数
 	var qrcodeCallback;
+	//图片获取回调函数
+	var getPicCallback;
 	
 	var device = {
 		status : data,
@@ -85,14 +87,14 @@ angular.module('chafangbao.services',['chafangbao.factories'])
 		callBacks : [],
 		
 		//====注: 麟翔编写的方法
-		save : function (Signal) {
-			var people = ThePerson.get();
-			if (people.name) {    
+		save : function (Signal,peoplename) {
+			if (peoplename) {    
 			    //键值名字
-				var peopleName = people.name;  
+				var peopleName = peoplename;  
 				//人名和仪器名
 				var indexName = peopleName + "_" + Signal; 
 				var lastCheck = JSON.parse(Android.getcfg("deviceStatus"));
+				console.log(lastCheck);
 				var lastCheckTime = lastCheck['最后检测时间'];
 				var indexName_time = indexName + "_" +  lastCheckTime;
 				 //索引是否存在
@@ -145,9 +147,11 @@ angular.module('chafangbao.services',['chafangbao.factories'])
 					console.log("加入数组后");
 					//开始连接设备检测
 					Android_do_cmd("onBtnClick", "00000", name + 'APP', "window.AndroidCallBack");
+					blueTooth.init(name);
 					return index;
 				}
 			}
+			
 			return -1;
 		},
 
@@ -208,7 +212,7 @@ angular.module('chafangbao.services',['chafangbao.factories'])
 		// 根据检测项，放回object类型的值
 		getRes : function (Key, Val) {
 			var Res;
-			var people = ThePerson.get();
+			//var people = ThePerson.get();
 
 			if (Key == "Weight") { // 对于”体重“，返回值是一个number,要先把返回值变成一个object再让其进入object的操作中！
 				Res = {
@@ -229,6 +233,7 @@ angular.module('chafangbao.services',['chafangbao.factories'])
 			return Res;
 		},
 		storage : function (Status, result) {
+			console.log(Status);
 			if (Status) {
 				var date = new Date();
 				var ms = date.getTime();
@@ -254,8 +259,10 @@ angular.module('chafangbao.services',['chafangbao.factories'])
 				}
 				if (repeatCheck) {
 					var j;
+					console.log(result);
 					for (j in result) {
 						Status.最后检测参数[j].push(result[j]);
+						//console.log(Status.最后检测参数[j]);
 					}
 					// for(j in result) {
 					// 	if (Status.最后检测参数[j].length == DEVICE[Status.消息标识].checkTimes ) {
@@ -276,6 +283,11 @@ angular.module('chafangbao.services',['chafangbao.factories'])
 		qrcode: function(callback) {
 			qrcodeCallback = callback;
 			Android_do_cmd("qrcode");
+		},
+		getPicReturn : function(callback) {
+			getPicCallback = callback;
+			Android.getPic();
+			//Android_do_cmd("qrcode");
 		}
 	}
 
@@ -288,51 +300,51 @@ angular.module('chafangbao.services',['chafangbao.factories'])
 	// comment     : 所有安卓的接口调用后,都会把结果传到AndroidCallBack中,
 	//             : 所以,重载该函数,让所有的结果获取后能够自动判断分发到对应的回调函数中
 	// -------------
-	window.AndroidCallBack = function (消息标识, msgKey) {
+
+	window.AndroidCallBack = function (MsgKey1, MsgKey2) {
 		//alert(msgKey);
-		if(消息标识 == 'QRCODE') {
+		if(MsgKey1 == 'QRCODE') {
 			if(qrcodeCallback){
-				var codeStr = Android_do_cmd("getMsg",msgKey);
+				var codeStr = Android_do_cmd("getMsg",MsgKey2);
 				qrcodeCallback(codeStr);
 			}
 		}
-		
-		var getMsg = Android_do_cmd("getMsg", msgKey) || msgKey;
-		// if (!window.recieveDeviceMsg(消息标识, getMsg)) {
-		// 			return;
-		// }
-		if (!window.recieveDeviceMsg(消息标识, getMsg)) {
-					return;
+		if (MsgKey1 == '选中图片') {
+			var picStr = MsgKey2;
+			getPicCallback(picStr);
 		}
-		
-		// 获取参数
-		
-
-		// 判断是否为接收消息，是的话退出
-		if (debug) {
-			var deviceId = 消息标识.replace(/APP/g, '');
-			getMsg = "{code:0,data:[" + debugResult(deviceId) + "],msg:'操作成功'}";
-			$timeout(function () {
-				window.AndroidCallBack('', "{code:0,data:['" + deviceId + "', '用户退出'],msg:'用户退出'}");
-			}, 500);
-		}
-
-		// 检测成功，返回结果
-		var 真实的消息 = eval("(" + getMsg + ")");
-		//alert(getMsg);
-		// 本次、对应检测设备的设备“消息标识”
-		var signal = 真实的消息['data'][0];
-		var result = device.getRes(signal, 真实的消息['data'][1]);
-		var msg = 真实的消息['msg'];
-		var code = 真实的消息['code'];
-		//window.checkWord =  真实的消息;
-		if (msg == '操作成功') { // 运行回调方法
-			var currentDevice = device.getCurrentDevice(signal);
-			currentDevice.callback(signal, result);
-			device.storage(currentDevice.status, result);
-		} else {
-			kfFn.tips.show("检测失败，msg:" + msg);
+		var 消息内容 = [Android_do_cmd("getMsg", MsgKey1) || MsgKey1];
+		var isMsg = false;
+		MsgKey2 && 消息内容.push(Android_do_cmd("getMsg", MsgKey2) || MsgKey2);
+		var 完整数据 = 消息内容.join('');
+		console.log(完整数据);
+		$rootScope.deviceOutMsg = 完整数据;
+		isMsg = blueTooth.analyse(完整数据);
+		if (isMsg) {
+			if (isMsg == "isRes") {
+				
+					console.log("%c这是检测结果", "color:cornflowerblue");
+					console.log(完整数据);
+					var 真实的消息 = JSON.parse(完整数据);
+					console.log(完整数据);
+					var signal = 完整数据.match(/Lung|co2|SPO2|Weight|血压|GLU|SLEEP /g);
+					var result = device.getRes(signal, 真实的消息['data'][1]);
+					var msg = 真实的消息['msg'];
+					if (msg == '操作成功') { 
+ 						// 运行回调方法
+ 						//console.log(signal);
+						var currentDevice = device.getCurrentDevice(signal);
+						//console.log(result);
+						currentDevice.callback(signal, result);
+						console.log(currentDevice.status);
+						device.storage(currentDevice.status, result);
+					} 
+				
+			} else {
+				console.log("%c这是回调消息", "color:blue");
+			}
 		}
 	}
 	return device;
 }]);
+

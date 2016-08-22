@@ -5,7 +5,7 @@ angular.module('chafangbao.controllers')
 	$scope.back = function () {
 		window.history.go(-1);
 	}
-	//参数获取
+//参数获取
 	$scope.reportName = ThePerson.returnReportName();
 	var systemSet = Android.getcfg("systemSet");
 	$scope.systemSet = JSON.parse(systemSet);
@@ -15,32 +15,35 @@ angular.module('chafangbao.controllers')
 	//console.log($scope.co2AddList);
 	console.log($scope.para);
 	
-	//数据初步处理函数定义
+//数据初步处理函数定义
+	//时间列表函数
 	$scope.getTimelist = function (){
 		//获取时间列表
 		var list = [];
 		for (var i = 0; i < $scope.reportList.length; i++) {
 			list.unshift($filter('date')($scope.reportList[i]["最后检测时间"],'MM-dd hh:mm:ss'));
 		}
-		return list;
+		return list;																//返回时间列表给图标用
 	}
+	//获取数据列表函数
 	$scope.getDataList = function (val){
 		var list = [];
-		if ($scope.para[0][val]){
+		if ($scope.para[0][val]){						
+		 //有些数据他是fev1:6; 这样的形式 判断是不是这样的格式
 			for (var i = 0; i < $scope.para.length; i++) {
-			    if ($filter('max')($scope.para[i][val]) == undefined) {
-			    	list.unshift($scope.para[i][val]);
+			    if ($filter('max')($scope.para[i][val]) == undefined) {				//里面的数据是不是数组形式的
+			    	list.unshift($scope.para[i][val]);								//不是的话直接推入
 			    }else{
-			    	list.unshift($filter('max')($scope.para[i][val]));
+			    	list.unshift($filter('max')($scope.para[i][val]));				//是的话取最大数值放入
 			    }
 			    
 		    }
-		    return list;
+		    return list;															//返回数据，给图表用
 		}				
 	}
 
 
-
+	//最大值过滤器函数
 	$scope.getMax = function(input,name) {
 		var out;
         var list = [];
@@ -57,7 +60,7 @@ angular.module('chafangbao.controllers')
         return out;
 	}
 
-
+	//最小值过滤器函数
 	$scope.getMin = function(input,name) {
 		var out;
         var list = [];
@@ -73,7 +76,7 @@ angular.module('chafangbao.controllers')
 		}
         return out;
 	}
-
+	//平均值过滤器函数
 	$scope.getAvg = function(input,name) {
 		var out;
 	    var list = [];
@@ -90,9 +93,9 @@ angular.module('chafangbao.controllers')
 	    return out;
 	  }
 
-	// 图表的展示/**/
 
 
+// 图表的展示/**/
 
 	//这个是血氧spo02
 	$scope.spo2_labels = $scope.getTimelist();
@@ -279,14 +282,16 @@ angular.module('chafangbao.controllers')
 	//console.log($scope.mac);
 	//获取参考值
 
+
+//debug
 	if (debug) {
 		$http.get('json/reference.json')
 		.success(function(response){
 		$scope.referenceValue = response;
 		});
 	} else {
-		if(!window.rootPath)
-			window.rootPath = '/web/hos/';
+		// if(!window.rootPath)
+			// window.rootPath = '/web/hos/';
 		var str = Android.getURL(window.rootPath + 'json/reference.json');
 		$scope.referenceValue = JSON.parse(str);
 	}
